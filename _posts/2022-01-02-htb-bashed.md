@@ -197,7 +197,7 @@ testing 123!
 scriptmanager@bashed:/scripts$
 ```
 
-A este punto ya debemos estar pensando que se debe ejecutar una tarea a intervalos regulares y que posiblemente **root** ejecutar el script, ya que el resultado es un archivo llamado `test.txt` cuyo propietario es **root**. Para validarlo, podemos crear nuestro archivo de confianza [ProcMon](/procmon) en una ruta donde tengamos privilegios `/dev/shm`.
+A este punto ya debemos estar pensando que se debe ejecutar una tarea a intervalos regulares y que posiblemente **root** ejecutar el script, ya que el resultado es un archivo llamado `test.txt` cuyo propietario es **root**. Para validarlo, podemos crear nuestro archivo de confianza [ProcMon](/posts/procmon) en una ruta donde tengamos privilegios `/dev/shm`.
 
 ```bash
 scriptmanager@bashed:/dev/shm$ ./procmon.sh 

@@ -5,7 +5,7 @@ date: 2022-01-02
 math: true
 mermaid: true
 image:
-  path: /assets/images/htb/hacktehbox.png
+  path: /assets/images/htb/hackthebox.png
 categories: [Easy, Linux]
 tags: [File Misconfiguration, Web]
 ping: true

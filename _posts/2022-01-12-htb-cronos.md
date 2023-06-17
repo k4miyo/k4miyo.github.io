@@ -584,7 +584,7 @@ www-data@cronos:/$ find \-perm -4000 2>/dev/null
 www-data@cronos:/$ 
 ```
 
-No vemos nada interesante, así que vamos a generar nuestro archivo de confianza [ProcMon](/procmon) para ver si se está realizando una tarea a intervalos regulares (que debería ya que el nombre de la máquina da pista a *cron*)
+No vemos nada interesante, así que vamos a generar nuestro archivo de confianza [ProcMon](/posts/procmon) para ver si se está realizando una tarea a intervalos regulares (que debería ya que el nombre de la máquina da pista a *cron*)
 
 ```bash
 www-data@cronos:/dev/shm$ ./procmon.sh 
