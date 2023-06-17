@@ -314,7 +314,7 @@ whoami
 guly
 ```
 
-Ya somos el usuario **guly** y podemos visualizar la flag (user.txt). Antes que otra cosa, vamos a hacer un [Tratamiento de la tty](/tratamiento-tty). Ahora vamos a enumerar un poco el sistema para ver de que forma podemos escalar privilegios:
+Ya somos el usuario **guly** y podemos visualizar la flag (user.txt). Antes que otra cosa, vamos a hacer un [Tratamiento de la tty](/posts/tratamiento-tty). Ahora vamos a enumerar un poco el sistema para ver de que forma podemos escalar privilegios:
 
 ```bash
 [guly@networked ~]$ id
