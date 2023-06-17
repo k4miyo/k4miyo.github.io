@@ -518,7 +518,7 @@ ${debian_chroot:+($debian_chroot)}mindy@solidstate:/$ find \-perm 4000 2>/dev/nu
 ${debian_chroot:+($debian_chroot)}mindy@solidstate:/$
 ```
 
-No vemos nada interesante. Asi que vamos a listar los procesos que se ejecutar en tiempos regualares de tiempo con nuestra herramienta [ProcMon](/procmon):
+No vemos nada interesante. Asi que vamos a listar los procesos que se ejecutar en tiempos regualares de tiempo con nuestra herramienta [ProcMon](/posts/procmon):
 
 ```bash
 ${debian_chroot:+($debian_chroot)}mindy@solidstate:/home/james$ cd /dev/shm/
