@@ -257,7 +257,7 @@ www-data@europa:/$ find \-perm 4000 2>/dev/null
 www-data@europa:/$
 ```
 
-No encontramos nada interesante, por lo que es posible que se esté ejecutando una tarea a intervalos regulares de tiempo; así que vamos a utilizar nuestro script [ProcMon](/procmon) para ver que procesos se ejecutan cada cierto tiempo.
+No encontramos nada interesante, por lo que es posible que se esté ejecutando una tarea a intervalos regulares de tiempo; así que vamos a utilizar nuestro script [ProcMon](/posts/procmon) para ver que procesos se ejecutan cada cierto tiempo.
 
 ```bash
 www-data@europa:/dev/shm$ touch procmon.sh; chmod +x procmon.sh
