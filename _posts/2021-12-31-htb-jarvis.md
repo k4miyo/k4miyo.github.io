@@ -416,7 +416,7 @@ pepper
 pepper@jarvis:/dev/shm$
 ```
 
-Ya nos encontramos dentro de la máquina como el usuario **pepper** y podemos visualizar la flag (user.txt). Ahora nos falta convertirnos en el usuario **root**; pero antes, vamos a hacer nuestro [Tratamiento de la tty](/tratamiento-tty) para trabajar mejor. Enumeraremos un poco el sitema a ver que hay:
+Ya nos encontramos dentro de la máquina como el usuario **pepper** y podemos visualizar la flag (user.txt). Ahora nos falta convertirnos en el usuario **root**; pero antes, vamos a hacer nuestro [Tratamiento de la tty](/posts/tratamiento-tty) para trabajar mejor. Enumeraremos un poco el sitema a ver que hay:
 
 ```bash
 pepper@jarvis:~$ id
