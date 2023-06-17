@@ -5,7 +5,7 @@ date: 2021-09-06
 math: true
 mermaid: true
 image:
-  path: /assets/images/htb/hackthebox.png
+  path: /assets/images/bash/bash.jpg
 categories: [Scripting, Tools]
 tags: [Bash]
 ping: true
