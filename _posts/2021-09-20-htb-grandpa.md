@@ -47,7 +47,7 @@ Nmap done: 1 IP address (1 host up) scanned in 26.93 seconds
            Raw packets sent: 131087 (5.768MB) | Rcvd: 19 (836B)
 ```
 
-Mediante la función [extractPorts](/posts/extractPorts) definida a nivel de `zsh` , se obtiene la información más relevante de la captura grepeable.
+Mediante la función [extractPorts](/posts/extractPorts) definida a nivel de `zsh`, se obtiene la información más relevante de la captura grepeable.
 
 ```bash
 ❯ extractPorts allPorts
