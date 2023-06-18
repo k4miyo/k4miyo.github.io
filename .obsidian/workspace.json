@@ -4,22 +4,35 @@
     "type": "split",
     "children": [
       {
-        "id": "0f4e3bed9837b3cc",
+        "id": "1fe8e8850f6ecc17",
         "type": "tabs",
         "children": [
           {
-            "id": "7cc4ccd123b6df71",
+            "id": "999f7613d311d301",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_drafts/2023-06-17-thm-rootme.md",
+                "file": "_drafts/template.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "555c7f7aa3359554",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "_drafts/2023-06-18-thm-simplectf.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -85,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_drafts/2023-06-17-thm-rootme.md",
+                "file": "_drafts/2023-06-18-thm-simplectf.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_drafts/2023-06-17-thm-rootme.md",
+                "file": "_drafts/2023-06-18-thm-simplectf.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_drafts/2023-06-17-thm-rootme.md"
+                "file": "_drafts/2023-06-18-thm-simplectf.md"
               }
             }
           }
@@ -146,11 +159,24 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "7cc4ccd123b6df71",
+  "active": "555c7f7aa3359554",
   "lastOpenFiles": [
-    "README.md",
-    "_drafts/2023-06-17-thm-rootme.md",
-    "Untitled.md",
-    "_drafts/template.md"
+    "assets/images/thm-simplectf/simplectf.png",
+    "assets/images/thm-simplectf",
+    "_drafts/template.md",
+    "_drafts/2023-06-18-thm-simplectf.md",
+    "_posts/2023-06-17-thm-rootme.md",
+    "assets/images/thm-rootme/rootme6.png",
+    "assets/images/thm-rootme/rootme5.png",
+    "assets/images/thm-rootme/rootme4.png",
+    "assets/images/thm-rootme/rootme3.png",
+    "assets/images/thm-rootme/rootme2.png",
+    "assets/images/thm-rootme/rootme1.png",
+    "assets/images/thm-rootme/rootme.png",
+    "assets/images/thm-rootme",
+    "_posts/2023-06-17-thm-picklerick.md",
+    "posts/extractPorts.md",
+    "posts",
+    "README.md"
   ]
 }
