@@ -1,1 +1,6 @@
-{}
+{
+  "spellcheckLanguages": [
+    "en-US",
+    "es-MX"
+  ]
+}
