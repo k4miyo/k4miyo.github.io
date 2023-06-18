@@ -30,9 +30,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "ceee95aadc31146d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "2023-06-17-thm-basicpentesting.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -98,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "2023-06-17-thm-blue.md",
+                "file": "2023-06-17-thm-basicpentesting.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "2023-06-17-thm-blue.md",
+                "file": "2023-06-17-thm-basicpentesting.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "2023-06-17-thm-blue.md"
+                "file": "2023-06-17-thm-basicpentesting.md"
               }
             }
           }
@@ -159,10 +171,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "857079ac98797914",
+  "active": "ceee95aadc31146d",
   "lastOpenFiles": [
     "2023-06-15-thm-tomghost.md",
     "2023-06-17-thm-blue.md",
+    "2023-06-17-thm-basicpentesting.md",
     "2022-03-20-htb-networked.md",
     "2022-01-28-htb-book.md",
     "2023-01-19-htb-shoppy.md",
@@ -185,7 +198,6 @@
     "2022-02-06-htb-sense.md",
     "2022-02-06-htb-netmon.md",
     "2022-02-05-htb-traceback.md",
-    "2022-02-05-htb-lazy.md",
-    "2022-01-31-htb-sauna.md"
+    "2022-02-05-htb-lazy.md"
   ]
 }
