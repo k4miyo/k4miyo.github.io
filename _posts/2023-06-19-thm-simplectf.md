@@ -311,7 +311,7 @@ User mitch may run the following commands on Machine:
 mitch@Machine:~$
 ```
 
-Vemos que podemos ejecutar el binario `/usr/bin/vim` como **root** sin proporcionar contraseña; por lo que ya sebemos que debemos utilizar [GTFobins](gtfobins.github.io/):
+Vemos que podemos ejecutar el binario `/usr/bin/vim` como **root** sin proporcionar contraseña; por lo que ya sebemos que debemos utilizar [GTFobins](https://gtfobins.github.io/):
 
 ```bash
 mitch@Machine:~$ sudo /usr/bin/vim

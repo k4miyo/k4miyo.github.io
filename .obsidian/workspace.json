@@ -30,9 +30,21 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "16b88286e6f7630f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "_drafts/template.md",
+                "mode": "source",
+                "source": false
+              }
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -159,12 +171,15 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "555c7f7aa3359554",
+  "active": "16b88286e6f7630f",
   "lastOpenFiles": [
     "_posts/2023-06-19-thm-simplectf.md",
+    "_posts/2023-06-19-thm-bountyhacker.md",
+    "assets/images/thm-bountyhacker/bountyhacker.png",
+    "assets/images/thm-bountyhacker",
+    "_drafts/template.md",
     "assets/images/thm-simplectf/simplectf.png",
     "assets/images/thm-simplectf",
-    "_drafts/template.md",
     "_posts/2023-06-17-thm-rootme.md",
     "assets/images/thm-rootme/rootme6.png",
     "assets/images/thm-rootme/rootme5.png",
