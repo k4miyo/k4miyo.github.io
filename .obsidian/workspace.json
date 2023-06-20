@@ -25,7 +25,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_drafts/2023-06-18-thm-simplectf.md",
+                "file": "_drafts/template.md",
                 "mode": "source",
                 "source": false
               }
@@ -98,7 +98,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_drafts/2023-06-18-thm-simplectf.md",
+                "file": "_drafts/template.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +115,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_drafts/2023-06-18-thm-simplectf.md",
+                "file": "_drafts/template.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -138,7 +138,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_drafts/2023-06-18-thm-simplectf.md"
+                "file": "_drafts/template.md"
               }
             }
           }
@@ -161,10 +161,10 @@
   },
   "active": "555c7f7aa3359554",
   "lastOpenFiles": [
+    "_posts/2023-06-19-thm-simplectf.md",
     "assets/images/thm-simplectf/simplectf.png",
     "assets/images/thm-simplectf",
     "_drafts/template.md",
-    "_drafts/2023-06-18-thm-simplectf.md",
     "_posts/2023-06-17-thm-rootme.md",
     "assets/images/thm-rootme/rootme6.png",
     "assets/images/thm-rootme/rootme5.png",

