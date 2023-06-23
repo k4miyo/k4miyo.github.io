@@ -1,4 +1,4 @@
-2---
+---
 title: Try Hack Me Agent Sudo
 author: k4miyo
 date: 2023-06-20
