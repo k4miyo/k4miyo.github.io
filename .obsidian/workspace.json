@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_drafts/2023-06-19-thm-agentsudo.md",
+                "file": "_drafts/template.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_drafts/2023-06-19-thm-agentsudo.md",
+                "file": "_drafts/template.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_drafts/2023-06-19-thm-agentsudo.md",
+                "file": "_drafts/template.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_drafts/2023-06-19-thm-agentsudo.md"
+                "file": "_drafts/template.md"
               }
             }
           }
@@ -148,8 +148,8 @@
   },
   "active": "f04cb642e605ac7f",
   "lastOpenFiles": [
+    "_posts/2023-06-20-thm-agentsudo.md",
     "_drafts/template.md",
-    "_drafts/2023-06-19-thm-agentsudo.md",
     "assets/images/thm-agentsudo/agentsudo3.png",
     "assets/images/thm-agentsudo/agentsudo2.png",
     "asstes/images/thm-agentsudo/agentsudo1.png.md",
