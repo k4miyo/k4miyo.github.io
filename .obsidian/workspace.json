@@ -49,7 +49,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_drafts/template.md",
+                "file": "_drafts/2023-06-25-thm-anthem.md",
                 "mode": "source",
                 "source": false
               }
@@ -122,7 +122,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_drafts/template.md",
+                "file": "_drafts/2023-06-25-thm-anthem.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -139,7 +139,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_drafts/template.md",
+                "file": "_drafts/2023-06-25-thm-anthem.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -162,7 +162,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_drafts/template.md"
+                "file": "_drafts/2023-06-25-thm-anthem.md"
               }
             }
           }
@@ -183,11 +183,11 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "ad1be24e86c1597c",
+  "active": "b064b11a4ee63b83",
   "lastOpenFiles": [
-    "_drafts/2023-06-25-thm-anthem.md",
-    "_drafts/template.md",
     "_posts/2023-06-25-thm-lazyadmin.md",
+    "_drafts/template.md",
+    "_drafts/2023-06-25-thm-anthem.md",
     "assets/images/thm-lazyadmin/lazyadmin9.png",
     "assets/images/thm-lazyadmin/lazyadmin8.png",
     "assets/images/thm-lazyadmin/lazyadmin7.png",

