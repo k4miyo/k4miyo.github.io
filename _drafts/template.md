@@ -1,7 +1,7 @@
 ---
 title: (Plataforma) (Máquina)
 author: k4miyo
-date: (Fecha: 2023-06-17)
+date: 2023-07-09
 math: true
 mermaid: true
 image:
