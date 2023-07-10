@@ -97,7 +97,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_drafts/template.md",
+                "file": "_drafts/2023-07-06-htb-timelapse.md",
                 "mode": "source",
                 "source": false
               }
@@ -170,7 +170,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_drafts/template.md",
+                "file": "_drafts/2023-07-06-htb-timelapse.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -187,7 +187,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_drafts/template.md",
+                "file": "_drafts/2023-07-06-htb-timelapse.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -210,7 +210,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_drafts/template.md"
+                "file": "_drafts/2023-07-06-htb-timelapse.md"
               }
             }
           }
@@ -233,16 +233,16 @@
   },
   "active": "f3000c1aa34cd1f8",
   "lastOpenFiles": [
+    "_posts/2023-07-09-vh-lupinone.md",
+    "_posts/2023-06-28-thm-roasted.md",
+    "_drafts/template.md",
     "_drafts/2023-07-06-htb-timelapse.md",
     "_drafts/2023-06-25-thm-anthem.md",
-    "_drafts/template.md",
-    "_posts/2023-07-09-vh-lupinone.md",
     "assets/images/vh-lupin/lupin4.png",
     "assets/images/vh-lupin/lupin3.png",
     "assets/images/vh-lupin/lupin2.png",
     "assets/images/vh-lupin/lupin.png",
     "assets/images/vh-lupin",
-    "_posts/2023-06-28-thm-roasted.md",
     "_posts/2023-06-25-thm-startup.md",
     "assets/images/thm-startup/startup4.png",
     "assets/images/thm-startup/startup3.png",

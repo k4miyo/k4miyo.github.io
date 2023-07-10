@@ -5,9 +5,9 @@ date: 2023-07-09
 math: true
 mermaid: true
 image:
-  path: /assets/images/vh/vulnhub.jpg
+  path: /assets/images/vulnhub/vulnhub.png
 categories: [Medium, Linux]
-tags: [Web, SSH]
+tags: [Web, SSH, Cracking, No pass]
 ping: true
 ---
 
