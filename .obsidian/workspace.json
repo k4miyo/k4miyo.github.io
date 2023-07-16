@@ -8,91 +8,7 @@
         "type": "tabs",
         "children": [
           {
-            "id": "f04cb642e605ac7f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "_drafts/template.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "52a9f2ca19a81ba3",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "_posts/2023-06-23-thm-overpass.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "f7449f6be1dd359f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "_drafts/2023-06-25-thm-anthem.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "ad1be24e86c1597c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "_drafts/2023-06-25-thm-anthem.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "6eb4e6ebf40d4638",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "_posts/2023-06-25-thm-startup.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "5544ac8727ff5998",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "_posts/2023-06-28-thm-roasted.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "65b685f65cdebbb2",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "_drafts/2023-07-06-htb-timelapse.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "f3000c1aa34cd1f8",
+            "id": "6a84a6000cbbe11e",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -103,8 +19,7 @@
               }
             }
           }
-        ],
-        "currentTab": 7
+        ]
       }
     ],
     "direction": "vertical"
@@ -231,27 +146,29 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "f3000c1aa34cd1f8",
+  "active": "6a84a6000cbbe11e",
   "lastOpenFiles": [
-    "_posts/2023-07-09-vh-lupinone.md",
-    "_posts/2023-06-28-thm-roasted.md",
+    "_posts/2023-07-10-vh-devguru.md",
+    "assets/images/vh-devguru/devguru20.png",
+    "assets/images/vh-devguru/devguru19.png",
+    "assets/images/vh-devguru/devguru18.png",
+    "assets/images/vh-devguru/devguru17.png",
+    "assets/images/vh-devguru/devguru16.png",
+    "assets/images/vh-devguru/devguru15.png",
+    "assets/images/vh-devguru/devguru14.png",
+    "assets/images/vh-devguru/devguru13.png",
+    "assets/images/vh-devguru/devguru12.png",
+    "assets/images/vh-devguru/devguru11.png",
+    "assets/images/vh-devguru",
     "_drafts/template.md",
     "_drafts/2023-07-06-htb-timelapse.md",
+    "_posts/2023-07-09-vh-lupinone.md",
+    "_posts/2023-06-28-thm-roasted.md",
     "_drafts/2023-06-25-thm-anthem.md",
-    "assets/images/vh-lupin/lupin4.png",
-    "assets/images/vh-lupin/lupin3.png",
-    "assets/images/vh-lupin/lupin2.png",
-    "assets/images/vh-lupin/lupin.png",
     "assets/images/vh-lupin",
     "_posts/2023-06-25-thm-startup.md",
-    "assets/images/thm-startup/startup4.png",
-    "assets/images/thm-startup/startup3.png",
-    "assets/images/thm-startup/startup2.png",
-    "assets/images/thm-startup/startup.png",
-    "assets/images/thm-startup/important.jpg",
     "assets/images/thm-startup",
     "_posts/2023-06-25-thm-lazyadmin.md",
-    "assets/images/thm-lazyadmin/lazyadmin9.png",
     "assets/images/thm-lazyadmin",
     "_posts/2023-06-23-thm-overpass.md",
     "_posts/2023-06-19-thm-bountyhacker.md",
@@ -264,7 +181,6 @@
     "assets/images/thm-agentsudo",
     "_posts/2023-06-19-thm-simplectf.md",
     "assets/images/thm-bountyhacker",
-    "assets/images/thm-simplectf",
     "_posts/2023-06-17-thm-rootme.md",
     "_posts/2023-06-17-thm-picklerick.md",
     "posts/extractPorts.md",
