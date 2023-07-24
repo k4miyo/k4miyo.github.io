@@ -4,35 +4,18 @@
     "type": "split",
     "children": [
       {
-        "id": "1fe8e8850f6ecc17",
+        "id": "4da9b7c63f48af70",
         "type": "tabs",
         "children": [
           {
-            "id": "6a84a6000cbbe11e",
+            "id": "0b0f9f726189ecea",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "_posts/2023-07-16-htb-timelapse.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "0315a40aa2325b89",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "_drafts/2023-07-17-htb-late.md",
-                "mode": "source",
-                "source": false
-              }
+              "type": "empty",
+              "state": {}
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -98,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_drafts/2023-07-17-htb-late.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -115,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_drafts/2023-07-17-htb-late.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -137,9 +118,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "_drafts/2023-07-17-htb-late.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -159,8 +138,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "0315a40aa2325b89",
+  "active": "0b0f9f726189ecea",
   "lastOpenFiles": [
+    "_posts/2023-07-16-htb-timelapse.md",
+    "_posts/2023-07-17-htb-late.md",
     "assets/images/htb-late/late12.png",
     "assets/images/htb-late/late11.png",
     "assets/images/htb-late/late10.png",
@@ -171,12 +152,9 @@
     "assets/images/htb-late/late5.png",
     "assets/images/htb-late/late4.png",
     "assets/images/htb-late/late3.png",
-    "assets/images/htb-late/late2.png",
     "assets/images/htb-late",
     "_drafts/template.md",
-    "_drafts/2023-07-17-htb-late.md",
     "_drafts/2023-06-25-thm-anthem.md",
-    "_posts/2023-07-16-htb-timelapse.md",
     "_posts/2023-07-10-vh-devguru.md",
     "assets/images/vh-devguru",
     "_posts/2023-07-09-vh-lupinone.md",
