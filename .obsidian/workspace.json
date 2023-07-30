@@ -11,8 +11,12 @@
             "id": "0b0f9f726189ecea",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {}
+              "type": "markdown",
+              "state": {
+                "file": "_posts/2023-07-17-htb-late.md",
+                "mode": "source",
+                "source": false
+              }
             }
           }
         ]
@@ -81,6 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "_posts/2023-07-17-htb-late.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,6 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "_posts/2023-07-17-htb-late.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -118,7 +124,9 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {}
+              "state": {
+                "file": "_posts/2023-07-17-htb-late.md"
+              }
             }
           }
         ]
@@ -142,6 +150,7 @@
   "lastOpenFiles": [
     "_posts/2023-07-16-htb-timelapse.md",
     "_posts/2023-07-17-htb-late.md",
+    "_drafts/2023-06-25-thm-anthem.md",
     "assets/images/htb-late/late12.png",
     "assets/images/htb-late/late11.png",
     "assets/images/htb-late/late10.png",
@@ -154,7 +163,6 @@
     "assets/images/htb-late/late3.png",
     "assets/images/htb-late",
     "_drafts/template.md",
-    "_drafts/2023-06-25-thm-anthem.md",
     "_posts/2023-07-10-vh-devguru.md",
     "assets/images/vh-devguru",
     "_posts/2023-07-09-vh-lupinone.md",
