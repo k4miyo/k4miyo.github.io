@@ -37,7 +37,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_drafts/2023-07-30-htb-fawn.md",
+                "file": "_posts/2023-07-30-htb-meow.md",
                 "mode": "source",
                 "source": false
               }
@@ -110,7 +110,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_drafts/2023-07-30-htb-fawn.md",
+                "file": "_posts/2023-07-30-htb-meow.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -127,7 +127,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_drafts/2023-07-30-htb-fawn.md",
+                "file": "_posts/2023-07-30-htb-meow.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -150,7 +150,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_drafts/2023-07-30-htb-fawn.md"
+                "file": "_posts/2023-07-30-htb-meow.md"
               }
             }
           }
@@ -173,11 +173,11 @@
   },
   "active": "61b597da585fb40e",
   "lastOpenFiles": [
-    "_drafts/template.md",
+    "_posts/2023-07-30-htb-late.md",
     "_drafts/2023-07-30-htb-fawn.md",
+    "_drafts/template.md",
     "_drafts/2023-06-25-thm-anthem.md",
     "_posts/2023-07-30-htb-meow.md",
-    "_posts/2023-07-30-htb-late.md",
     "_posts/2023-07-16-htb-timelapse.md",
     "assets/images/htb-late/late12.png",
     "assets/images/htb-late/late11.png",
