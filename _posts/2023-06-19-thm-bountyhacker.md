@@ -196,7 +196,7 @@ Nos encontramos con un posible diccionario y unas tareas, así mismo, observamos
 http://10.10.200.126/ [200 OK] Apache[2.4.18], Country[RESERVED][ZZ], HTTPServer[Ubuntu Linux][Apache/2.4.18 (Ubuntu)], IP[10.10.200.126]
 ```
 
-![](/assets/images/thm-bountyhacker/bountyhacker.png)
+![""](/assets/images/thm-bountyhacker/bountyhacker.png)
 
 Básicamente el sitio web nos dice que debemos entrar a la máquina; por lo tanto, tenemos un potencial usuario y una lista de contraseñas, por lo que podríamos tratar de ingresar vía ssh:
 

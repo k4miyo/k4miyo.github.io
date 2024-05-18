@@ -209,14 +209,14 @@ Vemos el dominio `devguru.local`, por lo que vamos a agregarlo a nuestro archivo
 http://devguru.local/ [200 OK] Apache[2.4.29], Cookies[october_session], Country[RESERVED][ZZ], Email[support@devguru.loca,support@gmail.com], HTML5, HTTPServer[Ubuntu Linux][Apache/2.4.29 (Ubuntu)], HttpOnly[october_session], IP[10.0.0.96], MetaGenerator[DevGuru], Script, Title[Corp - DevGuru], X-UA-Compatible[IE=edge]
 ```
 
-![](/assets/images/vh-devguru/devguru.png)
+![""](/assets/images/vh-devguru/devguru.png)
 
 ```bash
 ❯ whatweb http://devguru.local:8585/
 http://devguru.local:8585/ [200 OK] Cookies[_csrf,i_like_gitea,lang], Country[RESERVED][ZZ], HTML5, HttpOnly[_csrf,i_like_gitea], IP[10.0.0.96], JQuery, Meta-Author[Gitea - Git with a cup of tea], Open-Graph-Protocol[website], PoweredBy[Gitea], Script, Title[Gitea: Git with a cup of tea], X-Frame-Options[SAMEORIGIN], X-UA-Compatible[ie=edge]
 ```
 
-![](/assets/images/vh-devguru/devguru2.png)
+![""](/assets/images/vh-devguru/devguru2.png)
 
 Haciendo ***hovering*** no vemos que nos lleve a ningún lado y para el repositorio de ***Gitea*** no contamos con accesos ni podemos crearnos una cuenta; por lo que vamos a tratar de descubrir recursos con nuestra herramienta de confianza `nmap`:
 
@@ -262,7 +262,7 @@ drwxr-xr-x root root  24 B  Thu Jul 13 16:59:52 2023  themes
 
 Encontramos varios recursos que existen y podemos validar que existen en el servidor web:
 
-![](/assets/images/vh-devguru/devguru3.png)
+![""](/assets/images/vh-devguru/devguru3.png)
 
 Tomando el recurso `adminer.php` y partiendo de que tenemos los archivos del servidor, podríamos tratar de búscar credenciales de acceso:
 
@@ -434,19 +434,19 @@ return [
 
 Encontramos credenciales de acceso a la base de datos de **Adminer**, asi que vamos a tratar:
 
-![](/assets/images/vh-devguru/devguru4.png)
+![""](/assets/images/vh-devguru/devguru4.png)
 
 Una tabla que ya nos debe llamar la atención es **backend_users**, así que vamos a echarle un ojo el contenido:
 
-![](/assets/images/vh-devguru/devguru5.png)
+![""](/assets/images/vh-devguru/devguru5.png)
 
 Buscando en internet, vemos que el hash de la contraseña es [bcrypt](https://appdevtools.com/bcrypt-generator), por lo que vamos a crear un nuevo hash con una contraseña que sepamos, por ejemplo: ***admin123***:
 
-![](/assets/images/vh-devguru/devguru6.png)
+![""](/assets/images/vh-devguru/devguru6.png)
 
 Vamos a cambiar la contraseña del usuario **frank** por la nuestra:
 
-![](/assets/images/vh-devguru/devguru7.png)
+![""](/assets/images/vh-devguru/devguru7.png)
 
 Podríamos tratar de acceder al repositorio con las credenciales **frank : admin123**; sin embargo, vemos que no podemos acceder, así que tratemos de buscar algún recurso en donde podamos acceder. (**Nota**: Como pista, la base de datos de llama OctoberDB, por lo que podría hacer referencia al CMS October)
 
@@ -488,11 +488,11 @@ Progress: 4796 / 220547 (2.17%)                                                 
 
 Vemos que el recurso `/backend` nos redirige a `http://devguru.local/backend/backend/auth`; por lo que vamos a echarle un ojo:
 
-![](/assets/images/vh-devguru/devguru8.png)
+![""](/assets/images/vh-devguru/devguru8.png)
 
 Vamos a tratar de acceder con las credenciales que tenemos:
 
-![](/assets/images/vh-devguru/devguru9.png)
+![""](/assets/images/vh-devguru/devguru9.png)
 
 Ya nos encontramos dentro del CMS October, así que tratemos de ver una forma que nos ayude a ingresar a la máquina, por ejemplo modificando o subiendo un archivo php que nos ayude a entablarnos una reverse shell. Tratando varias opciones, no podemos subir un archivo PHP, por lo tanto, vamos a tratar de obtener ejecución de comandos a nivel de sistema. Investigando un poco, nos encontramos con el siguiente artículo [Octobercms CVE-2022-21705](https://cyllective.com/blog/post/octobercms-cve-2022-21705) en el cual vemos que podemos crear una función que nos permita ejecutar comandos:
 
@@ -510,11 +510,11 @@ Hello World.
 ?>
 ```
 
-![](/assets/images/vh-devguru/devguru10.png)
+![""](/assets/images/vh-devguru/devguru10.png)
 
 Si guardamos los cambios y en la previsualización, ya vemos la ejecución del comando `id`:
 
-![](/assets/images/vh-devguru/devguru11.png)
+![""](/assets/images/vh-devguru/devguru11.png)
 
 A este punto podriamos tratar de entablarnos una reverse shell php para ganar acceso a la máquina.
 
@@ -528,7 +528,7 @@ function onStart() {
 }
 ```
 
-![](/assets/images/vh-devguru/devguru12.png)
+![""](/assets/images/vh-devguru/devguru12.png)
 
 Ahora en la parte de **Markup**, colocamos la siguiente línea:
 
@@ -536,15 +536,15 @@ Ahora en la parte de **Markup**, colocamos la siguiente línea:
 {{ page.this.getShell }}
 ```
 
-![](/assets/images/vh-devguru/devguru13.png)
+![""](/assets/images/vh-devguru/devguru13.png)
 
 Guardamos los cambios y accedemos la previsualización.
 
-![](/assets/images/vh-devguru/devguru14.png)
+![""](/assets/images/vh-devguru/devguru14.png)
 
 Tendremos el error anterior, si en la dirección URL colocamos `?cmd=whoami`, vemos que ya podemos ejecutar comandos a nivel de sistema.
 
-![](/assets/images/vh-devguru/devguru15.png)
+![""](/assets/images/vh-devguru/devguru15.png)
 
 Cualquier opción que hayamos escogido para ejecutar comandos a nivel de sistema, para a ponernos en escucha por el puerto 443 y ahora tratar de entablarnos una reverse shell php:
 
@@ -863,7 +863,7 @@ MariaDB [gitea]>
 
 Encontramos unas credenciales de acceso del usuario **frank**, lo más seguro que al repositorio debido a que la base de datos se llama **Gitea**. De forma similar, podemos crearnos una contraseña con el algoritmo **pbkdf2** y cambiar la del usuario **frank**:
 
-![](/assets/images/vh-devguru/devguru6.png)
+![""](/assets/images/vh-devguru/devguru6.png)
 
 ```bash
 MariaDB [gitea]> update user set passwd='$2a$10$TA/m1nQZUL2SwwmhxUaDgOZ/KP5.tAvlnhocNiHa0m1SDDpiI5nzi',passwd_hash_algo='bcrypt' where name='frank';
@@ -884,19 +884,19 @@ MariaDB [gitea]>
 
 Ahora tratremos de acceder al repositorio con las credenciales **frank : admin123**:
 
-![](/assets/images/vh-devguru/devguru16.png)
+![""](/assets/images/vh-devguru/devguru16.png)
 
-![](/assets/images/vh-devguru/devguru17.png)
+![""](/assets/images/vh-devguru/devguru17.png)
 
 Ya nos encontramos dentro del repositorio como el usuario **frank**; ahora debemos tratar de buscar una forma de entablarnos una reverse shell para acceder a la máquina nuevamente pero ahora como el usuario **frank**. Encontramos el repo [CVE-2020-14144-GiTea-git-hooks-rce](https://github.com/p0dalirius/CVE-2020-14144-GiTea-git-hooks-rce) en donde nos indica como podemos realizar lo que buscamos, por lo tanto:
 
-![](/assets/images/vh-devguru/devguru18.png)
+![""](/assets/images/vh-devguru/devguru18.png)
 
-![](/assets/images/vh-devguru/devguru19.png)
+![""](/assets/images/vh-devguru/devguru19.png)
 
 Editamos el archivo `README.md` para se pueda realizar un push y nos entable la reverse shell.
 
-![](/assets/images/vh-devguru/devguru20.png)
+![""](/assets/images/vh-devguru/devguru20.png)
 
 ```bash
 ❯ nc -nlvp 8443

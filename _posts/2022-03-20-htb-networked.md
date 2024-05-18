@@ -97,11 +97,11 @@ http://10.10.10.146 [200 OK] Apache[2.4.6], Country[RESERVED][ZZ], HTTPServer[Ce
 
 No vemos nada interesante, así que vamos a visualizar el contenido vía web:
 
-![](/assets/images/htb-networked/networked-web.png)
+![""](/assets/images/htb-networked/networked-web.png)
 
 Vamos a ver el código fuente del sitio:
 
-![](/assets/images/htb-networked/networked-web1.png)
+![""](/assets/images/htb-networked/networked-web1.png)
 
 Vemos un comentario en donde indica que `/upload` y `gallery` no han sido agregados; si los consultamos, no vemos nada. Por lo tanto, vamos a tratar de descubrir recursos dentro del servidor web; primerante con `nmap` y posteriormente con `wfuzz`:
 
@@ -123,7 +123,7 @@ Nmap done: 1 IP address (1 host up) scanned in 13.07 seconds
 
 Vemos algunos recursos potenciales, como `/backup/` y `uploads`. Dentro de `backup` vemos el archivo **backup.tar**; por lo tanto lo descargamos en nuestra máquina.
 
-![](/assets/images/htb-networked/networked-web2.png)
+![""](/assets/images/htb-networked/networked-web2.png)
 
 Antes de echarle un ojo, vamos a utilizar la herramienta `wfuzz` para tratar de escubrir directorios y también archivos de extensión **txt**, **php**. **html**, entre otros
 
@@ -200,15 +200,15 @@ GIF8;
 
 Vamos a tratar de subirlo:
 
-![](/assets/images/htb-networked/networked-web3.png)
+![""](/assets/images/htb-networked/networked-web3.png)
 
 Se ha subido nuestro archivo, por lo tanto, vamos a recargar la página de `photos.php` para ver si encontramos nuestro archivo.
 
-![](/assets/images/htb-networked/networked-web4.png)
+![""](/assets/images/htb-networked/networked-web4.png)
 
 Si vemos el código fuente, nos encontramos que para este caso nuestro archivo fue guardado en `/uploads/10_10_14_27.php.png`; si le damos click sólo vemos la cadena de texto **GIF8;** pero podemos ejecutar comandos:
 
-![](/assets/images/htb-networked/networked-web5.png)
+![""](/assets/images/htb-networked/networked-web5.png)
 
 Ahora si, vamos a tratar de entablarnos una reverse shell a nuestro equipo; por lo tanto, nos ponemos en escucha por el puerto 443:
 

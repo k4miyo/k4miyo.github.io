@@ -104,7 +104,7 @@ Algo que nos llama la atención es el título **October CMS - Vanilla** ya que h
 
 Vemos que en el recurso `/backend` se debe encontrar el panel de adminsitración.
 
-![](/assets/images/htb-october/october-panel.png)
+![""](/assets/images/htb-october/october-panel.png)
 
 Y efectivamente, tenemos el panel de administración. Ahora, antes de tirar fuerza bruta o cualquier otra cosa, tenemos que ver si existen credenciales por defecto.
 
@@ -112,7 +112,7 @@ Y efectivamente, tenemos el panel de administración. Ahora, antes de tirar fuer
 
 Vemos que comentan que las credenciales son *admin:admin*; así que vamos a probarlas:
 
-![](/assets/images/htb-october/october-admin.png)
+![""](/assets/images/htb-october/october-admin.png)
 
 Ya estamos dentro del panel de administración del sitio web. Ahora debemos de buscar alguna forma de ingresar a la máquina víctima; si intentamos crear un archivo de extensión `php`, vemos que no nos deja; por lo tanto, tenemos que validar que extensiones permite el servidor. En la parte superior izquierda vemos varias opciones, podemos ingresar a **Media** y vemos algo curioso, un archivo de extensión `php5`; si lo seleccionamos vemos unas opciones del lado derecho y si le damos en ***Click here***, nos abre el recurso `dr.php5`.
 
@@ -128,15 +128,15 @@ Así que podemos crearnos un archivo con extensión `php5` y subirlo al servidor
    3   │ ?>
 ```
 
-![](/assets/images/htb-october/october-shell.png)
+![""](/assets/images/htb-october/october-shell.png)
 
 Le damos en la opción ***Click here***, se nos abre otra ventana en donde se encuentra nuestro archivo php. Ahora mediante la variable `cmd` podemos ejecutar comandos a nivel de sistema.
 
-![](/assets/images/htb-october/october-cmd.png)
+![""](/assets/images/htb-october/october-cmd.png)
 
 Ahora debemos entablarnos una reverse shell a nuestra máquina de atacante. Probando las reverse shell de [pentestmonkey](https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet), vemos que **Netcat** no nos deja, así que vamos por otras vías alternativas; como por ejemplo python. Antes de lanzar la reverse shell, vamos a validar si la máquina cuenta con python:
 
-![](/assets/images/htb-october/october-python.png)
+![""](/assets/images/htb-october/october-python.png)
 
 Ahora si, lanzamos la reverse shell y nos ponemos en escucha por el puerto 443:
 
@@ -513,7 +513,7 @@ www-data@october:~$
 
 Ahora, para nuestro script de *buffer overflow* debemos tener presente la siguiente secuencia de envío de datos:
 
-![](/assets/images/htb-october/october-ret2libc.png)
+![""](/assets/images/htb-october/october-ret2libc.png)
 
  - Junk: Los datos a introducir que llenan el buffer, para este caso son 112 caracteres.
  - Payload: Llamada a la librería *libc* la cual cuenta con funciones útiles. Esta se divide en tres partes:

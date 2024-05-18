@@ -100,7 +100,7 @@ http://10.10.65.144/ [200 OK] Country[RESERVED][ZZ], HTML5, IP[10.10.65.144], Sc
 
 No vemos nada interesante, por lo que vamos a visualizar el contenido vía web:
 
-![](/assets/images/thm-overpass/overpass.png)
+![""](/assets/images/thm-overpass/overpass.png)
 
 Tampoco vemos nada interesante, por lo que vamos a tratar de descubrir recursos en el sitio web:
 
@@ -133,11 +133,11 @@ Requests/sec.: 0
 
 Nos llama la atención el recurso **admin**:
 
-![](/assets/images/thm-overpass/overpass1.png)
+![""](/assets/images/thm-overpass/overpass1.png)
 
 Vemos un panel de acceso pero no tenemos credenciales y probando las más comunes, no podemos ingresar. Si analizamos el un poco los recursos del servidor, encontramos el archivo **login.js**:
 
-![](/assets/images/thm-overpass/overpass2.png)
+![""](/assets/images/thm-overpass/overpass2.png)
 
 Analizando un poco el archivo, en la parte del condicional, se tiene las siguientes lineas:
 
@@ -153,7 +153,7 @@ if (statusOrCookie === "Incorrect credentials") {
 
 Si el login es exitoso, se crea la cookie **SessionToken** cuyo valor debe ser ***statusOrCookie***; por lo tanto, con ayuda del plugin **EditThisCookie** podemos crearla y refrescar la página.
 
-![](/assets/images/thm-overpass/overpass3.png)
+![""](/assets/images/thm-overpass/overpass3.png)
 
 Tenemos una llave, por lo tanto la copiamos y guardamos en nuestra máquina como `id_rsa` para poder acceder vía ssh. Si lo intentamos, vemos que nos pedirá contraseña, por lo tanto, debemos obtener el hash y tratar de crackearla.
 
@@ -231,7 +231,7 @@ james@overpass-prod:~$
 
 Vemos que utiliza un tipo de cifrado pero no sabemos cual puede ser. Para eso, debemos descargar el programa que se utilizar para cifrar en `http://X.X.X.X/downloads/`:
 
-![](/assets/images/thm-overpass/overpass4.png)
+![""](/assets/images/thm-overpass/overpass4.png)
 
 Vamos a ver el contenido de dicho archivo:
 
@@ -273,7 +273,7 @@ func saveCredsToFile(filepath string, passlist []passListEntry) string {
 
 En la función `saveCredsToFile` vemos que la variable `stringToWrite` hace referencia aun **ROT47**; por lo que podriamos tratar de búscar cualquier descifrador online y probar para **ROT47**.
 
-![](/assets/images/thm-overpass/overpass5.png)
+![""](/assets/images/thm-overpass/overpass5.png)
 
 Ya encontramos la contraseña del usuario **james**. Ahora vamos a enumerar un poco el sistema para determinar como escalar privilegios:
 

@@ -244,7 +244,7 @@ id username password Status last_login RoleID Remark
 
 Tenemos credenciales de usuarios, por lo que antes que cualquier cosa, vamos a guardarlas para no perderlas despúes. Si queremos obtener los resultados de una forma visual más bonita, podemos hacer uso de la herramienta online [MDBOpener](https://www.mdbopener.com/es.html)
 
-![](/assets/images/htb-access/access-mdb.png)
+![""](/assets/images/htb-access/access-mdb.png)
 
 Si checamos las credenciales que tenemos, la del usuario **engineer** es muy personalizada y además, tenemos otro recurso llamado igual con un archivo comprimido; por lo que es posible que dicha contraseña la utilicemos para descomprimir el archivo `Access Control.zip`.
 

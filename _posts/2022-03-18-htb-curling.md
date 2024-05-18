@@ -128,15 +128,15 @@ Nmap done: 1 IP address (1 host up) scanned in 13.55 seconds
 
 Checando la página web.
 
-![](/assets/images/htb-curling/curling-web.png)
+![""](/assets/images/htb-curling/curling-web.png)
 
 Si vemos el código fuente de la página, hasta el final vemos un comentario apuntando a recurso `secret.txt`:
 
-![](/assets/images/htb-curling/curling-web1.png)
+![""](/assets/images/htb-curling/curling-web1.png)
 
 Vamos a echarle un ojo a ese recurso.
 
-![](/assets/images/htb-curling/curling-web2.png)
+![""](/assets/images/htb-curling/curling-web2.png)
 
 Tenemos una cadena de texto posiblemente en base 64, así que la desciframo:
 
@@ -147,19 +147,19 @@ Curling2018!
 
 Tenemos una posible contraseña pero no sabemos a que usuario está destinana; por lo tanto, vamos a echarle un ojo a las publicaciones por si encontramos algo interesante.
 
-![](/assets/images/htb-curling/curling-web3.png)
+![""](/assets/images/htb-curling/curling-web3.png)
 
 Tenemos usuarios potenciales a probar, como por ejemplo: **superuser**, **super.user**, **admin**, **administrator** y **floris**. Al probarlas, tenemos que la combinación es **floris : Curling2018!**; por lo tanto vamos a loguearnos bajo el panel de administración de **Joomla!**:
 
-![](/assets/images/htb-curling/curling-web4.png)
+![""](/assets/images/htb-curling/curling-web4.png)
 
 Vemos que nos enfrentamos ante un **Joomla 3.8.8**, por lo que investigando un poco, encontramos una forma de subir un archivo php que nos permita ejecutar obtener una reverse shell [hackingarticles](https://www.hackingarticles.in/joomla-reverse-shell/). Siguiendo el artículo, nos dice que debemos navegar en **Extensions > Templates**:
 
-![](/assets/images/htb-curling/curling-web5.png)
+![""](/assets/images/htb-curling/curling-web5.png)
 
 Seleccionamos de la tabla que nos parace aquel que no está asginado (**Beez3 - Default**) en el campo de **Template**:
 
-![](/assets/images/htb-curling/curling-web6.png)
+![""](/assets/images/htb-curling/curling-web6.png)
 
 Antes de generar un archivo, vamos a descargarnos una reverse shell de [pentestmonkey](https://pentestmonkey.net/tools/web-shells/php-reverse-shell)
 
@@ -199,11 +199,11 @@ Editamos el archivo `php-reverse-shell.php` modificando los valores que nos indi
 
 Ahora creamos un nuevo archivo en **New File** dentro del CMS y llenamos los campos que nos solicita, **File Name**, **Extension** y le damos en **Create*.
 
-![](/assets/images/htb-curling/curling-web7.png)
+![""](/assets/images/htb-curling/curling-web7.png)
 
 En el cuadro de texto que nos aparece, copiamos el pegamos el contenido del archivo `php-reverse-shell.php` y guardamos los cambios:
 
-![](/assets/images/htb-curling/curling-web8.png)
+![""](/assets/images/htb-curling/curling-web8.png)
 
 Ahora, para apuntar a nuestro archivo, debemos recordar que el *fuzzing* de `nmap` existe un recurso llamado `templates` y como nos encontramos dentro de dicha sección, podriamos pensar que igual en dicho recurso está nuestro archivo. Por lo tanto apuntamos a nuestro archivo y nos ponemos en escucha por el puerto 443:
 

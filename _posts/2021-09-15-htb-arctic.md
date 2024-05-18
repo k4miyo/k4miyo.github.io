@@ -87,11 +87,11 @@ Nmap done: 1 IP address (1 host up) scanned in 138.84 seconds
 
 Obsevamos el puerto 8500/TCP abierto asociado al servicio *fmtp (Flight Message Transfer Protocol)* y es posible que observemos cierto contenido a través del sitio web; por lo que tratamos de ingresar a la URL `http://10.10.10.11:8500/` y observamos dos recursos de un listado de directorios:
 
-![](/assets/images/htb-arctic/arctic_web.png)
+![""](/assets/images/htb-arctic/arctic_web.png)
 
 Explorando un poco los recursos vistos en el sitio web, observamos que en la siguiente dirección existe un panel de login asociado a la tecnología **Adobe Coldfusion 8**. Podriamos probar credenciales de acceso como: *admin:admin* o *admin:password*; sin embargo, no obtenemos acceso al portal, por lo que procedemos a buscar una posible vulnerabilidad asociada a dicha tecnología:
 
-![](/assets/images/htb-arctic/arctic_panel.png)
+![""](/assets/images/htb-arctic/arctic_panel.png)
 
 Buscando la existencia de algún exploit público, podemos encontrar multiples resultados con la herramienta `searchsploit`; por lo que le echamos un ojos poco a poco. Podemos empezar aquellos relacionados a *directory traversal - multiple/remote/14641.py*
 
@@ -118,7 +118,7 @@ Papers: No Results
 
 De acuerdo con el exploit, existe la posiblidad de acceso a la siguiente ruta: `http://10.10.10.11:8500/CFIDE/administrator/enter.cfm?locale=../../../../../../../../../../ColdFusion8/lib/password.properties%00en`; ingresando, nos encontramos el panel de administración y el hash de la contraseña. Podriamos trata de identificar que tipo de hash se trata mediante el uso de la herramienta `hash-identifier`
 
-![](/assets/images/htb-arctic/arctic_pass.png)
+![""](/assets/images/htb-arctic/arctic_pass.png)
 
 ```bash
 ❯ hash-identifier -h
@@ -165,7 +165,7 @@ Use the "--show --format=Raw-SHA1" options to display all of the cracked passwor
 Session completed
 ```
 
-![](/assets/images/htb-arctic/arctic_crack.png)
+![""](/assets/images/htb-arctic/arctic_crack.png)
 
 Ahora ingresamos al panel de administración de *Adobe Coldfusion* con el password identificado. Investigando un poco, podemos encontrar que existe una vulnerabilidad de dicha tecnología asociada al CVE *[CVE-2018-15961](https://www.cvedetails.com/cve/CVE-2018-15961/ "CVE-2018-15961 security vulnerability details")* que podemos explotar subiendo un archivo en **java** en la sección de *DEBUGGING & LOGGING → Scheduled Tasks* y llenamos los siguientes campos:
 
@@ -174,7 +174,7 @@ Ahora ingresamos al panel de administración de *Adobe Coldfusion* con el passwo
 - Publish: check
 - File: C:\coldfusion8\wwwroot\CFIDE\k4mishell.jsp (Se intuye que la aplicación se encuentra montada en la ruta *C:\coldfusion8\wwwroot\\*, por lo que incluimos el directorio *CFIDE* y el nombre de nuestro archivo)
 
-![](/assets/images/htb-arctic/arctic_shell.png)
+![""](/assets/images/htb-arctic/arctic_shell.png)
 
 Por lo tanto, necesitamos generar nuestro archivo que nos entable la reverse shell, así como compartir un servidor HTTP con python.
 

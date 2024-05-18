@@ -100,7 +100,7 @@ http://forwardslash.htb/ [200 OK] Apache[2.4.29], Country[RESERVED][ZZ], HTML5, 
 
 No vemos nada interesante, así que vamos a echarle un ojo vía web.
 
-![](/assets/images/htb-forwardslash/forwardslash-web.png)
+![""](/assets/images/htb-forwardslash/forwardslash-web.png)
 
 Se trata de un ***defacement*** en el cual nos dan unas posibles pistas; pero fuera de eso, no vemos nada interesante, así que vamos a tratar de descubrir nuevos recursos dentro del servidor empezando por `nmap` y luego herramientas mas tochas.
 
@@ -143,19 +143,19 @@ Requests/sec.: 0
 
 Tenemos un subdominios que es `backup.forwardslash.htb`, así que vamos a agregarlo a nuestro archivo `/etc/hosts` y a echarle un ojo a ver que tiene.
 
-![](/assets/images/htb-forwardslash/forwardslash-web1.png)
+![""](/assets/images/htb-forwardslash/forwardslash-web1.png)
 
 Tenemos un panel de login y además podría contar con un panel de registro; asi que antes de intentar cualquier cosa, vamos a tratar de registrarnos y ver a lo que tenemos acceso.
 
-![](/assets/images/htb-forwardslash/forwardslash-web2.png)
+![""](/assets/images/htb-forwardslash/forwardslash-web2.png)
 
 Aquí algo que ya nos debería llamar la atención sería **Change Your Profile Picture**, a que nos permitiría subir archivos.
 
-![](/assets/images/htb-forwardslash/forwardslash-web3.png)
+![""](/assets/images/htb-forwardslash/forwardslash-web3.png)
 
 Al ingresar vemos que nos dice que se ha deshabilitado los items, pero igual y podríamos habilitarlos para despúes hacer una consulta; esto lo logramos dando click secundario en el sitio web y seleccionar la opción de **Inspeccionar**, ahí nos muestra el código fuente del sitio y sobre los campos **input** damos click secundario y elegimos **Editar como HTML** y eliminamos la parte donde dice **disabled=""**.
 
-![](/assets/images/htb-forwardslash/forwardslash-web4.png)
+![""](/assets/images/htb-forwardslash/forwardslash-web4.png)
 
 Con esto se nos habilitan dichos campos y si escribimos cualquier cosa en donde dice **URL** y luego damos click en **Submit**, vemos que la petición se tramita; por lo tanto, vamos a ver si puede acceder a un recurso de nuestra máquina, por lo que nos compartimos un servicio HTTP con python:
 
@@ -165,11 +165,11 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 10.10.10.183 - - [22/Jan/2022 19:39:12] "GET /test.php HTTP/1.0" 200 -
 ```
 
-![](/assets/images/htb-forwardslash/forwardslash-web5.png)
+![""](/assets/images/htb-forwardslash/forwardslash-web5.png)
 
 Vemos que la consulta se realiza, ahora vamos a ver si podemos ver archivos internos de la máquina, como el `/etc/passwd`:
 
-![](/assets/images/htb-forwardslash/forwardslash-web6.png)
+![""](/assets/images/htb-forwardslash/forwardslash-web6.png)
 
 También podemos ver recursos internos de la máquina. Como es un poco incómodo andar cambiando varias veces el item **input** quitando el disable, vamos a crearnos un programa en python.
 
@@ -350,11 +350,11 @@ Requests/sec.: 55.03040
 
 Tenemos el directorio `dev`, vamos a echarle un ojito.
 
-![](/assets/images/htb-forwardslash/forwardslash-web7.png)
+![""](/assets/images/htb-forwardslash/forwardslash-web7.png)
 
 Vemos una respuesta algo personalizadas, por lo que podría pensar que debemos estar apuntando a un recurso por defecto como **index.php**.
 
-![](/assets/images/htb-forwardslash/forwardslash-web8.png)
+![""](/assets/images/htb-forwardslash/forwardslash-web8.png)
 
 Y es correcto, entonces podríamos tratar de ver el contenido de dicho archivo con nuestro programa en python que desarrollamos y vamos a suponer que la ruta interna de dicho archivo está en `/var/www/backup.forwardslash.htb/dev/index.php` y además, como es un archivo php, lo más seguro es que el servidor lo interprete, así que haremos uso de un wrapper para convertirlo en base64:
 

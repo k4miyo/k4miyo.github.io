@@ -313,7 +313,7 @@ http://10.10.10.64:8080/ [200 OK] Country[RESERVED][ZZ], HTML5, IP[10.10.10.64],
 
 No vemos nada interesante, así que vamos a ver el contenido web:
 
-![](/assets/images/htb-stratosphere/stratosphere-web.png)
+![""](/assets/images/htb-stratosphere/stratosphere-web.png)
 
 Que tampoco vemos algo que nos de valor como atacantes, así que vamos a tratar de descubrir rutas dentro del servidor web:
 
@@ -370,7 +370,7 @@ Requests/sec.: 311.6257
 
 Vemos los recursos `manager` y `Monitoring`, al tratar de checarlos, el recurso `manager` nos arroja un panel de login asociado a **Apache Tomcat** y las credenciales por defecto no funcionan. Para el recurso `Monitoring` vemos un panel de login y notamos algo extraño en la dirección URL:
 
-![](/assets/images/htb-stratosphere/stratosphere-monitoring.png)
+![""](/assets/images/htb-stratosphere/stratosphere-monitoring.png)
 
 Tenemos un archivo llamado `Welcome.action` con una extensión poco común; así que buscaremos un posible exploit relacionado con ese tipo de extensión.
 

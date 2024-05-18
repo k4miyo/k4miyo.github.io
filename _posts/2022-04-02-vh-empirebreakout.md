@@ -151,19 +151,19 @@ http://10.0.0.28:20000 [200 OK] Country[RESERVED][ZZ], HTTPServer[MiniServ/1.830
 
 No vemos nada interesante, así que vamos a ver el contenido vía web.
 
-![](/assets/images/vh-empirebreakout/empire-web.png)
+![""](/assets/images/vh-empirebreakout/empire-web.png)
 
-![](/assets/images/vh-empirebreakout/empire-web1.png)
+![""](/assets/images/vh-empirebreakout/empire-web1.png)
 
-![](/assets/images/vh-empirebreakout/empire-web2.png)
+![""](/assets/images/vh-empirebreakout/empire-web2.png)
 
 No vemos nada interesante, así que checaremos el código fuente de las páginas.
 
-![](/assets/images/vh-empirebreakout/empire-web3.png)
+![""](/assets/images/vh-empirebreakout/empire-web3.png)
 
 Por el puerto 80 vemos hasta el final del código fuente un comentario en donde se nos comparte una contraseña, la cual se encuentra cifrada en [Brainfuck](https://es.wikipedia.org/wiki/Brainfuck). Por lo tanto, podemos utilizar el recurso online [dcode](https://www.dcode.fr/brainfuck-language).
 
-![](/assets/images/vh-empirebreakout/empire-web4.png)
+![""](/assets/images/vh-empirebreakout/empire-web4.png)
 
 Tenemos una contraseña pero desconocemos para que usuario; por lo tanto vamos a tratar de descubrir usuarios a través del servicio SMB mediante el uso de la herramienta `enum4linux`:
 
@@ -315,19 +315,19 @@ S-1-22-1-1000 Unix User\cyber (Local User)
 
 Encontramos el usuario **cyber** y tenemos paneles de login por los puertos 10000 y 20000 del ***Webmin***.
 
-![](/assets/images/vh-empirebreakout/empire-web5.png)
+![""](/assets/images/vh-empirebreakout/empire-web5.png)
 
-![](/assets/images/vh-empirebreakout/empire-web6.png)
+![""](/assets/images/vh-empirebreakout/empire-web6.png)
 
 Vamos a tratar de loguearnos con las credenciales que contamos **cyber : .2uqPEfj3D<P'a-3** en ambos paneles a ver en cual podemos acceder y vemos que podemos acceder al servicio está corriendo por el puerto 20000.
 
-![](/assets/images/vh-empirebreakout/empire-web7.png)
+![""](/assets/images/vh-empirebreakout/empire-web7.png)
 
 Si investigamos un poco dentro del panel, vemos que existe un item que nos permte ejecutar comandos a nivel de sistema.
 
-![](/assets/images/vh-empirebreakout/empire-web8.png)
+![""](/assets/images/vh-empirebreakout/empire-web8.png)
 
-![](/assets/images/vh-empirebreakout/empire-web9.png)
+![""](/assets/images/vh-empirebreakout/empire-web9.png)
 
 Ahora, vamos a tratar de entablarnos una reverse shell a una máquina de atacante. Por lo tanto, nos ponemos en escucha por el puerto 443:
 

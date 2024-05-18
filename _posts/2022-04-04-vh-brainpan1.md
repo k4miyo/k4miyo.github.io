@@ -144,7 +144,7 @@ http://10.0.0.32:10000/ [200 OK] Country[RESERVED][ZZ], HTTPServer[SimpleHTTP/0.
 
 No vemos nada interesante, así que vamos a ver vía web:
 
-![](/assets/images/vh-brainpan1/brainpan1-web.png)
+![""](/assets/images/vh-brainpan1/brainpan1-web.png)
 
 No tenemos nada interesante, así que vamos a tratar de descubrir recursos:
 
@@ -173,7 +173,7 @@ Requests/sec.: 100.1378
 
 Tenemos el recurso `bin`, así que vamos a echarle un ojo:
 
-![](/assets/images/vh-brainpan1/brainpan1-web1.png)
+![""](/assets/images/vh-brainpan1/brainpan1-web1.png)
 
 Nos descargamos el binario a nuestra máquina y para trabajar más comodos, vamos a utilizar una máquina Windows para analizarlo. Por lo tanto, compartimos un recurso a través de SMB para poder transferir el binario.
 
@@ -189,11 +189,11 @@ Impacket v0.9.22 - Copyright 2020 SecureAuth Corporation
 [*] Config file parsed
 ```
 
-![](/assets/images/vh-brainpan1/brainpan1-smb.png)
+![""](/assets/images/vh-brainpan1/brainpan1-smb.png)
 
 Ejecutamos el programa:
 
-![](/assets/images/vh-brainpan1/brainpan1-exe.png)
+![""](/assets/images/vh-brainpan1/brainpan1-exe.png)
 
 Vemos que nos abre el puerto 9999 el cual se encuentra abierto en la máquina vícitma; por lo tanto podríamos pensar que este programa se está ejecutando en dicha máquina. Asi que haremos pruebas a nuestra máquina Windows para evitar crashear el de la máquina víctima. Tratamos de establecer la comunicación hacia nuestro servidor (10.0.0.30):
 
@@ -218,7 +218,7 @@ _|_|_|    _|          _|_|_|  _|  _|    _|  _|_|_|      _|_|_|  _|    _|
 Connection closed by foreign host.
 ```
 
-![](/assets/images/vh-brainpan1/brainpan1-test.png)
+![""](/assets/images/vh-brainpan1/brainpan1-test.png)
 
 Vemos que lo que mandamos se refreja en el programa y a este punto vamos a tratar de introducir varias cadenas de texto de diferetes longitudes para ver a que punto crashea el programa. Para esto vamos a hacer un script en python que nos ayude:
 
@@ -275,7 +275,7 @@ Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac
 
 Antes de envía la cadena, vamos a utilizar la herramienta [Immunity Debugger](https://www.immunityinc.com/products/debugger/) la cual instalaremos en nuestra máquina Windows y una vez que la hayamos abierto, abriremos el ejecutable `brainpan.exe` y del panel de arriba, damos click en un botón tipo *play*:
 
-![](/assets/images/vh-brainpan1/brainpan1-debugger.png)
+![""](/assets/images/vh-brainpan1/brainpan1-debugger.png)
 
 Ahora si mandamos la cadena de texto que tenemos:
 
@@ -320,7 +320,7 @@ if __name__=='__main__':
 
 Ahora si observamos en **Immunity Debugger** tenemos un valor para el registro ***EIP*** el cual vamos a copiar:
 
-![](/assets/images/vh-brainpan1/brainpan1-debugger1.png)
+![""](/assets/images/vh-brainpan1/brainpan1-debugger1.png)
 
 Tenemos el valor `335724134` el cual, mediante la herramienta `pattern_offset` vamos a determinar el valor del buffer antes de modificar el valor del registro ***EIP***.
 
@@ -365,7 +365,7 @@ if __name__=='__main__':
         sys.exit(1)
 ```
 
-![](/assets/images/vh-brainpan1/brainpan1-debugger2.png)
+![""](/assets/images/vh-brainpan1/brainpan1-debugger2.png)
 
 Ya tenemos el control del valor del registro **EIP - Extended Instruction Pointer**. Dicho registro indica al programa cual es la siguiente instrucción y debido que hemos cambiando su valor, el programa no sabe que debe ejecutar a continuación y por eso crashea. Si queremos aprender un poco más de los registros y del ataque de ***Buffer Overflow*** podemos consultar el siguiente recurso [softtek](https://blog.softtek.com/es/explotaci%C3%B3n-de-software-en-arquitecturas-x86-i-introducci%C3%B3n-y-explotaci%C3%B3n-de-un-buffer-overflow).
 
@@ -405,7 +405,7 @@ if __name__=='__main__':
         sys.exit(1)
 ```
 
-![](/assets/images/vh-brainpan1/brainpan1-debugger3.png)
+![""](/assets/images/vh-brainpan1/brainpan1-debugger3.png)
 
 Vemos que nuestras **C** sobreescriben el registro **ESP**, esto significa que se puede usar una dirección **ESP JMP** para redirigir la ejecución a **ESP**, que contendrá el shellcode malicioso. 
 
@@ -413,15 +413,15 @@ Por lo tanto, debemos encontrar una dirección de instrucción **JMP ESP** váli
 
 Abrimos **Immunity Debugger**, corremos el programa y en la parte inferior, vemos que podemos ejecutar algunos comandos y escribimos `!mona modules`:
 
-![](/assets/images/vh-brainpan1/brainpan1-debugger4.png)
+![""](/assets/images/vh-brainpan1/brainpan1-debugger4.png)
 
 Vemos que el propio ejecutable `brainpan.exe` no cuenta con protecciones y ahora vamos a ver cual es la dirección de instrucción **JMP ESP** ejecutando `!mona assemble -s "JMP ESP"`:
 
-![](/assets/images/vh-brainpan1/brainpan1-debugger5.png)
+![""](/assets/images/vh-brainpan1/brainpan1-debugger5.png)
 
 Tenemos el valor FFE4, por lo que vamos a buscar el valor correspondiente de dirección con el comando`!mona find -s "\xff\xe4" -m brainpan.exe`:
 
-![](/assets/images/vh-brainpan1/brainpan1-debugger6.png)
+![""](/assets/images/vh-brainpan1/brainpan1-debugger6.png)
 
 Tenemos el valor 0x311712F3. Podemos validarlo al darle doble click en dicho valor y nos arroja que está asociado a **JMP ESP**. Ahora solo nos falta generar nuestra shellcode para entablarnos una reverse shell; pero antes, vamos a checar si existen caracteres que no le gusten o conocidos como ***Bad Chars***:
 
@@ -478,7 +478,7 @@ if __name__=='__main__':
         sys.exit(1)
 ```
 
-![](/assets/images/vh-brainpan1/brainpan1-debugger7.png)
+![""](/assets/images/vh-brainpan1/brainpan1-debugger7.png)
 
 Vemos que acepta todos los caracteres (se omitio `\x00` debido a que casi siempre se considera un ***Bad Char***). Por lo tanto, ya podemos crear nuestro shellcode:
 

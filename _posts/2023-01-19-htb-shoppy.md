@@ -164,7 +164,7 @@ http://shoppy.htb [200 OK] Country[RESERVED][ZZ], HTML5, HTTPServer[nginx/1.23.1
 
 Abrimos la el sitio web para validar su contenido.
 
-![](/assets/images/htb-shoppy/shoppy.png)
+![""](/assets/images/htb-shoppy/shoppy.png)
 
 No vemos nada interesante que nos pueda ayudar. Por lo tanto, vamos a tratar de enumerar posibles recursos dentro del servidor mediante el uso de `nmap`:
 
@@ -184,23 +184,23 @@ Nmap done: 1 IP address (1 host up) scanned in 173.71 seconds
 
 Se tiene el recurso `/login/`; por lo que podriamos echarle un ojo:
 
-![](/assets/images/htb-shoppy/shoppy1.png)
+![""](/assets/images/htb-shoppy/shoppy1.png)
 
 Si tratamos de hacer enumeración de usuarios, vemos que no nos indica cuando un usuario es válido; por lo tanto trataremos de realizar una injección con `' or 1=1-- -` en el campo de username y sin contraseña.
 
-![](/assets/images/htb-shoppy/shoppy2.png)
+![""](/assets/images/htb-shoppy/shoppy2.png)
 
 La página tarda en cargar y al final nos muestra un código de estado de 504; por lo que podría funcionar realizar una inyección SQL. Probando varias, no vemos resultados, por lo que ahora se tratará de hacer inyección NoSQL y se pueden tomar ejemplos de la página de confianza [HackTricks](https://book.hacktricks.xyz/pentesting-web/nosql-injection) Aplicando la sentencia `admin' || '1==1` en el campo username y cualquier cosa en el campo password, vemos que accedemos al contenido.
 
-![](/assets/images/htb-shoppy/shoppy3.png)
+![""](/assets/images/htb-shoppy/shoppy3.png)
 
 Al dar click en ***Search for users***, podemos buscar un usuario en específico, por lo que probaremos para **admin**.
 
-![](/assets/images/htb-shoppy/shoppy4.png)
+![""](/assets/images/htb-shoppy/shoppy4.png)
 
 Vemos que podemos descargar un json, pero igual nos interesaría saber si existen más usuarios; por lo tanto, aplicaremos la misma inyección `admin' || '1==1` sobre el cuadro de búsqueda.
 
-![](/assets/images/htb-shoppy/shoppy5.png)
+![""](/assets/images/htb-shoppy/shoppy5.png)
 
 Tenemos los usuarios **admin** y **josh** con sus respectivas contraseñas, por lo tanto, vamos a tratar de crackearlas.
 
@@ -242,15 +242,15 @@ Requests/sec.: 0
 
 Mediante el uso de diversos diccionarios, encontramos unos de [SecLists](https://github.com/danielmiessler/SecLists) con el cual obtuvimos un subodminio `http://mattermost.shoppy.htb`, por lo que vamos a echarle un ojo (**Nota**: No olvidar agregar el subdominio en el archivo `/etc/hosts`).
 
-![](/assets/images/htb-shoppy/shoppy6.png)
+![""](/assets/images/htb-shoppy/shoppy6.png)
 
 Tenemos un panel de login, por lo que podemos tratar de acceder con las credenciales que tenemos:
 
-![](/assets/images/htb-shoppy/shoppy7.png)
+![""](/assets/images/htb-shoppy/shoppy7.png)
 
 Vemos que al acceder, nos encontramos en la plataforma [MasterMost](https://mattermost.com/), por lo que vamos a echarle un ojo a los mensajes que se tienen.
 
-![](/assets/images/htb-shoppy/shoppy8.png)
+![""](/assets/images/htb-shoppy/shoppy8.png)
 
 Dentro del canal ***Deploy Machine*** nos encontramos una credenciales; por lo que podríamos tratar de acceder por SSH.
 

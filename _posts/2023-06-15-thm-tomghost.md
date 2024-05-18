@@ -108,9 +108,9 @@ http://10.10.168.168:8080/ [200 OK] Country[RESERVED][ZZ], HTML5, IP[10.10.168.1
 
 Si tratamos de acceder vía web a través del puerto 8080, solo observamos la página por defecto de Apache Tomcat. Podríamos tratar de acceder a la ruta **/manager/html/** para trata de acceder al servicios, pero no tenemos éxito.
 
-![](/assets/images/thm-tomghost/tomghost.png)
+![""](/assets/images/thm-tomghost/tomghost.png)
 
-![](/assets/images/thm-tomghost/tomghost1.png)
+![""](/assets/images/thm-tomghost/tomghost1.png)
 
 Vamos a tratar de buscar alguna vulnerabilidad asociada a la versión de tomcat y encontramos el siguiente CVE y repositorio:
 

@@ -162,11 +162,11 @@ https://10.10.10.123 [404 Not Found] Apache[2.4.29], Country[RESERVED][ZZ], HTTP
 
 No vemos nada interesante como un gestor de contenido, así que vamos a visualizar el contenido vía web.
 
-![](/assets/images/htb-friendzone/friendzone-web.png)
+![""](/assets/images/htb-friendzone/friendzone-web.png)
 
 Si observamos el puerto 443, tenemos que nos muestra un código de estado 404; por lo que podríamos estar pensando en que se está aplicando *virtual hosting*, así que vamos a agregar el dominio `friendzone.red` a nuestro archivo `/etc/hosts` y ahora si podemos visualizar el contenido.
 
-![](/assets/images/htb-friendzone/friendzone-web1.png)
+![""](/assets/images/htb-friendzone/friendzone-web1.png)
 
 Por el momento no vemos algun panel de login o algo que nos pueda llamar la atención, así que vamos a ver el puerto 445, el cual está abierto, así que podríamos tratar de acceder con una null session y ver si tenemos permisos y bajo que recursos.
 
@@ -309,21 +309,21 @@ Received 250 bytes from 10.10.10.123#53 in 140 ms
 
 Encontramos varios subdominios asociados al dominio principal `friendzone.red`; así que  vamos a copiarlos y agregarlos a nuestro archivo `/etc/hosts` y posteriormente ver si contenido vía web.
 
-![](/assets/images/htb-friendzone/friendzone-web2.png)
+![""](/assets/images/htb-friendzone/friendzone-web2.png)
 
-![](/assets/images/htb-friendzone/friendzone-web3.png)
+![""](/assets/images/htb-friendzone/friendzone-web3.png)
 
 Tenemos que los subdominios `administrator1.friendzone.red` y `uploads.friendzone.red` presentan contenido bajo el puerto 443. Si recordamos, tenemos unas credenciales, por lo que podríamos tratar de usarlas en el panel de login.
 
-![](/assets/images/htb-friendzone/friendzone-web4.png)
+![""](/assets/images/htb-friendzone/friendzone-web4.png)
 
 Al ingresar, nos dice que visitemos el recurso `/dashboard.php`.
 
-![](/assets/images/htb-friendzone/friendzone-web5.png)
+![""](/assets/images/htb-friendzone/friendzone-web5.png)
 
 De lo observamos, nos indica que existen los parámetros `imagen_id` y `pagename`; como ejemplo debemos colocar lo siguiente:  `image_id=a.jpg&pagename=timestamp`.
 
-![](/assets/images/htb-friendzone/friendzone-web6.png)
+![""](/assets/images/htb-friendzone/friendzone-web6.png)
 
 A este punto vemos algo curioso, el parámetro `pagename` el cual nos hace pensar que podemos listar recursos de la máquina, es decir, ***LFI - Local File Inclusion***; por lo que podríamos tratar de ver un recurso interno.
 
@@ -332,7 +332,7 @@ A este punto vemos algo curioso, el parámetro `pagename` el cual nos hace pensa
 - `pagename=dashboard.php` - No vemos nada
 - `pagename=dashboard` - Vemos que se interpreta el código php asociado al archivo `dashboard`.
 
-![](/assets/images/htb-friendzone/friendzone-web7.png)
+![""](/assets/images/htb-friendzone/friendzone-web7.png)
 
 Con esto, podemos pensar que con el parámetro `pagename` podemos visualizar archivos php; por lo que podríamos utilizar wrappers para ver archivos del sistema:
 
@@ -342,7 +342,7 @@ Con esto, podemos pensar que con el parámetro `pagename` podemos visualizar arc
 - `pagename=php://filter/convert.base64-encode/resource=/etc/passwd` - No vemos nada.
 - `pagename=php://filter/convert.base64-encode/resource=timestamp` - Tenemos una cadena en base 64 del archivo php `timestamp.php`
 
-![](/assets/images/htb-friendzone/friendzone-web8.png)
+![""](/assets/images/htb-friendzone/friendzone-web8.png)
 
 Copiamos la cadena y la decodificamos:
 
@@ -454,7 +454,7 @@ Y ahora, pensando un poco, vemos que el directorio `Files` del servicio SMB se e
 
 - `pagename=/etc/Development/test`
 
-![](/assets/images/htb-friendzone/friendzone-web9.png)
+![""](/assets/images/htb-friendzone/friendzone-web9.png)
 
 Se nos interpreta nuestro código, así que ahora, vamos a entablarnos una reverse shell:
 

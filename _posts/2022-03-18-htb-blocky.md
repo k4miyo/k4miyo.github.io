@@ -122,11 +122,11 @@ http://10.10.10.37/ [200 OK] Apache[2.4.18], Country[RESERVED][ZZ], HTML5, HTTPS
 
 Tenemos que nos enfrentamos ante un **WordPress**. Ahora si podemos ver el contenido vía web:
 
-![](/assets/images/htb-blocky/blocky-web.png)
+![""](/assets/images/htb-blocky/blocky-web.png)
 
 Navengado un poco en el sitio, encontramos una publicación del usuario **notch** el cual podría ser un potencial dato a tomar en cuenta.
 
-![](/assets/images/htb-blocky/blocky-web1.png)
+![""](/assets/images/htb-blocky/blocky-web1.png)
 
 Ahora vamos a tratar de descubrir rutas dentro del servidor de las cuales podemos obtener información.
 
@@ -157,7 +157,7 @@ Nmap done: 1 IP address (1 host up) scanned in 14.20 seconds
 
 Aquí `nmap` nos reporta el panel de login de **WordPress** bajo la ruta `/wp-login.php`; con esto, podemos validar si el usuario que hemos identificado existe.
 
-![](/assets/images/htb-blocky/blocky-web2.png)
+![""](/assets/images/htb-blocky/blocky-web2.png)
 
 Vemos que el usurio existe. Como `nmap` prueba con pocas rutas, vamos a irnos algo más tochos y lo haremos con `wfuzz`:
 
@@ -190,11 +190,11 @@ Requests/sec.: 43.34058
 
 Tenemos un recurso interesante, `/plugins`, asi que vamos a echarle un ojo:
 
-![](/assets/images/htb-blocky/blocky-web3.png)
+![""](/assets/images/htb-blocky/blocky-web3.png)
 
 Tenemos dos recursos, que al hacerles *hovering* vemos que se encuentran en `/plugins/files`:
 
-![](/assets/images/htb-blocky/blocky-web4.png)
+![""](/assets/images/htb-blocky/blocky-web4.png)
 
 Vamos a descargarlos anuestra máquina y como vemos que es un archivo **.jar**, significa que es un comprimido, por lo tanto podemos descomprmirlo (analizaremos solo BlockyCore.jar).
 
@@ -276,7 +276,7 @@ Vemos una cadena medio extraña `8YsqfCTnvxAUeduzjNSXe22` la cual podría estar 
 
 Al validar la contraseña, vemos que podemos acceder a `phpmyadmin` con las credenciales **root : 8YsqfCTnvxAUeduzjNSXe22** y que también podemos acceder vía ssh con **notch : 8YsqfCTnvxAUeduzjNSXe22**.
 
-![](/assets/images/htb-blocky/blocky-web5.png)
+![""](/assets/images/htb-blocky/blocky-web5.png)
 
 ```bash
 ❯ ssh notch@10.10.10.37

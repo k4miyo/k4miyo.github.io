@@ -104,7 +104,7 @@ http://10.10.250.92/ [200 OK] Apache[2.4.29], Cookies[PHPSESSID], Country[RESERV
 
 No vemos nada interesante, así que ingresaremos vía web.
 
-![](/assets/images/thm-rootme/rootme.png)
+![""](/assets/images/thm-rootme/rootme.png)
 
 No observamos algo adicional, por lo que vamos a tratar de descubrir directorios dentro del servidor web:
 
@@ -136,15 +136,15 @@ Requests/sec.: 0
 
 Encontramos 2 recursos interesantes, vamos a echarles un ojo:
 
-![](/assets/images/thm-rootme/rootme1.png)
+![""](/assets/images/thm-rootme/rootme1.png)
 
-![](/assets/images/thm-rootme/rootme2.png)
+![""](/assets/images/thm-rootme/rootme2.png)
 
 Vemos que podemos subir un archivo y posiblemente la ruta en donde se guardará el archivo, podríamos tratar de subir un archivo txt de prueba.
 
-![](/assets/images/thm-rootme/rootme3.png)
+![""](/assets/images/thm-rootme/rootme3.png)
 
-![](/assets/images/thm-rootme/rootme4.png)
+![""](/assets/images/thm-rootme/rootme4.png)
 
 Ahora tratemos de subir un archivo php que nos permita la ejecución de comando a nivel de sistema:
 
@@ -155,7 +155,7 @@ Ahora tratemos de subir un archivo php que nos permita la ejecución de comando 
 ?>
 ```
 
-![](/assets/images/thm-rootme/rootme5.png)
+![""](/assets/images/thm-rootme/rootme5.png)
 
 Nos manda un error al tratar de subir el archivo php, por lo que podriamos tratar otras extensiones que nos permita acceder:
 
@@ -166,7 +166,7 @@ Nos manda un error al tratar de subir el archivo php, por lo que podriamos trata
 
 Al subir el archivo de extensión **php5** vemos que podemos subir el archivo y ejecutar comandos a nivel de sistema.
 
-![](/assets/images/thm-rootme/rootme6.png)
+![""](/assets/images/thm-rootme/rootme6.png)
 
 Trataremos en entablarnos una reverse shell a nuestro equipo de atacante. Para este caso, utilizaremos una reverse shell en python de acuerdo con [PentestMonkey](https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet)
 

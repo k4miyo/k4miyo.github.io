@@ -124,7 +124,7 @@ Ejecutamos nuestro archivo y tratamos de acceder vía web.
 
 ```
 
-![](/assets/images/htb-celestial/celestial-web.png)
+![""](/assets/images/htb-celestial/celestial-web.png)
 
 Si vemos el código del archivo que creamos **node.js**, vemos una cookie en donde se observa una cadena en base 64; vamos a tratar de ver el contenido.
 
@@ -135,7 +135,7 @@ Si vemos el código del archivo que creamos **node.js**, vemos una cookie en don
 
 Vemos que se tienen datos de forma serializada en donde el campo **username** se observa el dato **ajin**, el mismo que vemos vía web. 
 
-![](/assets/images/htb-celestial/celestial-web1.png)
+![""](/assets/images/htb-celestial/celestial-web1.png)
 
 Leyendo el documento, nos proporciona una función para serializar los datos.
 
@@ -281,7 +281,7 @@ eyJyY2UiOiJfJCRORF9GVU5DJCRfZnVuY3Rpb24oKXtldmFsKFN0cmluZy5mcm9tQ2hhckNvZGUoMTAs
 
 Copiamos el resultado, ingresamos al sitio web de la máquina víctima `http://10.10.10.85:3000/` y con el plugin **Edit this cookie** cambiamos el valor de la cookie por lo que copiamos.
 
-![](/assets/images/htb-celestial/celestial-web2.png)
+![""](/assets/images/htb-celestial/celestial-web2.png)
 
 Antes de recargar la página, nos ponemos en escucha por el puerto 443.
 

@@ -182,7 +182,7 @@ Requests/sec.: 53.04854
 
 Vemos que se tiene el recurso **simple**, vamos a echarle un  ojo:
 
-![](/assets/images/thm-simplectf/simplectf.png)
+![""](/assets/images/thm-simplectf/simplectf.png)
 
 Vemos que nos encontramos frente a un CMS (Gestor de contenido) y que se tiene la versión 2.2.8; por lo que podrimos buscar algun posible exploit:
 - [CMS Made Simple](https://www.exploit-db.com/exploits/46635)

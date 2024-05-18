@@ -98,15 +98,15 @@ http://10.10.10.46/ [200 OK] Apache[2.4.18], Country[RESERVED][ZZ], HTML5, HTTPS
 
 Tenemos un ***WordPress 4.8*** que al tratar de ingredar vía web, como que lo vemos todo raro:
 
-![](/assets/images/htb-apocalyst/apocalyst-web.png)
+![""](/assets/images/htb-apocalyst/apocalyst-web.png)
 
 Si checamos el código fuente del sitio web, vemos que se está utilizando *virtual hosting*:
 
-![](/assets/images/htb-apocalyst/apocalyst-web1.png)
+![""](/assets/images/htb-apocalyst/apocalyst-web1.png)
 
 Asi que agregaremos el dominio `apocalyst.htb` a nuestro archivo `/etc/hosts` y tratamos de ver la página nuevamente.
 
-![](/assets/images/htb-apocalyst/apocalyst-web2.png)
+![""](/assets/images/htb-apocalyst/apocalyst-web2.png)
 
 Ahora ya tenemos la web de forma más bonita. Como sabemos que estamos frente a un ***WordPress***, vamos a tratar de descubrir rutas del sitio web con `nmap`:
 
@@ -149,7 +149,7 @@ Nmap done: 1 IP address (1 host up) scanned in 15.14 seconds
 
 Tenemos algunas rutas interesante a las cuales podríamos echarles un ojo, como por ejemplo `/wp-login.php`; sin embargo, por el momento no contamos con credenciales. También vemos otros recursos como random `/down`, `good`, `hidden`, etc y si accedemos a dichos recursos, vemos la misma imagen.
 
-![](/assets/images/htb-apocalyst/apocalyst-web3.png)
+![""](/assets/images/htb-apocalyst/apocalyst-web3.png)
 
 Como sabemos que estamos frente a un ***WordPress***, vamos a hacer uso de la herramienta [WPSeku](https://github.com/Redshoee/WPSeku) para obtener algo de información.
 
@@ -203,7 +203,7 @@ No JSON object could be decoded
 
 Tenemos un potencial usuario **falaraki** el cual podemos validar desde el panel de login:
 
-![](/assets/images/htb-apocalyst/apocalyst-login.png)
+![""](/assets/images/htb-apocalyst/apocalyst-login.png)
 
 Vemos que el usuario **falaraki** es válido, por lo que ahora nos falta es la contraseña. Antes de tirar por fuerza bruta, debemos recordar que en varias rutas vemos la misma imagen, por lo que es posible que alguna tenga oculto algún dato que nos ayude a obtener la contraseña; así que vamos a crearnos un diccionario de rutas a partir del sitio web con la herramienta `cewl`; esto lo hacemos que dentro del sitio se hace mucha mención de la palabra **apocalyst** y es posible que una variante nos arroje algo diferente.
 
@@ -427,15 +427,15 @@ Trying falaraki / total Time: 00:00:20 <=====================                   
 
 Ya tenemos las credenciales de acceso al portal de login de ***WordPress*** y como siempre, antes que nada, vamos a guardarlas y posteriormente a tratar de acceder.
 
-![](/assets/images/htb-apocalyst/apocalyst-login1.png)
+![""](/assets/images/htb-apocalyst/apocalyst-login1.png)
 
 Ya para ingresar a la máquina víctima, vamos a editar la plantilla 404 desde **Appearance > Editor > Templates > 404 Template**.
 
-![](/assets/images/htb-apocalyst/apocalyst-shell.png)
+![""](/assets/images/htb-apocalyst/apocalyst-shell.png)
 
 Vamos a cambiar su contenido por una [php-reverse-shell](https://pentestmonkey.net/tools/web-shells/php-reverse-shell) que descargamos y modificamos los parámetros.
 
-![](/assets/images/htb-apocalyst/apocalyst-shell1.png)
+![""](/assets/images/htb-apocalyst/apocalyst-shell1.png)
 
 ```php
 <?php
@@ -646,7 +646,7 @@ $
 ```
 
 Antes que nada, vamos a hacer un [Tratamiento de la tty](/posts/tratamiento-tty) para trabajar más cómodos. A este punto nos encontramos dentro de la máquina como el usuario **www-data** y podemos visualizar la flag (user.txt). Por lo que nos queda enumerar un poco el sistema para ver una forma de escalar privilegios. En esta ocasión vamos a hacer uso de la herramienta [linux-smart-enumeration](https://github.com/diego-treitos/linux-smart-enumeration), por lo que la descargamos y la transferimos a la máquina víctima dentro de un directorio donde tengamos permisos de lectura, escritura y ejecución.
-![](/assets/images/htb-apocalyst/banner-apocalyst.jpg)
+![""](/assets/images/htb-apocalyst/banner-apocalyst.jpg)
 
 ```bash
 ❯ python3 -m http.server 80

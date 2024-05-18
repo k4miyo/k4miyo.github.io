@@ -97,7 +97,7 @@ http://10.10.10.91:5000/ [200 OK] Country[RESERVED][ZZ], HTTPServer[gunicorn/19.
 
 No tenemos nada interesante, así que hora si vamos a ver el contenido web.
 
-![](/assets/images/htb-devoops/devoops-web.png)
+![""](/assets/images/htb-devoops/devoops-web.png)
 
 Tampco no vemos nada interesante, tanto en el sitio web como en el código fuente. Asi que vamos a tratar de descubrir recursos en el servidor.
 
@@ -137,7 +137,7 @@ Tenemos dos recursos: `feed` y `upload`; por lo tanto, vamos a echarles un ojo. 
 
 Y vamos a subirlo al servidor:
 
-![](/assets/images/htb-devoops/devoops-xml.png)
+![""](/assets/images/htb-devoops/devoops-xml.png)
 
 Vemos que nos nuestra nuestra información de prueba y además tenemos un recurso donde almacena dicho archivo `/uploads/test.xml`. A este punto ya debemos estar pensando en un ***[XXE](https://owasp.org/www-community/vulnerabilities/XML_External_Entity_(XXE)_Processing) (XML External Entity)***. Asi que vamos a modificar nuestro archivo para obtener ejecución de comandos a nivel de sistema. (**Nota**: Para evitar problemas del lado del servidor y que no nos interprete la información, debemos cambiar el nombre del archivo).
 
@@ -153,7 +153,7 @@ Vemos que nos nuestra nuestra información de prueba y además tenemos un recurs
 </elements>
 ```
 
-![](/assets/images/htb-devoops/devoops-etc.png)
+![""](/assets/images/htb-devoops/devoops-etc.png)
 
 Podemos visualizar archivos de sistema, para este caso el archivo `/etc/passwd`. Recordando que tenemos el puerto 22 abierto, podríamos tratar de visualizar el archivo `id_rsa` del usuario **roosa**.
 
@@ -169,7 +169,7 @@ Podemos visualizar archivos de sistema, para este caso el archivo `/etc/passwd`.
 </elements>
 ```
 
-![](/assets/images/htb-devoops/devoops-idrsa.png)
+![""](/assets/images/htb-devoops/devoops-idrsa.png)
 
 Nos copiamos dicho archivo y lo guardamos en nuestro directorio de trabajo. Ahora vamos a tratar de ingresar por el puerto 22 como el usuario **roosa** y hay que recordar que debemos de darle permiso 600 al archivo `id_rsa` que hemos identificado para que no nos mande un problema.
 

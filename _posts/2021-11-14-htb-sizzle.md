@@ -253,7 +253,7 @@ http://10.10.10.103/ [200 OK] Country[RESERVED][ZZ], HTTPServer[Microsoft-IIS/10
 
 Podemos ver que visualizamos vía web; sin embargo, no vemos nada interesante:
 
-![](/assets/images/htb-sizzle/sizzle-web.png)
+![""](/assets/images/htb-sizzle/sizzle-web.png)
 
 Podríamos tratar de ver si existe algún código oculto dentro de la imagen *.git*, pero no vamos a encontrar nada. Vemos que también se tiene el servico SMB por el puerto 445, así que vamos a tratar de ver si podemos listar recursos del servicio compartido:
 
@@ -729,13 +729,13 @@ Corremos el servicio `apache` y tratamos de ver el contenido:
 ❯ service apache2 start
 ```
 
-![](/assets/images/htb-sizzle/sizzle-dominio.png)
+![""](/assets/images/htb-sizzle/sizzle-dominio.png)
 
 Con esto, vemos de una forma gráfica toda la información referente al dominio.
 
-![](/assets/images/htb-sizzle/sizzle-domainusers.png)
+![""](/assets/images/htb-sizzle/sizzle-domainusers.png)
 
-![](/assets/images/htb-sizzle/sizzle-domaingroupsmem.png)
+![""](/assets/images/htb-sizzle/sizzle-domaingroupsmem.png)
 
 Esta información debemos de tenerla presente para posterior. Ahora vamos a tratar de como el usuario **amanda** ver si tenemos nuevos privilegios sobre el servicio SMB.
 
@@ -811,19 +811,19 @@ Requests/sec.: 0
 
 Tenemos un recurso llamado `certsrv` que posiblemente nos ayude con el certificado que debemos utilizar, así que vamos a echarle un ojo:
 
-![](/assets/images/htb-sizzle/sizzle-certsrv.png)
+![""](/assets/images/htb-sizzle/sizzle-certsrv.png)
 
 Le proporcionamos las credenciales que tenemos del usuario **amanda**.
 
-![](/assets/images/htb-sizzle/sizzle-certsrv1.png)
+![""](/assets/images/htb-sizzle/sizzle-certsrv1.png)
 
 Ahora le damos click en la opción ***Request a certificate***:
 
-![](/assets/images/htb-sizzle/sizzle-certsrv2.png)
+![""](/assets/images/htb-sizzle/sizzle-certsrv2.png)
 
 Seleccionamos la opción ***advanced certificate request***:
 
-![](/assets/images/htb-sizzle/sizzle-certsrv3.png)
+![""](/assets/images/htb-sizzle/sizzle-certsrv3.png)
 
 Ahora es necesario generar una key con la herramienta `openssl`:
 
@@ -861,9 +861,9 @@ Nos copiamos el contenido del archivo `csr` y lo pegamos en la parte de ***Saved
 ❯ cat amanda.csr | xclip -sel clip
 ```
 
-![](/assets/images/htb-sizzle/sizzle-certsrv4.png)
+![""](/assets/images/htb-sizzle/sizzle-certsrv4.png)
 
-![](/assets/images/htb-sizzle/sizzle-certsrv5.png)
+![""](/assets/images/htb-sizzle/sizzle-certsrv5.png)
 
 Le damos la opción ***Base 64 encoded*** y nos descargamos el certificado en la opción ***Download certificate***. Una vez obtenido el archivo de extensión `cer`, vamos a apoyarnos en la utilidad [**evil-winrm**](https://github.com/Hackplayers/evil-winrm) para obtener una consola interactiva:
 
@@ -1030,29 +1030,29 @@ Ingresamos vía web a `http://localhost:7474/` y nos logueamos con las credencia
 
 En las opciones de la parte derecha, selecciomos la que dice **Upload Data** y seleccionamos el archivo `.zip` que sacamos de la máquina víctima.
 
-![](/assets/images/htb-sizzle/sizzle-bloodhound.png)
+![""](/assets/images/htb-sizzle/sizzle-bloodhound.png)
 
 Una vez que termine de cargar los datos, en la parte superior izquiera aparecen tres barritas, le damos click y nos vamos a la parte de **Analysis**:
 
-![](/assets/images/htb-sizzle/sizzle-bloodhound1.png)
+![""](/assets/images/htb-sizzle/sizzle-bloodhound1.png)
 
 De las opciones que se nos listan, vamos a probar **Find Shortest Paths to Domain Admins** para tratar de ver el posible camino para convertirnos en usuario administrador del dominio.
 
-![](/assets/images/htb-sizzle/sizzle-bloodhound2.png)
+![""](/assets/images/htb-sizzle/sizzle-bloodhound2.png)
 
 No vemos algo que nos pueda ayudar, así que vamos con la siguiente opción **Find Principals with DCSync Rights**:
 
-![](/assets/images/htb-sizzle/sizzle-bloodhound3.png)
+![""](/assets/images/htb-sizzle/sizzle-bloodhound3.png)
 
 Aqui ya vemos algo interesante, tenemos que el usuario **MRLKY** tiene el privilegios DS-Replication-Get-Changes y DS-Replication-Get-Changes-All en el dominio HTB.LOCAL. Si quieremos ver información sobre como ejecutar este tipo de ataque, le damos click secundario en las líneas que une al usuario con el dominio y luego en **HELP**.
 
-![](/assets/images/htb-sizzle/sizzle-bloodhound4.png)
+![""](/assets/images/htb-sizzle/sizzle-bloodhound4.png)
 
-![](/assets/images/htb-sizzle/sizzle-bloodhound5.png)
+![""](/assets/images/htb-sizzle/sizzle-bloodhound5.png)
 
 Vemos que necesitamos convertirnos en el usuario **mrlky** para posterior convertirnos en administradores del dominio. Podriamos tratar de ver los usuarios que son kerberoasteables en la opción **List all Kerberoastable Accounts**:
 
-![](/assets/images/htb-sizzle/sizzle-bloodhound6.png)
+![""](/assets/images/htb-sizzle/sizzle-bloodhound6.png)
 
 Y tenemos al usuario **mrlky**; sin embargo, el puerto 88 no se encuentra visible desde afuerta, pero lo mas seguro es que internamente se encuentre, así que vamos a validar.
 

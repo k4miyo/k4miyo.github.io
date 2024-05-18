@@ -105,7 +105,7 @@ http://10.10.10.140/ [302 Found] Apache[2.4.18], Country[RESERVED][ZZ], HTTPServ
 http://swagshop.htb/ [200 OK] Apache[2.4.18], Cookies[frontend], Country[RESERVED][ZZ], HTML5, HTTPServer[Ubuntu Linux][Apache/2.4.18 (Ubuntu)], HttpOnly[frontend], IP[10.10.10.140], JQuery[1.10.2], Magento, Modernizr, Prototype, Script[text/javascript], Scriptaculous, Title[Home page], X-Frame-Options[SAMEORIGIN]
 ```
 
-![](/assets/images/htb-swagshop/swagshop-web.png)
+![""](/assets/images/htb-swagshop/swagshop-web.png)
 
 Vemos que nos enfrentamos ante un ***Magento***; por lo tanto, vamos a tratar de buscar si existen exploits públicos relacionados:
 
@@ -138,11 +138,11 @@ Copied to: /home/k4miyo/Documentos/HTB/SwagShop/content/37977.py
 
 Analizando un poco el exploits, vamos a retocarlo para que nos funciones; primeramente eliminando los comentarios que tienen `/`, despúes validamos si el recurso `/admin/Cms_Wysiwyg/directive/index/` existe para nuestro caso.
 
-![](/assets/images/htb-swagshop/swagshop-web1.png)
+![""](/assets/images/htb-swagshop/swagshop-web1.png)
 
 Pensando un poco, vemos que nuestra página presenta la dirección URL `http://swagshop.htb/index.php/`; por lo tanto podríamos agregar el `/admin/` despúes del `/index.php`:
 
-![](/assets/images/htb-swagshop/swagshop-web2.png)
+![""](/assets/images/htb-swagshop/swagshop-web2.png)
 
 Nos encontramos con el panel de administración de ***Magento*** y de acuerdo con lo que dice el exploit, nos crea las credenciales **forme:forme**; las cuales podemos cambiar a las que nosotros queramos. Por lo tanto, el script nos quedaría de la siguiente forma:
 
@@ -203,19 +203,19 @@ Check http://swagshop.htb/index.php/admin with creds k4miyo:k4miyo123
 
 De acuerdo con esto, deberíamos acceder al panel de administración con las credenciales **k4miyo:k4miyo123**, así que vamos a probar.
 
-![](/assets/images/htb-swagshop/swagshop-web3.png)
+![""](/assets/images/htb-swagshop/swagshop-web3.png)
 
 Hemos ingresado al panel de administración y recordando los exploits que encontramos, existe otro que nos permite la ejecución de comandos si contamos con credenciales válidas de acceso. Para este caso, vamos a hacerlo de manera manual, por lo tanto, lo primero que debemos hacer es ir a **System > Configuration**.
 
-![](/assets/images/htb-swagshop/swagshop-web4.png)
+![""](/assets/images/htb-swagshop/swagshop-web4.png)
 
 Del panel de configuración del lado izquierdo, nos vamos hasta abajo y seleccionamos **Advanced > Developer**.
 
-![](/assets/images/htb-swagshop/swagshop-web5.png)
+![""](/assets/images/htb-swagshop/swagshop-web5.png)
 
 En el apartado de **Templete Settings** vamos a cambiar el valor **Allow Symlinks** de **No** a **Yes** y guardamos los cambios.
 
-![](/assets/images/htb-swagshop/swagshop-web6.png)
+![""](/assets/images/htb-swagshop/swagshop-web6.png)
 
 Ahora vamos a crear una nueva categoría en **Catalog > Manage Categories**. 
 - **Name**: Lo que nosotros queramos, para este caso vamos a ponerle K4miShell.
@@ -230,11 +230,11 @@ Ahora vamos a crear una nueva categoría en **Catalog > Manage Categories**.
 
 Y guardamos los cambios.
 
-![](/assets/images/htb-swagshop/swagshop-web7.png)
+![""](/assets/images/htb-swagshop/swagshop-web7.png)
 
 Ahora vamos a darle click secundario en el hipervínculo donde se encuentra nuestra imagen y nos vamos a quedar con la parte de `/media/catalog/category/shell.php.png`, ya que dicho recurso existe a nivel de sistema. Ahora nos falta hacer un llamado a nuestro archivo para que se ejecute, esto lo logramos en la sección **Newsletter > Newsletter Templates**.
 
-![](/assets/images/htb-swagshop/swagshop-web8.png)
+![""](/assets/images/htb-swagshop/swagshop-web8.png)
 
 Agregamos un nuevo template en **Add New Template** modificando los siguiente parámetros:
 - **Template Name**: Lo que nosotros queramos, para este caso Shell.
@@ -243,7 +243,7 @@ Agregamos un nuevo template en **Add New Template** modificando los siguiente pa
 
 **\{\{block type='core/template' template='../../../../../..//media/catalog/category/shell.php.png'\}\}**
 
-![](/assets/images/htb-swagshop/swagshop-web9.png)
+![""](/assets/images/htb-swagshop/swagshop-web9.png)
 
 Antes de darle en la parte de **Preview Template** vamos a ponernos en escucha por el puerto 443:
 

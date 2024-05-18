@@ -127,9 +127,9 @@ http://10.10.10.63:50000/ [404 Not Found] Country[RESERVED][ZZ], HTTPServer[Jett
 
 Vemos el uso de *Microsoft IIS 10.0* a través del puerto 80 y un código de estado 404 para el puerto 50000. 
 
-![](/assets/images/htb-jeeves/jeeves-web.png)
+![""](/assets/images/htb-jeeves/jeeves-web.png)
 
-![](/assets/images/htb-jeeves/jeeves-web1.png)
+![""](/assets/images/htb-jeeves/jeeves-web1.png)
 
 Como no vemos nada interesante, vamos a buscar recursos en los sitios web. Vamos a empezar por el puerto 50000 debido a que es un puerto muy alto con el servicio HTTP:
 
@@ -159,7 +159,7 @@ Requests/sec.: 0
 
 Tenemos el recurso `askjeeves`, así que vamos a echarle un ojo:
 
-![](/assets/images/htb-jeeves/jeeves-askjeeves.png)
+![""](/assets/images/htb-jeeves/jeeves-askjeeves.png)
 
 Vemos el uso de la herramienta **Jenkins**, así que vamos a buscar un posible exploit asociado a dicha tecnología y especificamente, un exploit que nos permita ejecución de comandos:
 
@@ -176,7 +176,7 @@ Shellcodes: No Results
 
 De los resultados observados, vamos a echarle un ojo al archivo `multiple/remote/24206.rb` para ver que realiza. Tenemos que se debe de tener un recurso denominado `script` en donde posiblemente podemos ejecutar comandos a nivel de sistema; por lo que vamos a ver.
 
-![](/assets/images/htb-jeeves/jeeves-groovy.png)
+![""](/assets/images/htb-jeeves/jeeves-groovy.png)
 
 Investigando un poco sobre ***Groovy script***, identificamos dos recursos que nos indican como podríamos ejecutar comandos a nivel de sistema y nos podria ayudar:
 
@@ -190,7 +190,7 @@ cmd = "whoami"
 cmd.execute().text
 ```
 
-![](/assets/images/htb-jeeves/jeeves-cmd.png)
+![""](/assets/images/htb-jeeves/jeeves-cmd.png)
 
 Ahora debemos ingresar al sistema, por lo que buscamos el archivo `Invoke-PowerShellTcp` en nuestra máquina y lo copiamos a nuestro directorio de trabajo
 
@@ -498,7 +498,7 @@ Vamos a instalarnos `keepassxc`:
 
 Ahora si tratamos de abrir el archivo y vemos que nos solicita una contraseña
 
-![](/assets/images/htb-jeeves/jeeves-keepass.png)
+![""](/assets/images/htb-jeeves/jeeves-keepass.png)
 
 Vamos a utilizar fuerza bruta para tratar de romper la contraseña, asi que mediante la herramienta `keepass2john` creamos el hash del archivo y posteriormente utilizamos `john` para romper la contraseña:
 
@@ -521,7 +521,7 @@ Session completed
 
 Ya tenemos la contraseña `moonshine1`, así que vamos a utilizarla y ver el contenido del archivo `CEH.kdbx`.
 
-![](/assets/images/htb-jeeves/jeeves-keepass1.png)
+![""](/assets/images/htb-jeeves/jeeves-keepass1.png)
 
 Viendo los usuarios, tenemos uno de nombre `?` y tiene de contraseña `aad3b435b51404eeaad3b435b51404ee:e0fb1fb85756c24235ff238cbe81fe00` que parece ser un hash NTLM; por lo que podríamos pensar que sería el hash del usuario **Administrator**. Vamos a validarlo:
 

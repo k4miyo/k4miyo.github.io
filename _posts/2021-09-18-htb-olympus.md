@@ -118,7 +118,7 @@ Vemos que tiene el puerto 80 abierto, por lo que ya sabemos, tiramos de `whatweb
 http://10.10.10.83/ [200 OK] Apache, Country[RESERVED][ZZ], HTML5, HTTPServer[Apache], IP[10.10.10.83], Title[Crete island - Olympus HTB], UncommonHeaders[x-content-type-options,xdebug], X-Frame-Options[sameorigin], X-XSS-Protection[1; mode=block]
 ```
 
-![](/assets/images/htb-olympus/olympus_web.png)
+![""](/assets/images/htb-olympus/olympus_web.png)
 
 Podríamos tirar un `wfuzz` para obtener recursos del sitio web; sin embargo, no nos va a arrojar algún resultado. A este punto, podríamos checar el *header* del servidor con la herramienta `curl`:
 
@@ -327,7 +327,7 @@ Too_cl0se_to_th3_Sun:$WPAPSK$Too_cl0se_to_th3_Sun#xCkseuWdkCvvrzkegkSY1sDCOScF.u
 
 Antes de btener la contraseña, vamos a pensar en las pistas que nos proporciona la máquina. Recordemos que existe el archivo `papyrus.txt` el cual tiene el texto: *Captured while flying. I'll banish him to Olympia - Zeus*; aquí nos habla de dioses de la mitología griega relacionados con un vuelo, por lo que buscando un poco en [Google](https://www.google.com/) 
 
-![](/assets/images/htb-olympus/olympus_icaro.png)
+![""](/assets/images/htb-olympus/olympus_icaro.png)
 
 Vemos que se trata de ***Icaro*** o ***Icarus***, así que nos vamos a crear un direccionario a partir de `rockyou.txt` de aquellas palabras que contengan *icar*:
 

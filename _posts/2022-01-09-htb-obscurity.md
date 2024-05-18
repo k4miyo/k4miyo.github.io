@@ -193,11 +193,11 @@ http://10.10.10.168:8080/ [200 OK] Bootstrap, Country[RESERVED][ZZ], Email[secur
 
 Vemos una dirección de correo electrónico **secure@obscure.htb**, por lo que podríamos estar pensando en que se está aplicando ***Virtual Hosting***; pero antes de ver agregar el dominio a nuestro archivo `/etc/hosts`, vamos a echarle un ojo:
 
-![](/assets/images/htb-obscurity/obscurity-web.png)
+![""](/assets/images/htb-obscurity/obscurity-web.png)
 
 Algo que debemos de notar, es al final del sitio web, nos dicen que existe un directorio secreto en donde se encuentra un script en python llamado **SuperSecureServer.py** (podríamos agregar el dominio al archivo `/etc/hosts` y lo único que cambia son que se pueden visualizar mejor unos iconos). 
 
-![](/assets/images/htb-obscurity/obscurity-web1.png)
+![""](/assets/images/htb-obscurity/obscurity-web1.png)
 
 De acuerdo con lo que nos indican, vamos a tratar de descubrir un directorio que contenga el archivo **SuperSecureServer.py** mediante el uso de `wfuzz`:
 
@@ -226,7 +226,7 @@ Requests/sec.: 92.52235
 
 Tenemos el directorio `/develop`, asi que vamos a echarle un ojo.
 
-![](/assets/images/htb-obscurity/obscurity-web2.png)
+![""](/assets/images/htb-obscurity/obscurity-web2.png)
 
 Tenemos un programa en python y podemos visualizar el código, por lo que vamos a pasarlo a nuestro equipo para analizarlo.
 
@@ -252,7 +252,7 @@ Primero, vamos a tratar de buscar palabras claves que nos ayuden a ejecutar coma
 
 Vemos la línea `exec(info.format(path))`; pero no sabemos el valor de `path`; sin embargo, la línea anterior `info = "output = 'Document: {}'"` se observa que la variable info regresa un valor `Document:`, y si consultamos un recurso innexistente en el servidor web, tenemos lo siguiente:
 
-![](/assets/images/htb-obscurity/obscurity-web3.png)
+![""](/assets/images/htb-obscurity/obscurity-web3.png)
 
 Aqui podemos pensar que el script gestiona las consultas hacia el servidor y lo hace validando recursos a nivel de sistema mediante el comando `exec`. Por lo tanto podríamos tratar de encontrar una forma que nos permita ejecutar comandos a nivel de sistema a través de dicho script; asi que primero vamos a importar la librería `pdb` para hacer debugin y agregaremos el inicio del programa.
 

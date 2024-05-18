@@ -90,7 +90,7 @@ http://10.10.10.8/ [200 OK] Cookies[HFS_SID], Country[RESERVED][ZZ], HTTPServer[
 
 Aqui podemos ver el uso de **HTTP File Server 2.3**, lo que también podemos validar vía web.
 
-![](/assets/images/htb-optimum/optimum_web.png)
+![""](/assets/images/htb-optimum/optimum_web.png)
 
 A continuación, procedemos a buscar un exploit público con el uso de la herramienta `searchsploit`:
 

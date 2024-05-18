@@ -97,13 +97,13 @@ http://10.10.10.31/ [200 OK] Apache[2.4.18], Country[RESERVED][ZZ], HTML5, HTTPS
 
 No vemos nada interesante, asi que ahora si vamos a valir vía web.
 
-![](/assets/images/htb-charon/charon-web.png)
+![""](/assets/images/htb-charon/charon-web.png)
 
 Analizando un poco el sitio web, vemos que tenemos las opciones **HOME**, **ABOUT** y **BLOG**. Dentro de **BLOG** tenemos algunas opciones que si seleccionamos, tenemos en la dirección URL el parámetro `id`.
 
-![](/assets/images/htb-charon/charon-web1.png)
+![""](/assets/images/htb-charon/charon-web1.png)
 
-![](/assets/images/htb-charon/charon-web2.png)
+![""](/assets/images/htb-charon/charon-web2.png)
 
 Si cambianos el valor del `id`, tenemos que cambia lo que visualizamos vía web y para este caso, sólo tenemos las opciones 10, 11 y 12; para las demás opciones, el texto desaparece. Por lo tanto, podríamos pensar en realizar una inyección SQL (***SQLi***):
 
@@ -171,18 +171,18 @@ Requests/sec.: 0
 
 Aqui ya tenemos unos archivos que ya debería de llamarnos la atención sería `login.php`; asi que vamos a echarle un ojo.
 
-![](/assets/images/htb-charon/charon-web3.png)
+![""](/assets/images/htb-charon/charon-web3.png)
 
 Podríamos tratar de ingresar credenciales default o típicas; sin embargo, no vamos a conseguir nada. Como sabemos que el sitio es vulnerable a ataques de SQLi, vamos a tratar de inyectar algunos comandos. Para el panel de login no logramos nada; pero si intentamos sobre el recurso `forgot.php`, vemos que se nos muestra una leyenda **Incorrect format**
 
-![](/assets/images/htb-charon/charon-web4.png)
+![""](/assets/images/htb-charon/charon-web4.png)
 
 - `' order by 100-- -` - Incorrect format
 - `test@test.com' order by 100-- -` - Error in Database!
 
 Con la inyección anterior, vemos un resultado diferente.
 
-![](/assets/images/htb-charon/charon-web5.png)
+![""](/assets/images/htb-charon/charon-web5.png)
 
 Para trabajar de una forma más cómoda y poder realizar pruebas, vamos a generar un script en python que nos permita realizar las consultas que necesitemos.
 
@@ -270,7 +270,7 @@ Email:
 
 Para hacer un barrido sobre los caracteres especiales, hacremos uso del archivo `/opt/SecLists/Fuzzing/special-chars.txt` (que en caso de no tenerlo, podemos descargar [SecLists](https://github.com/danielmiessler/SecLists) y lo guardamos en `/opt/`). Como la respuesta no es la que buscamos, vamos a tratar de hacer combinaciones de caracteres especiales. Pero para este caso vamos a utilizar la herramienta [BurpSuite](https://portswigger.net/burp)
 
-![](/assets/images/htb-charon/charon-burp.png)
+![""](/assets/images/htb-charon/charon-burp.png)
 
 Vemos que la combinación `@` y `.` generan una respuesta **Email sent to:**, por lo que podriamos pensar que dichos símbolos son necesarios cuando queramos hacer una inyección. Ahora vamos a tratar de obtener el nombre de la base de datos a través del comando `database()` y `concat`.
 
@@ -325,15 +325,15 @@ Email:
 
 Vemos varios usuarios, pero ya tenemos uno que nos debe llamar mucho la atención: `super_cms_adm` y tenemos su contraseña hasheada; por lo que vamos a crackearla con la herramienta online [crackstation](https://crackstation.net/)
 
-![](/assets/images/htb-charon/charon-hash.png)
+![""](/assets/images/htb-charon/charon-hash.png)
 
 Ya tenemos unas credenciales a probar, así que validaremos en el panel de login (**Nota**: Simpre guardar las credenciales que vayamos encontrando):
 
-![](/assets/images/htb-charon/charon-web6.png)
+![""](/assets/images/htb-charon/charon-web6.png)
 
 Aqui algo que ya nos llama la atención es que podemos super archivos y en específico, imágenes.
 
-![](/assets/images/htb-charon/charon-web7.png)
+![""](/assets/images/htb-charon/charon-web7.png)
 
 Vamos a tratar de subir un archivo php el cual nos ayude a ejecutar comandos a nivel de sistema.
 
@@ -343,7 +343,7 @@ Vamos a tratar de subir un archivo php el cual nos ayude a ejecutar comandos a n
 ?>
 ```
 
-![](/assets/images/htb-charon/charon-web8.png)
+![""](/assets/images/htb-charon/charon-web8.png)
 
 Vamos a cambiar la cabezara de nuestro archivo para que sea considerado como un GIF.
 
@@ -356,11 +356,11 @@ GIF8;
 
 Pero vemos que nos sigue mandanlo lo mismo, por lo que cambiaremos la extensión de nuestro archivo.
 
-![](/assets/images/htb-charon/charon-web9.png)
+![""](/assets/images/htb-charon/charon-web9.png)
 
 Vemos que nuestro archivo se sube en la ruta `/images/`; sin embargo, no presenta la extensión php que necesitamos para poder ejecutar comandos. Si le echamos un ojo al código fuente del sitio, vemos un campo que se encuentra comentado.
 
-![](/assets/images/htb-charon/charon-web10.png)
+![""](/assets/images/htb-charon/charon-web10.png)
 
 Vamos a descomentar el campo y modificar el tipo. Además, podemos ver que el nombre está medio raro, como que está en base64, por lo que vamos a descifrarlo.
 
@@ -371,19 +371,19 @@ testfile1
 
 Vemos que el nombre es `testfile1`, por lo que vamos a cambiar lo que está en base64 por `testfile1`, quedando de la siguiente forma:
 
-![](/assets/images/htb-charon/charon-web11.png)
+![""](/assets/images/htb-charon/charon-web11.png)
 
 Ahora vamos a tratar de subir un archivo nuevamente `shell.gif` y vamos a agregar algo en el nuevo campo que tenemos, por ejemplo `test`.
 
-![](/assets/images/htb-charon/charon-web12.png)
+![""](/assets/images/htb-charon/charon-web12.png)
 
 Y vemos que con dicho campo podemos modificar el nombre del archivo, por lo tanto podríamos subir nuevamente nuestra shell `shell.gif` y aprovechando el campo para cambiar la extensión.
 
-![](/assets/images/htb-charon/charon-web13.png)
+![""](/assets/images/htb-charon/charon-web13.png)
 
 Ahora vamos a validar en la ruta que se nos indica `/images/shell.php`:
 
-![](/assets/images/htb-charon/charon-web14.png)
+![""](/assets/images/htb-charon/charon-web14.png)
 
 Ya logramos ejecución de comandos a nivel de sistema, así que ahora nos queda es entablarnos una reverse shell, por lo que nos ponemos en escucha a través del puerto 443.
 
@@ -489,7 +489,7 @@ Al imprimir las variables, tenemos que:
 
 Ahora para encontrar ***p*** y ***q*** vamos a hacer uso de [factordb](http://factordb.com/)
 
-![](/assets/images/htb-charon/charon-pq.png)
+![""](/assets/images/htb-charon/charon-pq.png)
 
 ```bash
 [*] El valor de p = 280651103481631199181053614640888768819 

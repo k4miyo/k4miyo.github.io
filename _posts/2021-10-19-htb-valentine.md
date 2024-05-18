@@ -110,7 +110,7 @@ https://valentine.htb/ [200 OK] Apache[2.2.22], Country[RESERVED][ZZ], HTTPServe
 
 Vemos que nos enfrentamos ante un **Apache 2.2.22**, **PHP 5.3.10** y sistema operativo **Ubuntu Linux**. Vamos a tratar de ver el sitio via web:
 
-![](/assets/images/htb-valentine/valentine_web.png)
+![""](/assets/images/htb-valentine/valentine_web.png)
 
 Nos vemos nada interensante, así que vamos a tratar de descubrir recursos dentro del servidor con `nmap`:
 
@@ -135,11 +135,11 @@ Nmap done: 1 IP address (1 host up) scanned in 27.44 seconds
 
 Vemos que tanto  para el puerto 80 como para el puerto 443 se tienen los mismos recursos: `/dev/` y `/index/`; así que vamos a echarles un ojo. Para el recurso `/index/` no tenemos nada interesante, pero en `/dev/` vemos dos archivos curiosos:
 
-![](/assets/images/htb-valentine/valentine_dev.png)
+![""](/assets/images/htb-valentine/valentine_dev.png)
 
-![](/assets/images/htb-valentine/valentine_notes.png)
+![""](/assets/images/htb-valentine/valentine_notes.png)
 
-![](/assets/images/htb-valentine/valentine_key.png)
+![""](/assets/images/htb-valentine/valentine_key.png)
 
 En el archivo `hype_key` vemos un código en hexdecimal, por lo que desde nuestra máquina vamos a ver que es:
 

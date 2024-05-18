@@ -98,7 +98,7 @@ http://10.10.10.56 [200 OK] Apache[2.4.18], Country[RESERVED][ZZ], HTML5, HTTPSe
 
 No vemos nada relevante, así que ahora si visualizaremos el contenido vía web.
 
-![](/assets/images/htb-shocker/shocker-web.png)
+![""](/assets/images/htb-shocker/shocker-web.png)
 
 Tampoco vemos nada interesante, así que a este punto vamos a tratar de descubrir recursos dentro del servidor web y para variarle un poco, damos a utilizar la herramienta `gobuster` y el diccionario `/usr/share/dirb/wordlists/common.txt`:
 
@@ -160,7 +160,7 @@ Progress: 109694 / 441122 (24.87%)            ^C
 
 Encontramos un recurso llamado `user.sh`, así que vamos a echarle un ojito.
 
-![](/assets/images/htb-shocker/shocker-web1.png)
+![""](/assets/images/htb-shocker/shocker-web1.png)
 
 A este punto, ya debemos estar pensando en el ataque [***ShellSock***](https://es.wikipedia.org/wiki/Shellshock_(error_de_software)), así que vamos a tratar de explotarlo mediante la herramienta `curl`:
 

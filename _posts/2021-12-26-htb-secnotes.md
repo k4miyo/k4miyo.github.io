@@ -127,35 +127,35 @@ http://10.10.10.97:8808/ [200 OK] Country[RESERVED][ZZ], HTTPServer[Microsoft-II
 
 Vemos que para el puerto 80 nos hace una redirección al recurso `login.php` y poca cosa más de valor que nos pueda servir hasta el momento. Ahora si vamos a echarles un ojo vía web.
 
-![](/assets/images/htb-secnotes/secnotes-web.png)
+![""](/assets/images/htb-secnotes/secnotes-web.png)
 
 Antes de probar cosas, notamos que podemos registrarnos, así que es lo que haremos primero y posteriormente vamos a tratar de ingresar con nuestras credenciales.
 
-![](/assets/images/htb-secnotes/secnotes-web1.png)
+![""](/assets/images/htb-secnotes/secnotes-web1.png)
 
 Le damos click en el botón ***Sign Out*** y ahora vamos a hacer unas pruebas en el panel de login, como ya contamos con unas credenciales válidas de acceso (las nuestras), vamos a colocar el usuario y una contraseña incorrecta para ver que pasa.
 
-![](/assets/images/htb-secnotes/secnotes-web4.png)
+![""](/assets/images/htb-secnotes/secnotes-web4.png)
 
 Tenemos que nos dice que la contraseña es incorrecta, es decir, nos está validando el usuario y lo toma como bueno. Si recordamos que al acceder correctamente nos aparece un banner que nos dice que podríamos contactar con el usuario **tyler**; así que vamos a probar si dicho usuario existe en el panel de login.
 
-![](/assets/images/htb-secnotes/secnotes-web5.png)
+![""](/assets/images/htb-secnotes/secnotes-web5.png)
 
 Vemos que el usuario existe, por lo que tenemos un usuario potencial a comprometer y podría tener algunos modulos de administrator con los cuales no contamos en nuestra cuenta que creamos. Ahora, analizando un poco el sitio web, vemos que podemos crear una nota, asi que trataremos de injectar código:
 
-![](/assets/images/htb-secnotes/secnotes-web2.png)
+![""](/assets/images/htb-secnotes/secnotes-web2.png)
 
-![](/assets/images/htb-secnotes/secnotes-web3.png)
+![""](/assets/images/htb-secnotes/secnotes-web3.png)
 
 Podemos hacer injecciones html, vamos a tratar ahora ***XSS (Cross Site Scripting)***.
 
-![](/assets/images/htb-secnotes/secnotes-web6.png)
+![""](/assets/images/htb-secnotes/secnotes-web6.png)
 
-![](/assets/images/htb-secnotes/secnotes-web7.png)
+![""](/assets/images/htb-secnotes/secnotes-web7.png)
 
 Ahora, con nuestro pluggin **Edit this cookie** vemos que tenemos una cookie llamanda **PHPSESSID** asociada a nuestra sessión. Por lo tanto, ya debemos estar pensando en un ataque de ***Cookie Hijacking*** del usuario **Tyler**; pero antes que de eso, vamos a validar si podemos hacerlo, así que creamos una nueva nota en donde trataremos de acceder a una imagen de un servidor HTTP (debemos compartir un servidor HTTP con python) y que nos nuestre la cookie de la sessión:
 
-![](/assets/images/htb-secnotes/secnotes-web8.png)
+![""](/assets/images/htb-secnotes/secnotes-web8.png)
 
 ```bash
 ❯ python3 -m http.server 80
@@ -166,15 +166,15 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 
 Vemos nuestra cookie de sessión, por lo tanto vamos a mandar la misma injección al usuario **Tyler** en el apartado de **Contact Us**. Sin embargo, no vemos una respuesta por parte del usuario.
 
-![](/assets/images/htb-secnotes/secnotes-web9.png)
+![""](/assets/images/htb-secnotes/secnotes-web9.png)
 
 Analizando un poco el sitio web, en el apartado de **Change Password** vemos que la solicitud viaja mediante el método POST; sin embargo, es posible que admita el método GET y una forma de probarlo sería agregando los parámetros en la URL `http://10.10.10.97/change_pass.php?password=hola123&confirm_password=hola123&submit=submit`.
 
-![](/assets/images/htb-secnotes/secnotes-web10.png)
+![""](/assets/images/htb-secnotes/secnotes-web10.png)
 
 Y nos dice que el password ha sido actualizado, por lo tanto podríamos probar de mandar dicha dirección URL al usuario **Tyler** para que cambie su propia contraseña a una que nosotros conozcamos y podemos acceder a su cuenta. Para validar que ha dado click en el enlace, vamos a compartirnos un servidor HTTP con python de manera adicional.
 
-![](/assets/images/htb-secnotes/secnotes-web11.png)
+![""](/assets/images/htb-secnotes/secnotes-web11.png)
 
 ```bash
 ❯ python3 -m http.server 80
@@ -185,15 +185,15 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 
 Y a este punto la contraseña del usuario **Tyler** ha sido modificada por **hola123**, vamos a validarlo.
 
-![](/assets/images/htb-secnotes/secnotes-web12.png)
+![""](/assets/images/htb-secnotes/secnotes-web12.png)
 
 Otra forma de acceder a una cuenta privilegiada es mediante una injección SQL en el panel de registro ingresando como nombre de usuario `' or 1=1-- -` y lo mismo de contraseña.
 
-![](/assets/images/htb-secnotes/secnotes-web13.png)
+![""](/assets/images/htb-secnotes/secnotes-web13.png)
 
 Ahora ingresamos como nuestro nuevo usuario.
 
-![](/assets/images/htb-secnotes/secnotes-web14.png)
+![""](/assets/images/htb-secnotes/secnotes-web14.png)
 
 Vemos la notas de todos los usuarios, incluyendo las de **Tyler** en donde tenemos unas credenciales de acceso bajo la nota **new site** y como pista nos dan la ruta `secnotes.htb\new-site`; por lo que ya debemos estar pensando en acceso por el servicio de SMB, por lo que primero trataremos de ver recursos a con una **Null Session** y después con las credenciales que nos dá la página.
 
@@ -258,7 +258,7 @@ smb: \>
 
 Vamos a verlo vía web:
 
-![](/assets/images/htb-secnotes/secnotes-web15.png)
+![""](/assets/images/htb-secnotes/secnotes-web15.png)
 
 Como el sitio web nos interpreta archivos php, podemos crear nuestro archivo php que nos permita la ejecución de comandos a nivel de sistema y lo subimos al sistema.
 
@@ -276,7 +276,7 @@ smb: \>
 
 Ahora si tratamos de ejecutar un comando:
 
-![](/assets/images/htb-secnotes/secnotes-web16.png)
+![""](/assets/images/htb-secnotes/secnotes-web16.png)
 
 Lo que nos queda es ingresar al sistema mediante una reverse shell haciendo uso del archivo `nc.exe`, por lo que tambíen lo subimos al sistema, nos ponemos en escucha por el puerto 443 y ejecutamos nuestra reverse shell:
 

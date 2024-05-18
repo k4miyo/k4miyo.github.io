@@ -91,7 +91,7 @@ http://10.10.10.191 [200 OK] Apache[2.4.41], Bootstrap, Country[RESERVED][ZZ], H
 
 No vemos nada interesante, así que vamos a ver el contenido vía web.
 
-![](/assets/images/htb-blunder/blunder-web.png)
+![""](/assets/images/htb-blunder/blunder-web.png)
 
 En la web no vemos algo que nos llame la atención, así que vamos a tratar de descubrir rutas con `wfuzz`:
 
@@ -121,7 +121,7 @@ Requests/sec.: 26.02173
 
 Vemos que tiene un recurso bajo `admin` el cual nos lleva a un panel de login de **BLUDIT**, que si buscamos un poco, tenemos que es un gestor de contenido el cual utiliza archivos en formato JSON para almacenar el contenido, no es necesario instalar ni configurar una base de datos. Para saber un poco más, podemos consultar el siguiente recurso [bludit](https://www.bludit.com/es/).
 
-![](/assets/images/htb-blunder/blunder-web1.png)
+![""](/assets/images/htb-blunder/blunder-web1.png)
 
 Ahora vamos a tratar de buscar archivo alojados en el servidor de extensión txt, php, html, etc. Comenzaremos con txt.
 
@@ -151,7 +151,7 @@ Requests/sec.: 0
 
 Tenemos el recurso `todo.txt`, vamos a echarle un ojo.
 
-![](/assets/images/htb-blunder/blunder-web2.png)
+![""](/assets/images/htb-blunder/blunder-web2.png)
 
 Tenemos un posible nombre de usuario: **fergus**; así que lo que podríamos hacer es tratar de aplicar fuerza bruta el panel de login utilizando como diccionario las palabras de la misma página web con la herramienta `cewl`.
 
@@ -162,7 +162,7 @@ CeWL 5.4.8 (Inclusion) Robin Wood (robin@digi.ninja) (https://digi.ninja/)
 
 Antes de empezar el ataque de fuerza bruta, vamos a verificar si el servidor cuenta con algún tipo de bloqueo.
 
-![](/assets/images/htb-blunder/blunder-web3.png)
+![""](/assets/images/htb-blunder/blunder-web3.png)
 
 Vemos que el servidor bloquea las peticiones de nuestra dirección IP al intentar loguearnos múltiples veces en poco tiempo; por lo tanto vamos a investigar si encontramos algo para realizar bypass de la protección [rastating](https://rastating.github.io/bludit-brute-force-mitigation-bypass/). El articulo nos indica que la función **getUserIp** determina la dirección IP y confía en el valor de la cabecera **X-Forwarded-For**; por lo que podríamos tratar de modificar dicha cabecera de forma dinámica para burlar la protección.
 
@@ -231,7 +231,7 @@ if __name__=='__main__':
 
 Ya tenemos la contraseña del usuario **fergus**, por lo que antes de que algo pase, vamos a guardarla para tenerla presente. Ahora vamos a ingresarlas en el panel de login.
 
-![](/assets/images/htb-blunder/blunder-web4.png)
+![""](/assets/images/htb-blunder/blunder-web4.png)
 
 Buscando un poco en internet, vemos que existe el exploit [exploit-db](https://www.exploit-db.com/exploits/48701) el cual nos ayuda a subir un archivo para tener ejecución de comandos a nivel de sistema. Por lo tanto, lo traemos a nuestra máquina.
 
@@ -278,7 +278,7 @@ Uploading payload: .htaccess
 
 Nos ponemos en escucha por el puerto 443 y ahora dice que debemos ingresar a la ruta `/bl-content/tmp/temp/` y deberíamos ver nuestro archivo. Por lo que al seleccionarlo deberíamos tener la conexión.
 
-![](/assets/images/htb-blunder/blunder-web5.png)
+![""](/assets/images/htb-blunder/blunder-web5.png)
 
 ```bash
 ❯ nc -nlvp 443
@@ -364,7 +364,7 @@ www-data@blunder:/var/www$
 
 Vemos la contraseña de dicho usuario hasheada, por lo tanto vamos a rompearla con [crackstation](https://crackstation.net/).
 
-![](/assets/images/htb-blunder/blunder-web6.png)
+![""](/assets/images/htb-blunder/blunder-web6.png)
 
 No olvidemos guardar las credenciales y trataremos de migrar a dicho usuario:
 

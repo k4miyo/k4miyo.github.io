@@ -102,9 +102,9 @@ https://nineveh.htb/ [200 OK] Apache[2.4.18], Country[RESERVED][ZZ], HTTPServer[
 
 No vemos algún CMS (gestor de contenido), por lo que el sitio podría ser echo manualmente. Ahora si vamos el ver el contenido vía web.
 
-![](/assets/images/htb-nineveh/nineveh-web.png)
+![""](/assets/images/htb-nineveh/nineveh-web.png)
 
-![](/assets/images/htb-nineveh/nineveh-web1.png)
+![""](/assets/images/htb-nineveh/nineveh-web1.png)
 
 Como no vemos nada interesante, trataremos de descubrir rutas dentro del servidor con la herramienta `nmap` y posteriormente con  `wfuzz` para ambos servicios, tanto por HTTP como HTTPS:
 
@@ -128,7 +128,7 @@ Nmap done: 1 IP address (1 host up) scanned in 28.66 seconds
 
 Para el puerto 80 tenemos `/info.php` y sobre el puerto 443 tenemos `/db/` que se encuentra relacionado con ***BlogWorx Database***. Si tratamos de ingresar vía web al recurso, tenemos un panel de login de ***phpLiteAdmin v1.9***.
 
-![](/assets/images/htb-nineveh/nineveh-web2.png)
+![""](/assets/images/htb-nineveh/nineveh-web2.png)
 
 Vamos ahora a utilizar `wfuzz`:
 
@@ -180,7 +180,7 @@ Requests/sec.: 411.8040
 
 Tenemos nuevos recursos, para el 80 `department` al cual si le echamos un ojo, tenemos otro panel de login:
 
-![](/assets/images/htb-nineveh/nineveh-web3.png)
+![""](/assets/images/htb-nineveh/nineveh-web3.png)
 
 A este punto, tenemos dos paneles de login, por lo que podriamos tratar de hacer SQLi; sin embargo, los sitios no son vulnerables, por lo que vamos a tratar de hacer fuerza bruta para obtener la contraseña y empezaremos con el puerto recurso `db` y la herramienta `hydra`.
 
@@ -199,13 +199,13 @@ Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2021-11-27 20:57:
 
 Hablando un poco del comando `hydra`, con el parámetro `-l` le indicamos un nombre de usuario, si es minúscula es que conocemos el usuario y con mayúscula le indicamos un diccionario; para este caso en concreto, no requerimos usuario ya que solo se tiene el campo de password, así que le ponemos `none`. Con el parámetro `-P` le indicamos la contraseña y la ponemos en mayúscula ya que haremos uso de un diccionario, el `rockyou.txt`. Posteriormente el indicamos la dirección IP o el dominio, luego el método que se utilizar para tramitar la petición, para este caso es **POST** y se lo indicamos con `https-form-post` y por último entre comillas ponemos tres valores separados por dos puntos `:`, el primero corresponde al recurso donde se encuentra el panel de login, el segundo los datos que se tramitan y el tercero, algún indicador que nos ayude a validar si la contraseña es correcta o incorrecta. Esta información la podemos obtener de **Inspeccionar** del navegador, que puede ser click secundario e **Inspeccionar** o haciendo Ctrl + O en el navegador y después hacer una solicitud con cualquier contraseña.
 
-![](/assets/images/htb-nineveh/nineveh-web4.png)
+![""](/assets/images/htb-nineveh/nineveh-web4.png)
 
-![](/assets/images/htb-nineveh/nineveh-web5.png)
+![""](/assets/images/htb-nineveh/nineveh-web5.png)
 
 Vemos que la contraseña es `password123` y ya podemos ingresar (**Nota**: Recordar guardar siempre las credenciales que encontremos).
 
-![](/assets/images/htb-nineveh/nineveh-web6.png)
+![""](/assets/images/htb-nineveh/nineveh-web6.png)
 
 Mediante la herramienta `searchsploit` podriamos tratar de ver si existen exploits públicos asociados a ***phpLiteAdmin 1.9*** y encontramos algunos que básicamente nos indican como crear una nueva base de datos inyectando comandos en php.
 
@@ -222,9 +222,9 @@ Shellcodes: No Results
 
 Por el momento dejaremos este portal y ahora vamos a aplicar fuerza bruta para el panel de login sobre el puerto 80. Si probamos credenciales default dentro del panel de login, vemos que el usuario `admin` existe, así que vamos a utilizar este usuario y para el ataque vamos a utilizar la herramienta [patator](https://github.com/lanjelot/patator/blob/master/patator.py). Solo la descargamos, le damos permisos de ejecución y ejecutamos.
 
-![](/assets/images/htb-nineveh/nineveh-web7.png)
+![""](/assets/images/htb-nineveh/nineveh-web7.png)
 
-![](/assets/images/htb-nineveh/nineveh-web8.png)
+![""](/assets/images/htb-nineveh/nineveh-web8.png)
 
 ```bash
 ❯ ./patator.py http_fuzz url="http://nineveh.htb/department/login.php" method=POST body='username=admin&password=FILE0' 0=/usr/share/wordlists/rockyou.txt -x ignore:fgrep="Invalid Password\!"
@@ -239,11 +239,11 @@ Por el momento dejaremos este portal y ahora vamos a aplicar fuerza bruta para e
 
 Ya tenemos las credenciales del segundo panel del login `admin : 1q2w3e4r5t`; asi que vamos a guardarlas y luego utilizarlas para ver el contenido web.
 
-![](/assets/images/htb-nineveh/nineveh-web9.png)
+![""](/assets/images/htb-nineveh/nineveh-web9.png)
 
 Si seleccionamos el apartado de **Notes**, vemos que se nos muestra un mensaje y la dirección URL parece algo curiosa, al parecer está apuntando a un archivo dentro del sistema llamado `ninevehNotes.txt`
 
-![](/assets/images/htb-nineveh/nineveh-web10.png)
+![""](/assets/images/htb-nineveh/nineveh-web10.png)
 
 ```text
 - Have you fixed the login page yet! hardcoded username and password is really bad idea!
@@ -254,13 +254,13 @@ Si seleccionamos el apartado de **Notes**, vemos que se nos muestra un mensaje y
 
 El mensaje nos da algunas pistas y confirma la parte de que se está leyendo un archivo `ninevehNotes.txt`; asi que vamos a quitarle la extensión a ver que pasa.
 
-![](/assets/images/htb-nineveh/nineveh-web11.png)
+![""](/assets/images/htb-nineveh/nineveh-web11.png)
 
 Tenemos un mensaje de alertas indicando que el archivo `ninevehNotes` no existe bajo la ruta `/var/www/html/department/`. A este punto podríamos pensar que el sitio podría ser vulnerable a **LFI (Local File Inclusion)**; así que vamos a tratar de ver el archivo `/etc/passwd`:
 
 - `http://nineveh.htb/department/manage.php?notes=/etc/passwd`
 
-![](/assets/images/htb-nineveh/nineveh-web12.png)
+![""](/assets/images/htb-nineveh/nineveh-web12.png)
 
 El sitio nos arroja ***No note is selected***. Podríamos probar un **Directory Traversal**:
 
@@ -270,33 +270,33 @@ Sin embargo, tampoco vemos nada. Si hacemos varias pruebas, el mensaje de alerta
 
 - `http://nineveh.htb/department/manage.php?notes=/ninevehNotes/../../../../etc/passwd`
 
-![](/assets/images/htb-nineveh/nineveh-web13.png)
+![""](/assets/images/htb-nineveh/nineveh-web13.png)
 
 Tenemos capacidad de visualizar archivos internos de la máquina. Con esto ya tenemos la posibilidad de ingresar a la máquina, por lo que primero vamos a crearnos una base de datos en la plataforma de ***phpLiteAdmin*** con extensión php y agregarle contenido malicioso para posteriormente desde el recurso `/department` apuntar a nuestro archivo y ganar acceso a la máquina. 
 
 Primero vamos a crear nuestra base de datos en la parte donde indica **Create New Database** que llamaremos **k4miyo.php**. Una vez creada la seleccionamos en al parte donde indica **Change Database**
 
-![](/assets/images/htb-nineveh/nineveh-web14.png)
+![""](/assets/images/htb-nineveh/nineveh-web14.png)
 
 Ahora en la parte donde nos dice **Create new table on database 'k4miyo.php'**, en la sección de **Name** colocamos lo que queramos, en este caso *shell* y en **Number of Fields** podemos 1 y el damos click en **Go**:
 
-![](/assets/images/htb-nineveh/nineveh-web15.png)
+![""](/assets/images/htb-nineveh/nineveh-web15.png)
 
 Posteriormente, en **Type** seleccionamos **TEXT**, en **Field** insertamos nuestro código php `<?php system($_REQUEST["cmd"]) ?>` y le damos en **Create**
 
-![](/assets/images/htb-nineveh/nineveh-web16.png)
+![""](/assets/images/htb-nineveh/nineveh-web16.png)
 
 Ya tenemos nuestro archivo php que si le damos en **Return** nos mostrará información sobre nuestro archivo y lo que nos interesa es la ruta `/var/tmp/k4miyo.php` para que podamos apuntar desde el otro sitio web, que es lo que haremos:
 
 - `http://nineveh.htb/department/manage.php?notes=/ninevehNotes/../../../../var/tmp/k4miyo.php`
 
-![](/assets/images/htb-nineveh/nineveh-web17.png)
+![""](/assets/images/htb-nineveh/nineveh-web17.png)
 
 Ahora para poder ejecutar comandos, haremos uso de la variable `cmd` y hay que tener en cuentra que para agregarla a la dirección URL lo haremos con el símbolo `&` debido a el `?` ya está siendo usado:
 
 - `http://nineveh.htb/department/manage.php?notes=/ninevehNotes/../../../../var/tmp/k4miyo.php&cmd=whoami`
 
-![](/assets/images/htb-nineveh/nineveh-web18.png)
+![""](/assets/images/htb-nineveh/nineveh-web18.png)
 
 Ya tenemos ejecución de comando a nivel de sistema, ahora nos queda ingresar a la máquina; para este caso haremos uso de la herramienta [php-reverse-shell](https://pentestmonkey.net/tools/web-shells/php-reverse-shell), así que la descargamos en nuestro directorio de trabajo, los descomprimimos y modificamos los parámetros que nos indica dentro del archivo `php-reverse-shell.php`. Una vez hecho esto, nos compartimos un servidor HTTP con python, nos podemos en escucha y procedemos a entablarnos una reverse shell.
 

@@ -98,7 +98,7 @@ http://10.10.10.171/ [200 OK] Apache[2.4.29], Country[RESERVED][ZZ], HTTPServer[
 
 No vemos nada interesante, asi que vamos a verlo vía web:
 
-![](/assets/images/htb-openadmin/openadmin-web.png)
+![""](/assets/images/htb-openadmin/openadmin-web.png)
 
 Es la página default de Apache2, asi que a este punto vamos a tratar de descubrir rutas del servidor con `wfuzz`:
 
@@ -128,13 +128,13 @@ Requests/sec.: 65.48367
 
 Tenemos dos recursos, `/music` y `/artwork`, vamos a ver que onda:
 
-![](/assets/images/htb-openadmin/openadmin-web1.png)
+![""](/assets/images/htb-openadmin/openadmin-web1.png)
 
-![](/assets/images/htb-openadmin/openadmin-web2.png)
+![""](/assets/images/htb-openadmin/openadmin-web2.png)
 
 Ya vemos algo que nos debe de llamar la atención, en el recurso `/music` tenemos un **Login**, así que vamos a darle click.
 
-![](/assets/images/htb-openadmin/openadmin-web3.png)
+![""](/assets/images/htb-openadmin/openadmin-web3.png)
 
 Nos encontramos ante ***OpenNetAdmin*** de versión 18.1.1; por lo que vamos a buscar posibles exploits relacionados y encontramos uno que nos puede ayudar:
 
@@ -445,11 +445,11 @@ sshd    635608 k4miyo   11u  IPv4 2028359      0t0  TCP localhost:52846 (LISTEN)
 
 Ahora nos abrimos el navegador hacia dicho puerto y apuntamos a nuestra shell:
 
-![](/assets/images/htb-openadmin/openadmin-web4.png)
+![""](/assets/images/htb-openadmin/openadmin-web4.png)
 
 Podemos ejecutar comandos como el usuario **joanna** y como pista si checamos el contenido del archivo `main.php`, nos dice que dicho usuario tiene su archivo `id_rsa`; por lo tanto, vamos a tratar de obtenerlo para posteriormente tratar de ingresar puerto el puerto 22.
 
-![](/assets/images/htb-openadmin/openadmin-web5.png)
+![""](/assets/images/htb-openadmin/openadmin-web5.png)
 
 Ya tenemos la `id_rsa`, asi que generamos un archivo con ese nombre, el damos permiso 600, creamos un hash con `ssh2john` y tratamos de crackearla.
 

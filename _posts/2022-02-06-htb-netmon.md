@@ -188,7 +188,7 @@ ERROR Opening: http://10.10.10.152/index.htm - incorrect header check
 
 No tenemos nada interesante, así que ahora si visualizamos el contenido vía web.
 
-![](/assets/images/htb-netmon/netmon-web.png)
+![""](/assets/images/htb-netmon/netmon-web.png)
 
 Nos enfrentamos antes un **PRTG Network Monitor** e igual dicha tecnología presenta credenciales default, que buscando un poco las credenciales son **prtgadmin : prtgadmin**; sin embargo, vemos que no podemos ingresar. Pensando un poco como atacantes, podríamos deducir que existe un posible archivos de configuración en donde se guarden credenciales en texto claro y tenemos una vía de acceso de esos recursos por FTP. 
 
@@ -291,7 +291,7 @@ PrTg@dmin2018
 
 Tenemos las credenciales **prtgadmin : PrTg@dmin2018**; podríamos tratar de probarlas en el panel de login, pero vemos que no podemos acceder. Pensando un poco, dichas credenciales las obtuvimos del archivo `PRTG Configuration.old.bak`, lo que nos hace referencia que son antiguas y ¿si la contraseña sigue el mismo principio cambiando el año? Podríamos tratar de ingresar **PrTg@dmin2019**, **PrTg@dmin2020**, y así sucesivamente.
 
-![](/assets/images/htb-netmon/netmon-web1.png)
+![""](/assets/images/htb-netmon/netmon-web1.png)
 
 Las credenciales de acceso son **prtgadmin : PrTg@dmin2019** y ya hemos ingresado al sistema. Nos enfrentamos ante un PRTG Network Monitor de versión 18.1.37.13946, entonces vamos a tratar de buscar algún exploit público que nos ayude a ingresar al sistema.
 
@@ -310,7 +310,7 @@ Papers: No Results
 
 Vemos uno `windows/webapps/46527.sh`, así que tratamos de ver que hace. Básicamente tenemos que crear una notificación en la parte de **Setup > Notifications**, hacemos clicp en el símbol de **+** en la parte superior derecha y luego click en **Add new notification**.
 
-![](/assets/images/htb-netmon/netmon-web2.png)
+![""](/assets/images/htb-netmon/netmon-web2.png)
 
 Nos vamos hasta abajo y habilitamos **Execute Program** llenando los siguientes campos dela siguiente forma:
 
@@ -321,11 +321,11 @@ De acuerdo con el exploit, nos creamos un usuario a nivel de sistema y de paso l
 
 Por lo tanto ponemos `C:\Users\Public\tester.txt; net user kamiyo k4miyo123$! /add; net localgroups Administrators kamiyo /add`.
 
-![](/assets/images/htb-netmon/netmon-web4.png)
+![""](/assets/images/htb-netmon/netmon-web4.png)
 
 Para ejecutar la notificación, nos vamos a la que hemos creado y damos click en el icono de un papel y un lapiz y nos aparecen varias opciones; seleccionamos aquella que parece una campanita. 
 
-![](/assets/images/htb-netmon/netmon-web3.png)
+![""](/assets/images/htb-netmon/netmon-web3.png)
 
 Validamos con `crackmapexec smb` si nuestro usuario fue creado:
 

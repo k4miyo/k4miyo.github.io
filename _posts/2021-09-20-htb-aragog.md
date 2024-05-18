@@ -167,7 +167,7 @@ http://10.10.10.78/ [200 OK] Apache[2.4.18], Country[RESERVED][ZZ], HTTPServer[U
 
 De acuerdo con el título de la página, vemos que se trata de la web default de Apache. También lo podemos corroborar accediendo vía web.
 
-![](/assets/images/htb-aragog/aragog_web.png)
+![""](/assets/images/htb-aragog/aragog_web.png)
 
 A este punto, vamos a tratar de descubrir posibles recursos que se encuentre dentro del sitio web. Para este caso vamos a usar `nmap` para enumrar:
 
@@ -246,7 +246,7 @@ Requests/sec.: 0
 
 Vemos que existe un recurso denomiando **hosts.php**, por lo que accedemos  y vemos lo siguiente:
 
-![](/assets/images/htb-aragog/aragog_hosts.png)
+![""](/assets/images/htb-aragog/aragog_hosts.png)
 
 "*There are 4294967294 possible hosts for*", dicha frase hace referencia a los hosts que se encuentran en una red con determinada máscara; por lo tanto encontramos relación con el archivo **test.txt** que encontramos por FTP.
 
@@ -504,11 +504,11 @@ florian@aragog:/dev/shm$ ./procmon.sh
 
 Del resultado, vemos que se está ejecutando el recurso `/home/cliff/wp-login.py`, un archivo en python relacionado a un posible WordPress (por el `wp-login`), tal vez una posible autenticación. Además, vemos que se ejecuta `/root/restore.sh` que restablece los archivo en la ruta `/var/www/html/dev_wiki/`. Si ingresamos a la página `http://10.10.10.78/dev_wiki` , nos redirecciona a `http://aragog/dev_wiki/`, así que agremos **aragog** a nuestro archivo `/etc/hosts` y así podemos ver el recurso.
 
-![](/assets/images/htb-aragog/aragog_wiki.png)
+![""](/assets/images/htb-aragog/aragog_wiki.png)
 
 Vemos que el sitio hace uso de WordPress, por lo que debe de existir su panel de administración en [wp-admin](http://aragog/dev_wiki/wp-login.php):
 
-![](/assets/images/htb-aragog/aragog_wordpress.png)
+![""](/assets/images/htb-aragog/aragog_wordpress.png)
 
 Con lo que tenemos, podemos pensar que el programa `/home/cliff/wp-login.py` se está autenticando el el portal de login de wordPress y como tenemos permisos para modificar los archivos encontrado en `dev_wiki`, podemos obtener las crenciales de login agregando las siguientes líneas en el archivo `wp-login.php` (Nota: Hay que hacerlo rápido porque tenemos que recordar que se restablecen los archivos de dicho directorio debido al script `restore.sh` ejecutado por el usuario **root**).
 

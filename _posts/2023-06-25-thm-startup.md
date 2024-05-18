@@ -160,7 +160,7 @@ ftp> quit
 ───────┴─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ```
 
-![](/assets/images/thm-startup/important.jpg)
+![""](/assets/images/thm-startup/important.jpg)
 
 No vemos nada interesante, por lo que ahora vamos a echarle un ojo al sitio web, pero antes siempre saber a lo que nos enfrentamos con nuestra herramienta de confianza `whatweb`:
 
@@ -169,7 +169,7 @@ No vemos nada interesante, por lo que ahora vamos a echarle un ojo al sitio web,
 http://10.10.111.163 [200 OK] Apache[2.4.18], Country[RESERVED][ZZ], Email[#], HTML5, HTTPServer[Ubuntu Linux][Apache/2.4.18 (Ubuntu)], IP[10.10.111.163], Title[Maintenance]
 ```
 
-![](/assets/images/thm-startup/startup.png)
+![""](/assets/images/thm-startup/startup.png)
 
 No vemos nada interesante por web, así que trataremos que buscar directorios:
 
@@ -198,7 +198,7 @@ Requests/sec.: 0
 
 Se tiene el recurso `files`, asi que vamos a ver su contenido:
 
-![](/assets/images/thm-startup/startup2.png)
+![""](/assets/images/thm-startup/startup2.png)
 
 Se tiene la misma estructura que encontramos vía ftp, por lo que ya debemos estar pensando en subir un archivo php para lograr la ejecución de comandos a nivel de sistema.
 
@@ -246,9 +246,9 @@ ftp>
 
 Hemos logrado subir el archivo y ya podemos visualizarlo vía web:
 
-![](/assets/images/thm-startup/startup3.png)
+![""](/assets/images/thm-startup/startup3.png)
 
-![](/assets/images/thm-startup/startup4.png)
+![""](/assets/images/thm-startup/startup4.png)
 
 Ya tenemos ejecución de comandos a nivel de sistema, por lo tanto vamos a entablarnos una reverse shell por el puerto 443:
 

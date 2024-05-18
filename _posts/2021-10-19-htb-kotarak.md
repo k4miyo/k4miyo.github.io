@@ -113,11 +113,11 @@ http://10.10.10.55:60000/ [200 OK] Apache[2.4.18], Country[RESERVED][ZZ], HTML5,
 
 Comenzaremos a observa primero el contenido del servidor HTTP por el puerto 60000, ya que es un puerto muy alto y raro para utilizar un sitio web.
 
-![](/assets/images/htb-kotarak/kotarak-web.png)
+![""](/assets/images/htb-kotarak/kotarak-web.png)
 
 De acuerdo con la descripción, tenemos que el sitio es un buscador privado, lo que nos hace pensar que puede mostrarnos el contenido web de algun sitio; sólo para probar vamos a ver que pasa si introduccimos el mismo sitio, es decir, `http://10.10.10.55:60000/`:
 
-![](/assets/images/htb-kotarak/kotarak-web1.png)
+![""](/assets/images/htb-kotarak/kotarak-web1.png)
 
 Vemos que la dirección URL llama al recurso `url.php` y hace uso del parámetro `path`. A este punto, podemos hacer pruebas modificando el valor de `path` para ver que pasa. Podríamos tratar de inyectar comandos como por ejemplo:
 
@@ -145,7 +145,7 @@ Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
 10.10.10.55 - - [19/Oct/2021 14:22:56] "GET /test.php HTTP/1.1" 200 -
 ```
 
-![](/assets/images/htb-kotarak/kotarak-test.png)
+![""](/assets/images/htb-kotarak/kotarak-test.png)
 
 No vemos nada. Asi que vamos a tratar se ver si podemos ver puertos abiertos internos en la máquina, podriamos tratar con el puerto 22 que sabemos que se encuentra abierto:
 
@@ -153,7 +153,7 @@ No vemos nada. Asi que vamos a tratar se ver si podemos ver puertos abiertos int
 http://localhost:22
 ```
 
-![](/assets/images/htb-kotarak/kotarak-ssh.png)
+![""](/assets/images/htb-kotarak/kotarak-ssh.png)
 
 Vemos la cabecera del servicio SSH, por lo que vamos a tratar de descubrir puertos internos abiertos en la máquina víctima, los primeros 1000; así que nos vamos a crear un pequeño programa en python:
 
@@ -203,7 +203,7 @@ if __name__ == '__main__':
 
 Si validamos los puertos vía web, tenemos algo interesante para el puerto 888:
 
-![](/assets/images/htb-kotarak/kotarak-888.png)
+![""](/assets/images/htb-kotarak/kotarak-888.png)
 
 A este punto, ya nos debe estar llamando la atención el recurso `backup`. Si hacemos *hovering*, vemos `doc=backup`; debido a que estamos viendo contenido interno del servidor (*SSRF - Server Side Request Forgery*), tenemos que agregar dicho parámetro en la dirección URL completa, es decir:
 
@@ -213,19 +213,19 @@ http://10.10.10.55:60000/url.php?path=http://localhost:888/?doc=backup
 
 No vemos nada; sin embargo, si accedemos al código fuente del sitio, tenemos lo siguiente:
 
-![](/assets/images/htb-kotarak/kotarak-fuente.png)
+![""](/assets/images/htb-kotarak/kotarak-fuente.png)
 
 Tenemos unas credenciales, posiblemente de acceso a un portal de login de **Apache Tomcat**. Las guardamos y debemos recordar que se tiene el puerto 8080, así que vamos a echarle un ojo:
 
-![](/assets/images/htb-kotarak/kotarak-tomcat.png)
+![""](/assets/images/htb-kotarak/kotarak-tomcat.png)
 
 El servicio está asociado a **Apache Tomcat 8.5.5**; por lo que ya debemos saber que debe de existir el recurso `manager/html` en donde se encuentra el panel de login.
 
-![](/assets/images/htb-kotarak/kotarak-login.png)
+![""](/assets/images/htb-kotarak/kotarak-login.png)
 
 Introducimos las credenciales que obtuvimos y estamos dentro del panel de administración.
 
-![](/assets/images/htb-kotarak/kotarak-panel.png)
+![""](/assets/images/htb-kotarak/kotarak-panel.png)
 
 Para poder ingresar a la máquina, ya debemos saber que necesitamos crear un archivo de extensión `war` y subirlo a la máquina (**Nota**: El archivo se sube en la parte donde se indica "Archivo WAR a desplegar").
 
@@ -236,7 +236,7 @@ Final size of war file: 1096 bytes
 Saved as: shell.war
 ```
 
-![](/assets/images/htb-kotarak/kotarak-war.png)
+![""](/assets/images/htb-kotarak/kotarak-war.png)
 
 Nos ponemos en escucha por el puerto 443 y le damos click en nuestro archivo `/shell`:
 
@@ -249,7 +249,7 @@ tomcat
 ```
 
 Ya nos encontramos dentro de la máquina y vamos a hacer un [Tratamiento de la tty](/posts/tratamiento-tty) para trabajar más cómodos. Para este caso, vamos a tener un detalle al ejecutar el comando `script /dev/null -c bash` que no nos arroja una pseudo consola así que vamos a utilizar el comando `whereis python` para ver que versiones de python cuenta la máquina víctima y posterior ejecutamos `python3.5 -c 'import pty; pty.spawn("/bin/bash")'` para tener ahora si una pseudo consola (**Nota**: En caso de que no se nos cree la pseudo consola, ejecutar nuevamente el comando) y proseguimos con el tratamiento de la tty.
-![](/assets/images/htb-kotarak/banner-kotarak.jpg)
+![""](/assets/images/htb-kotarak/banner-kotarak.jpg)
 
 ```bash
 script /dev/null -c bash
@@ -519,7 +519,7 @@ Shellcodes: No Results
 
 Suponiendo que la máquina tercera está realizando la consulta a intervalos regulares de tiempo, vamos al apartado del exploit **Cronjob with wget scenario**:
 
-![](/assets/images/htb-kotarak/kotarak-exploit.png)
+![""](/assets/images/htb-kotarak/kotarak-exploit.png)
 
 Nos indica que primero debemos crear un archivo `.wgetrc` con el siguiente contenido, esto lo haremos en nuestra máquina de atacantes:
 

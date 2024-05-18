@@ -335,9 +335,9 @@ https://10.10.10.184:8443/index.html [200 OK] Bootstrap, Country[RESERVED][ZZ], 
 
 Ahora si vamos a echarles un ojo vía web.
 
-![](/assets/images/htb-servmon/servmon-web.png)
+![""](/assets/images/htb-servmon/servmon-web.png)
 
-![](/assets/images/htb-servmon/servmon-web1.png)
+![""](/assets/images/htb-servmon/servmon-web1.png)
 
 Vamos a empezar por el puerto 80 en donde tenemos un panel de login de **NVMS-1000**, que si no sabemos que es lo podemos buscar en internet (*Software NVMS1000 para centralización de grabadores y cámaras IP Meriva para SO*). Podríamos probar credenciales default, pero vemos que no accedemos; podríamos ver si existe algún exploit público.
 
@@ -542,7 +542,7 @@ nadine@SERVMON C:\Users\Nadine\Desktop>
 
 - Sin embargo, al logearnos, nos indica un ***403 Your not allowed***.
 
-![](/assets/images/htb-servmon/servmon-web2.png)
+![""](/assets/images/htb-servmon/servmon-web2.png)
 
 - Esto se debe a que si vemos el archivo de configuración del servicio, indica que el único host permitido es la misma máquina víctima (127.0.0.1).
 
@@ -586,17 +586,17 @@ ssh     307287 root    5u  IPv4 920433      0t0  TCP localhost:8443 (LISTEN)
 
 - Ahora si podemos ver el servicio apuntando a nuestra máquina.
 
-![](/assets/images/htb-servmon/servmon-web3.png)
+![""](/assets/images/htb-servmon/servmon-web3.png)
 
 - De acuerdo con el exploit, debemos habilitar los módulos **CheckExternalScripts** y  **Scheduler**.
 
-![](/assets/images/htb-servmon/servmon-web4.png)
+![""](/assets/images/htb-servmon/servmon-web4.png)
 
-![](/assets/images/htb-servmon/servmon-web5.png)
+![""](/assets/images/htb-servmon/servmon-web5.png)
 
 - Debemos crear un script bajo **Settings > External Scripts > Scripts**
 
-![](/assets/images/htb-servmon/servmon-web6.png)
+![""](/assets/images/htb-servmon/servmon-web6.png)
 
 - Vamos a transferior el archivo `nc.exe` y necesitamos crear un archivo de extensión bat que contenga lo siguiente. Ambos archivos los pondremos en la ruta `C:\Temp\`:
 
@@ -663,11 +663,11 @@ Impacket v0.9.22 - Copyright 2020 SecureAuth Corporation
 
 - Ahora creamos hacemos click en **Control > Reload** y esperamos a que se restablezca el servicio.
 
-![](/assets/images/htb-servmon/servmon-web7.png)
+![""](/assets/images/htb-servmon/servmon-web7.png)
 
 - Nos ponemos en escucha por el puerto 443 y dentro del panel de **NSClient++** nos vamos a **Queries** y ya debemos tener nuestra reverse shell, en caso contrario, seleccioanamos nuestro script y le damos en **Run**.
 
-![](/assets/images/htb-servmon/servmon-web8.png)
+![""](/assets/images/htb-servmon/servmon-web8.png)
 
 ```bash
 ❯ rlwrap nc -nlvp 443

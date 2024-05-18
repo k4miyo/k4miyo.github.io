@@ -90,11 +90,11 @@ http://10.10.10.153/ [200 OK] Apache[2.4.25], Country[RESERVED][ZZ], Email[conta
 
 Vemos una dirección de correo electrónico `contact@blackhatuni.com` y poco más de lo que ya nos había reportado `nmap`. Ahora si vamos a echarle un ojo:
 
-![](/assets/images/htb-teacher/teacher-web.png)
+![""](/assets/images/htb-teacher/teacher-web.png)
 
 Analizando un poco la página, vemos que existe un recurso `gallery.html` en donde se tienen múltiples imágenes y checando el código fuente, vemos algo curioso para una *imagen*:
 
-![](/assets/images/htb-teacher/teacher-imagen.png)
+![""](/assets/images/htb-teacher/teacher-imagen.png)
 
 ```html
 <li><a href="#"><img src="images/5.png" onerror="console.log('That\'s an F');" alt=""></a></li>
@@ -102,7 +102,7 @@ Analizando un poco la página, vemos que existe un recurso `gallery.html` en don
 
 Al tratar de abrirla, no vemos la imagen asociada:
 
-![](/assets/images/htb-teacher/teacher-imagen1.png)
+![""](/assets/images/htb-teacher/teacher-imagen1.png)
 
 Vamos a descargarla a nuestra máquina y le echamos un ojo
 
@@ -172,7 +172,7 @@ Requests/sec.: 0
 
 Vemos un `phpmyadmin`; sin embargo, por el código de estado, 403, no tenemos permisos para acceder. Otro directorio que vemos es `moodle`, que investigando un poco, tenemos que **Moodle** es una herramienta de gestión de aprendizaje, o más concretamente de Learning Content Management, de distribución libre, escrita en PHP.
 
-![](/assets/images/htb-teacher/teacher-moodle.png)
+![""](/assets/images/htb-teacher/teacher-moodle.png)
 
 Vemos que dicho recurso presenta un panel de login; por lo que ya debemos estar pensando en que el usuario podría ser **Giovanni** y la contraseña **Th4C00lTheacha** más un carácter que le falta; por lo tanto podríamos hacer un tipo de fuerza bruta añadiendo caracteres al final de la contraseña y mandando la solicitud. Vamos a crearnos un diccionario haciendo uso, primeramente, de los caracteres en ascii; por lo que vamos a ver su correspondiente a decimal:
 
@@ -299,7 +299,7 @@ Requests/sec.: 8.434860
 
 Vemos que la contraseña es `Th4C00lTheacha#` y vamos a tratar de ingresar al panel de login.
 
-![](/assets/images/htb-teacher/teacher-giovanni.png)
+![""](/assets/images/htb-teacher/teacher-giovanni.png)
 
 Estamos dentro, ahora necesitamos buscar una forma de ejecutar comandos a nivel de sistema, así que buscando *moodle remote code executioin* nos parace el siguiente recurso:
 
@@ -307,11 +307,11 @@ Estamos dentro, ahora necesitamos buscar una forma de ejecutar comandos a nivel 
 
 En dicho sitio web, nos indica básicamente que debemos ingresar al curso; que para nuestro caso sería en **Site home** ubicando del lado izquierdo y posteriormente a **Algebra**. Ahora le damos en el engrane y en la opción **Turn editting on** y nos parecen varias opciones:
 
-![](/assets/images/htb-teacher/teacher-editting.png)
+![""](/assets/images/htb-teacher/teacher-editting.png)
 
 Posteriormente, le damos click a la opción **Add an activity or resource** ubicada del lado derecho y escogemos la opción **Quiz**.
 
-![](/assets/images/htb-teacher/teacher-quiz.png)
+![""](/assets/images/htb-teacher/teacher-quiz.png)
 
 Le damos en **Add** y nos solicitará llenar algunos campos:
 
@@ -321,11 +321,11 @@ Le damos en **Add** y nos solicitará llenar algunos campos:
 
 Hasta abajo le damos click en **Save and display**
 
-![](/assets/images/htb-teacher/teacher-question.png)
+![""](/assets/images/htb-teacher/teacher-question.png)
 
 Ahora le damos click en **Edit quiz** y en la parte donde dice **Suffle**, hacemos click en **Add** y luego **a new question**.
 
-![](/assets/images/htb-teacher/teacher-question1.png)
+![""](/assets/images/htb-teacher/teacher-question1.png)
 
 Escogemos la opción **Calculated** y en el formulario que nos aparece, llenamos los campos:
 
@@ -338,7 +338,7 @@ Escogemos la opción **Calculated** y en el formulario que nos aparece, llenamos
 
 Vamos hasta el final y le damos **Save changes**.
 
-![](/assets/images/htb-teacher/teacher-rce.png)
+![""](/assets/images/htb-teacher/teacher-rce.png)
 
 Ahora le damos click en donde dice **Next page** y vemos que en la URL nos parece algo así:
 
@@ -568,7 +568,7 @@ Possible Hashs:
 
 Nos indica que es MD5, así que podríamos tratar de romperla con la herramienta `john` o con herramientas online como [crackstation](https://crackstation.net/):
 
-![](/assets/images/htb-teacher/teacher-crack.png)
+![""](/assets/images/htb-teacher/teacher-crack.png)
 
 Podríamos utilizar la contraseña para migrar al usuario `giovanni`:
 

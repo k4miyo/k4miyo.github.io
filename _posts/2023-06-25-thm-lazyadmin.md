@@ -100,7 +100,7 @@ http://10.10.59.115/ [200 OK] Apache[2.4.18], Country[RESERVED][ZZ], HTTPServer[
 
 Visualizaremos el contenido vía web:
 
-![](/assets/images/thm-lazyadmin/lazyadmin.png)
+![""](/assets/images/thm-lazyadmin/lazyadmin.png)
 
 No tenemos nada interesante, por lo que vamos a tratar de descubrir recursos vía web:
 
@@ -129,7 +129,7 @@ Requests/sec.: 0
 
 Tenemos el directorio **content**; por lo que vamos a echarle un ojo:
 
-![](/assets/images/thm-lazyadmin/lazyadmin2.png)
+![""](/assets/images/thm-lazyadmin/lazyadmin2.png)
 
 Vemos que nos enfrentamos antes un CMS llamado **SweetRice**; por lo que lo más seguro es que tenga algún panel de login y otros recursos, así que vamos a tratar de descubrir directorios bajo `content`:
 
@@ -169,11 +169,11 @@ De los directorios que nos aparecen, nos llama la atención:
 
 Vamos a echarle un ojo a `inc`:
 
-![](/assets/images/thm-lazyadmin/lazyadmin3.png)
+![""](/assets/images/thm-lazyadmin/lazyadmin3.png)
 
 Nos llama la atención el directorio **mysql_backup**:
 
-![](/assets/images/thm-lazyadmin/lazyadmin4.png)
+![""](/assets/images/thm-lazyadmin/lazyadmin4.png)
 
 Nos descargarmos el archivo para echarle un ojo:
 
@@ -198,13 +198,13 @@ Nos descargarmos el archivo para echarle un ojo:
 
 Tenemos unas credenciales del usuario **manager** y vemos que la contraseña está cifrada, por lo que vamos a crackearla con [CrackStation](https://crackstation.net/):
 
-![](/assets/images/thm-lazyadmin/lazyadmin5.png)
+![""](/assets/images/thm-lazyadmin/lazyadmin5.png)
 
 Tenemos unas credenciales **manager : Password123**. Si le echamos un ojo a los otros directorios, vemos que en `as` se tiene un panel de login de acceso al CMS SweetRice.
 
-![](/assets/images/thm-lazyadmin/lazyadmin6.png)
+![""](/assets/images/thm-lazyadmin/lazyadmin6.png)
 
-![](/assets/images/thm-lazyadmin/lazyadmin7.png)
+![""](/assets/images/thm-lazyadmin/lazyadmin7.png)
 
 Vemos que se tiene el CMS SweetRice 1.5.1; por lo que vamos a ver si existe algún exploit público.
 
@@ -301,9 +301,9 @@ El exploit nos dice que en la ruta `as/?type=media_center` podemos subir un arch
 
 Una vez que lo subimos, nos dirigimos en la ruta `attachment`:
 
-![](/assets/images/thm-lazyadmin/lazyadmin8.png)
+![""](/assets/images/thm-lazyadmin/lazyadmin8.png)
 
-![](/assets/images/thm-lazyadmin/lazyadmin9.png)
+![""](/assets/images/thm-lazyadmin/lazyadmin9.png)
 
 Tenemos ejecución de comandos a nivel de sistema, por lo que nos aventamos una reverse shell de python de acuerdon con [PentestMonkey](https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet):
 

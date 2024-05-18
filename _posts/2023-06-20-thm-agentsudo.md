@@ -102,7 +102,7 @@ http://10.10.44.30/ [200 OK] Apache[2.4.29], Country[RESERVED][ZZ], HTML5, HTTPS
 
 No vemos nada interesante, así que visualizaremos el contenido vía web:
 
-![](/assets/images/thm-agentsudo/agentsudo1.png)
+![""](/assets/images/thm-agentsudo/agentsudo1.png)
 
 En el mesaje vía web, nos indica que introduzcamos el **codename** en el campo ***user-agent*** y nos lo indica el agente **R**; por lo que es posible que si cambiamos el user-agent por "R" nos pueda mostrar una pista:
 
@@ -130,11 +130,11 @@ What are you doing! Are you one of the 25 employees? If not, I going to report t
 
 Vemos que nos arroja un mensaje al inicio diciendo que si somos uno de los 25 empleados y como vemos que si agregamos **R** en el user-agent nos da otra respuesta; podríamos tratar de búscar alguna letra del abecedario que nos genero otra respuesta.
 
-![](/assets/images/thm-agentsudo/agentsudo.png)
+![""](/assets/images/thm-agentsudo/agentsudo.png)
 
 Mediante la herramienta **BurpSuite** vemos que para la letra **C** nos genera un código de estado 302, es decir, nos redirecciona:
 
-![](/assets/images/thm-agentsudo/agentsudo2.png)
+![""](/assets/images/thm-agentsudo/agentsudo2.png)
 
 Vemos que nos redirecciona a http://10.10.175.93/agent_C_attention.php y se nos muestra un potencial usuario: **chris**; asi mismo, no indica que que hablemos con el agente **J** y que nuestra contraseña es insegura. Ahora, podriamos tratar de realizar un ataque de fuerza bruta sobre el usuario **chris** y el puerto 21:
 
@@ -363,7 +363,7 @@ Agent R
 
 Vemos que tenemos que mandar el mensaje a **QXJlYTUx**, por lo que primero vamos a decodificarlo para saber el nombre real del usuario con [CyberChef](https://gchq.github.io/CyberChef/):
 
-![](/assets/images/thm-agentsudo/agentsudo3.png)
+![""](/assets/images/thm-agentsudo/agentsudo3.png)
 
 Tenemos la decodificación y nos hace mención de una imagen, por lo que es posible que la imagen contenga algún otro recurso el cual se necesite alguna contraseña para obtenerlo:
 

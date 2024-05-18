@@ -231,7 +231,7 @@ App Version                     : 16.0300
 
 Vemos que se trata de un archivo de **Microsoft Excel 2007** creado por el usuario **Luis** y que el valor de **MIME Type** es `application/vnd.ms-excel.sheet.macroEnabled`, lo que nos indica que el archivo presenta una macro (también lo podriamos ver por la extensión del archivo). Para la visualización del contenido, podríamos utilizar *Open Office*; pero para no pelearnos con temas de proporciones o cosas random, nos instalaremos [WPS Office](https://linux.wps.com/).
 
-![](/assets/images/htb-querier/querier_document.jpg)
+![""](/assets/images/htb-querier/querier_document.jpg)
 
 Vemos que no presenta contenido el archivo; sin embargo, sabemos que presenta una macro, la cual podríamos tratar de visualizarla con **WPS Office**. Para este caso, vamos a utilizar la siguiente herramienta:
 

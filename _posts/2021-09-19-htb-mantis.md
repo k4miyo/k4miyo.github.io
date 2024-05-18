@@ -247,7 +247,7 @@ Podemos acceder al servicio SMB con una *null session*; sin embargo, no se lista
 
 Vamos a tratar de ver el contenido de los sitios web alojados en la máquina, que de acuerdo con el archivo **targeted** vemos el puerto 1337 asociado a *Microsoft IIS 7.5*. Aquí podriamos pensar que ejecutando el exploit de *MS17-010* podemos acceder al equipo; sin embargo, al parecer se encuentra parcheado.  También vemos el puerto 8080 relacionado con el blog *Tossed Salad - Blog*:
 
-![](/assets/images/htb-mantis/mantis_web.png)
+![""](/assets/images/htb-mantis/mantis_web.png)
 
 Con la herramienta `whatweb` podemos obtener un poco de información adicional; como el uso del CMS Orchard, que de acuerdo con lo investigado, poco podemos hacer.
 
@@ -283,7 +283,7 @@ Requests/sec.: 0
 
 Tenemos el recurso *secure_notes* que al acceder vemos dos archivos. El primero, un archivo txt que tiene un nombre un poco extraño después del *dev\_notes\_* y de acuerdo con el formato, podría trate de  una cadena en base64.
 
-![](/assets/images/htb-mantis/mantis_fuzz.png)
+![""](/assets/images/htb-mantis/mantis_fuzz.png)
 
 ```bash
 ❯ echo "NmQyNDI0NzE2YzVmNTM0MDVmNTA0MDczNzM1NzMwNzI2NDIx" | base64 -d; echo
@@ -299,7 +299,7 @@ m$$ql_S@_P@ssW0rd!
 
 Vemos una posible contraseña asociada al servicio de SQL (no olvidemos guardar siempre las posibles credenciales que identifiquemos). Ahora, checando el contenido del archivo txt, tenemos lo siguiente:
 
-![](/assets/images/htb-mantis/mantis_sql.png)
+![""](/assets/images/htb-mantis/mantis_sql.png)
 
 Tenemos varias pistas:
 - CMS Orchard
@@ -369,7 +369,7 @@ A este punto, vamos a listar el contenido de la tabla `blog_Orchard_Users_UserPa
 ❯ service apache2 start
 ```
 
-![](/assets/images/htb-mantis/mantis_db.png)
+![""](/assets/images/htb-mantis/mantis_db.png)
 
 Como se puede observar en los resultados obtenidos, tenemos el usuario **admin** y el usuario **james**, quien tiene una contraseña en texto claro; asi que nos guardamos las credenciales.
 
@@ -493,11 +493,11 @@ Podemos listar usuarios del dominio. Para tener la información en un formato m�
 
 Ahora desde el navegador consultado `localhost` y vemos una serie de archivos, aquellos con extensión `html` nos representa la información en un formato amigable sobre el dominio:
 
-![](/assets/images/htb-mantis/mantis_dominio.png)
+![""](/assets/images/htb-mantis/mantis_dominio.png)
 
 Como podemos ver, el unico usuario dentro del grupo **Administrators** es el usuario **Administrator**; nosotros como el usuario **james**, estamos en el grupo **Remote Desktop Users**, pero no tenemos el servicio RDP visible. En este punto, investigando un poco, vemos que exite una vulnerabilidad descrita en **MS14-068** que nos permitiría elevar privilegios de manera que el usuario **james** pueda tener los privilegios máximos:
 
-![](/assets/images/htb-mantis/mantis_kerberos.png)
+![""](/assets/images/htb-mantis/mantis_kerberos.png)
 
 Asi que primero vamos a agregar en nuestro archivo `/etc/hosts` los dominios relacionados con la dirección IP de la máquina:
 

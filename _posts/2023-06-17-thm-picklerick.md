@@ -97,7 +97,7 @@ http://10.10.151.209/ [200 OK] Apache[2.4.18], Bootstrap, Country[RESERVED][ZZ],
 
 No vemos nada interesante, así que vamos a ver el contenido vía web.
 
-![](/assets/images/thm-picklerick/picklerick.png)
+![""](/assets/images/thm-picklerick/picklerick.png)
 
 *Help Morty!*
 *Listen Morty... I need your help, I've turned myself into a pickle again and this time I can't change back!*
@@ -107,7 +107,7 @@ Al parecer tenemos que encontrar el nombre de 3  ingredientes.
 
 Si observamos el contenido del código html, obtenemos el nombre de usuario:
 
-![](/assets/images/thm-picklerick/picklerick1.png)
+![""](/assets/images/thm-picklerick/picklerick1.png)
 
 Como no se observa algo adicional, podríamos tratar de encontrar directorios de interes en el servidor web:
 
@@ -136,7 +136,7 @@ Requests/sec.: 52.23355
 
 Encontramos un directorio **assets** cuyo tenido no nos dice mucho; asi que vamos a tratar de de búscar archivos de extensión html, php, txt.
 
-![](/assets/images/thm-picklerick/picklerick2.png)
+![""](/assets/images/thm-picklerick/picklerick2.png)
 
 
 ```bash
@@ -167,17 +167,17 @@ Requests/sec.: 0
 
 Encontramos algunos recursos a los cuales vamos a echarles un ojo:
 
-![](/assets/images/thm-picklerick/picklerick3.png)
+![""](/assets/images/thm-picklerick/picklerick3.png)
 
-![](/assets/images/thm-picklerick/picklerick4.png)
+![""](/assets/images/thm-picklerick/picklerick4.png)
 
 El archivo **robots.txt** contiene la frase ***Wubbalubbadubdub***, por lo que podría ser una posible contraseña del usuario que tenemos y además, en el recurso **login.php** (el recurso **portal.php** nos redirige a login.php) se tiene un panel de acceso, por lo que podriamos tratar de acceder:
 
-![](/assets/images/thm-picklerick/picklerick5.png)
+![""](/assets/images/thm-picklerick/picklerick5.png)
 
 Se tiene una linea de comandos, por lo tanto podríamos tratar de ejecutar algún comando:
 
-![](/assets/images/thm-picklerick/picklerick6.png)
+![""](/assets/images/thm-picklerick/picklerick6.png)
 
 Vemos que podemos ejecutar comandos a nivel de sistema, por lo tanto, podríamos tratar de entablarnos una reverse shell, para este caso en especial, utilizaremos perl de acuerdo con [PentestMonkey](https://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet):
 

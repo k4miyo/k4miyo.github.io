@@ -123,7 +123,7 @@ http://10.10.10.51/ [200 OK] Apache[2.4.25], Country[RESERVED][ZZ], Email[webadm
 
 Vemos que nos enfrentamos ante un **Apache 2.4.25**, en servidor con sistema operativo **Debian** y un correo electrónico `webadmin@solid-state-security.com` que viendo el dominio, no se encuentra relacionado con la plataforma de Hack The Box; así que sólo nos quedamos por el posible usuario `webadmin`. Ahora vamos a ver el contenido vía web:
 
-![](/assets/images/htb-solidstate/solidstate-web.png)
+![""](/assets/images/htb-solidstate/solidstate-web.png)
 
 Si tratamos de buscar por la web, no encontramos nada interesante o de relevancia. Analizando nuestra captura de `nmap`, tenemos un puerto curioso 4555 asociado al servicio ***JAMES Remote Administration Tool 2.3.2***. A partir de este punto existen dos formas para poder ingresar a la máquina; el primero es mediante un exploit público asociado a la tecnología ***Apache James 2.3.2***:
 
@@ -479,7 +479,7 @@ mindy
 ```
 
 Para trabajar mas cómodos, hacemos un [Tratamiento de la tty](/posts/tratamiento-tty) con python:
-![](/assets/images/htb-solidstate/banner-solidstate.jpg)
+![""](/assets/images/htb-solidstate/banner-solidstate.jpg)
 
 ```bash
 whereis python

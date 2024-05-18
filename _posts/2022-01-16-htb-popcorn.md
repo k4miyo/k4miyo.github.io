@@ -97,7 +97,7 @@ http://10.10.10.6/ [200 OK] Apache[2.2.12], Country[RESERVED][ZZ], HTTPServer[Ub
 
 Vemos que se trata de la página default de Apache, que es lo que vemos vía web.
 
-![](/assets/images/htb-popcorn/popcorn-web.png)
+![""](/assets/images/htb-popcorn/popcorn-web.png)
 
 No vemos nada interesante, asi que vamos a buscar recursos dentro del servidor web y vamos a empezar con `nmap` antes de tirar de otra herramienta tocha.
 
@@ -120,13 +120,13 @@ Nmap done: 1 IP address (1 host up) scanned in 37.37 seconds
 
 Vamos a echarles un ojo:
 
-![](/assets/images/htb-popcorn/popcorn-web1.png)
+![""](/assets/images/htb-popcorn/popcorn-web1.png)
 
-![](/assets/images/htb-popcorn/popcorn-web2.png)
+![""](/assets/images/htb-popcorn/popcorn-web2.png)
 
 Algo que podemos observar son los **HTTP Headers Information** y en específico el **User-Agent** que nos aparece los datos de nuestro navegador **Mozilla/5.0 (X11; Linux x86_64; rv:96.0) Gecko/20100101 Firefox/96.0**.
 
-![](/assets/images/htb-popcorn/popcorn-web3.png)
+![""](/assets/images/htb-popcorn/popcorn-web3.png)
 
 Vamos a tratar de cambiarlo mediante el uso de `curl`:
 
@@ -165,29 +165,29 @@ Requests/sec.: 149.7100
 
 Tenemos el recurso `/torrent/`, así que vamos a echarle un ojo.
 
-![](/assets/images/htb-popcorn/popcorn-web4.png)
+![""](/assets/images/htb-popcorn/popcorn-web4.png)
 
 Si analizamos un poco el sitio, vemos que tenemos la capacidad de registrarnos, así que eso haremos.
 
-![](/assets/images/htb-popcorn/popcorn-web5.png)
+![""](/assets/images/htb-popcorn/popcorn-web5.png)
 
-![](/assets/images/htb-popcorn/popcorn-web6.png)
+![""](/assets/images/htb-popcorn/popcorn-web6.png)
 
 Si ponemos ojo de lince, tenemos la capacidad de subir archivos y por el nombre del recurso, lo más seguro es que sea un torrent; asi que vamos a descargar un archivo el que queramos; para este caso sería de [Parrot OS](https://www.parrotsec.org/security-edition/)
 
-![](/assets/images/htb-popcorn/popcorn-web7.png)
+![""](/assets/images/htb-popcorn/popcorn-web7.png)
 
-![](/assets/images/htb-popcorn/popcorn-web8.png)
+![""](/assets/images/htb-popcorn/popcorn-web8.png)
 
 Si nos percatamos, en la parte de abajo, vemos que tenemos la posiblidad de subir una imagen; pero si en vez de una imagen subimos un archivo php, nos indica **Invalid file**. Por lo tanto, vamos a tratar de subir una imagen de verdad y vamos a hacer uso de **BurpSuite** en donde modificamos el contenido del archivo a nuestra sentencia php de siempre y también modificamos el nombre del archivo a **shell.php.
 
-![](/assets/images/htb-popcorn/popcorn-burp.png)
+![""](/assets/images/htb-popcorn/popcorn-burp.png)
 
 Vemos que se ha subido de forma exitosa; asi que vamos a ver en donde podría estar el archivo que subimos. Si hacemos *hovering* sobre la imagen que subimos (para este caso nos aparece **Image File Not Found!**), vemos que nos aparece la ruta `upload` y despúes un nombre random con terminación php, ese es nuestro archivo, así que vamos a abrirlo en una segunda ventana para ejecutar comandos a nivel de sistema.
 
-![](/assets/images/htb-popcorn/popcorn-web9.png)
+![""](/assets/images/htb-popcorn/popcorn-web9.png)
 
-![](/assets/images/htb-popcorn/popcorn-web10.png)
+![""](/assets/images/htb-popcorn/popcorn-web10.png)
 
 Ahora como siempre, nos ponemos en escucha por el puerto 443 y procedemos a entablarnos una reverse shell.
 

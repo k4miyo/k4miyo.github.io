@@ -97,11 +97,11 @@ http://10.10.10.181/ [200 OK] Apache[2.4.29], Country[RESERVED][ZZ], HTML5, HTTP
 
 No vemos nada interesante, así que vamos a echarle un ojito vía web.
 
-![](/assets/images/htb-traceback/traceback-web.png)
+![""](/assets/images/htb-traceback/traceback-web.png)
 
 Tenemos que el sitio al parecer ha sido hackeado por [***Xh4H***](https://github.com/Xh4H) y si checamos el código fuente, nos ha dejado una pequeña pista.
 
-![](/assets/images/htb-traceback/traceback-web1.png)
+![""](/assets/images/htb-traceback/traceback-web1.png)
 
 Si buscamos la frase "*Some of the best web shells that you might need ;)*", encontramos el repositorio [Web-Shells-1](https://github.com/x0xr00t/Web-Shells-1) en el cual vemos diversas web shells. Lo que podemos hacer es tratar de crear una lista que contenga los nombres de dichas web shells y mediante la herramienta `wfuzz` validar si alguna de estas existen dentro del sitio web, ya que el mensaje nos dicen que dejó un backdoor en el servidor.
 
@@ -148,11 +148,11 @@ Requests/sec.: 0
 
 Vemos la web shell `smevk.php`; así que vamos a echarle un ojo vía web.
 
-![](/assets/images/htb-traceback/traceback-web2.png)
+![""](/assets/images/htb-traceback/traceback-web2.png)
 
 Si probamos credenciales por defecto **admin:admin**, vemos que ingresamos al aplicativo.
 
-![](/assets/images/htb-traceback/traceback-web3.png)
+![""](/assets/images/htb-traceback/traceback-web3.png)
 
 Si analizamos un poco la web shell, vemos que nos permite listar, mostrar y subir archivos al sistema y que estamos logueados como el usuario **webadmin**; por lo que si ingresamos al directorio **home** de dicho usuario, vemos que tiene la carpeta `.ssh`, así que podríamos generar un par de claves `id_rsa` y subirlas al servidor para posteriormente ingresar a través del servicio SSH.
 
@@ -198,7 +198,7 @@ La llave pública `id_rsa.pub` le cambiaremos el nombre a `authorized_keys` y es
 
 Antes de subirlo a la máquina, si nos encontramos con el archivo `authorized_keys` en la ruta `/home/webadmin/.ssh`, lo eliminamos y ahora si subimos el de nosotros.
 
-![](/assets/images/htb-traceback/traceback-web4.png)
+![""](/assets/images/htb-traceback/traceback-web4.png)
 
 Y ahora si deberíamos poder conectarnos por SSH a la máquina víctima como el usuario **webadmin** y sin proporcionar contraseña:
 
