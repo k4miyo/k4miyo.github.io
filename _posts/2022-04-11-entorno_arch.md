@@ -15,7 +15,7 @@ ping: true
 
 A continuación se presenta la configuración de un entorno de hacking en **Arch Linux** de acuerdo con el video de [YouTube de S4vitar](https://www.youtube.com/watch?v=fshLf6u8B-w). Primero, comenzaremos con al descarga de la ISO de [**Arch Linux**](https://archlinux.org/download/).
 
-![](/assets/images/entorno_arch/arch1.png)
+![""](/assets/images/entorno_arch/arch1.png)
 
 ## Configuración de la máquina virtual
 
@@ -31,7 +31,7 @@ Una vez descargada la ISO, vamos a proceder a crear una máquina vírtual con la
 
 Ejecutamos la máquina virutal y seleccionamos *Arch Linux install medium (x86_64, BIOS)*, la primera opción.
 
-![](/assets/images/entorno_arch/arch2.png)
+![""](/assets/images/entorno_arch/arch2.png)
 
 Al terminar el proceso, nos arroja una linea de comandos como **root** en la cual primero vamos a validar si tenemos conexión a internet con una traza ICMP (**Nota**: El teclado lo tendremos en configuración en-US, por lo que si lo queremos en español utilizaremos el comando `loadkeys es`):
 
@@ -51,7 +51,7 @@ Ahora escribimos el comando `cfdisk` y nos arrojará un panel de opción; como n
 
 Con el comando `lsblk` podemos ver las particiones que hemos creado.
 
-![](/assets/images/entorno_arch/arch3.png)
+![""](/assets/images/entorno_arch/arch3.png)
 
 Ahora vamos a darle formato a las particiones que tenemos con `mkfs.vfat -F 32 /dev/sda1` para la partición de 512M, `mkfs.ext4 /dev/sda2` para la partición de 15G y `mkswap /dev/sda3` para la partición de 4.5G y aplicamos los cambios `swapon`.
 
@@ -161,11 +161,11 @@ cp -r misc/. ~/
 
 Reiniciamos la máquina con `sudo reboot now`. Al iniciar la máquina otra vez, al darle click en nuestro usuario, vemos un engrane en la parte inferior derecha, damos click y seleccionamos **awesome**. 
 
-![](/assets/images/entorno_arch/arch4.png)
+![""](/assets/images/entorno_arch/arch4.png)
 
 Nuestro entorno va a estar un poco raro; esto lo arreglamos ingresando a modo consola con **Ctrl + Alt + F3**, nos logueamos, ingresamos a la ruta `cd /Desktop/repos/dotfiles` y ejecutamos un `git log`; de las opciones que nos aparecen, la quinta nos dice **fix: ui and widgets**.
 
-![](/assets/images/entorno_arch/arch5.png)
+![""](/assets/images/entorno_arch/arch5.png)
 
 Podemos guardar el id asociado `c1e2eef2baa91aebd37324891cb282666beae04f`  y ejecutamos
 
@@ -589,7 +589,7 @@ nvim +'hi NormalFloat guibg=#1e222a' +PackerSync
 
 Para abrir cualquier archivo utilizaremos `nvim` y para que nos muestre archivos que forma bonita, utilizaremos el comando `NvimTreeToggle`:
 
-![](/assets/images/entorno_arch/arch6.png)
+![""](/assets/images/entorno_arch/arch6.png)
 
 Recordar que tenemos que hace lo mismo para el usuario **root**:
 
