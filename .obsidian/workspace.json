@@ -4,24 +4,6 @@
     "type": "split",
     "children": [
       {
-        "id": "4da9b7c63f48af70",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "61b597da585fb40e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "_posts/2023-07-30-htb-meow.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          }
-        ]
-      },
-      {
         "id": "c41d4493d1d6256d",
         "type": "tabs",
         "children": [
@@ -32,7 +14,7 @@
               "type": "markdown",
               "state": {
                 "file": "_posts/2023-07-30-htb-meow.md",
-                "mode": "preview",
+                "mode": "source",
                 "source": false
               }
             }
