@@ -118,7 +118,7 @@ http://10.0.0.93/ [200 OK] Apache[2.4.48], Country[RESERVED][ZZ], HTML5, HTTPSer
 
 Vamos a ver el contenido de la página:
 
-![](/assets/images/vh-lupin/lupin.png)
+![""](/assets/images/vh-lupin/lupin.png)
 
 No encontramos nada interesante, por lo que vamos a tratar de descubrir recursos vía web comenzando por `nmap`:
 
@@ -149,7 +149,7 @@ Disallow: /~myfiles
 
 Se tiene el recurso `/~myfiles`,  así que vamos a echarle un ojo:
 
-![](/assets/images/vh-lupin/lupin2.png)
+![""](/assets/images/vh-lupin/lupin2.png)
 
 Si vemos el código fuente, encontramos lo siguiente:
 
@@ -197,7 +197,7 @@ Requests/sec.: 0
 
 Tenemos el recurso `/~secret`, así que vamos a echarle un ojo:
 
-![](/assets/images/vh-lupin/lupin3.png)
+![""](/assets/images/vh-lupin/lupin3.png)
 
 Nos dice el usuario `icex64` que dentro de este recurso guardó su `id_rsa` para conectarse por ssh, por lo que podriamos tratar de buscar archivos de extensión txt y que sean ocultos, es decir, que empiecen por un punto:
 
@@ -232,7 +232,7 @@ cGxD6KNZQddY6iCsSuqPzUdqSx4F5ohDYnArU3kw5dmvTURqcaTrncHC3NLKBqFM2ywrNbRTW3eTpUvE
 
 Vemos que la llave se encuentra cifrada, por lo que vamos a tratar de descifrar la llave con nuestra herramienta de confianza [CyberChef](https://gchq.github.io/CyberChef/):
 
-![](/assets/images/vh-lupin/lupin4.png)
+![""](/assets/images/vh-lupin/lupin4.png)
 
 Vemos que se trata de un cifrado en base 58. Una vez que tenemos la `id_rsa`, generaremos dicho archivo en nuestra máquina de atacante y trataremos de crackearla con `ssh2john` y `john`:
 
