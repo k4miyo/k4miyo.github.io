@@ -50,7 +50,7 @@ Nmap done: 1 IP address (1 host up) scanned in 26.55 seconds
 ```
 
 En caso de que nuestro escaneo no nos reporte algún puerto abierto, podríamos utilizar la herramienta [fastTCPScan](https://s4vitar.github.io/fasttcpscan-go/) desarrollada por ***S4vitar*** o crearnos un script sencillo como [portScan](/posts/portScan).
-![](/assets/images/portscan/banner-portscan.png)
+![""](/assets/images/portscan/banner-portscan.png)
 
 Mediante la función [extractPorts](/posts/extractPorts) definida a nivel de `zsh` , se obtiene la información más relevante de la captura grepeable.
 
@@ -682,4 +682,3 @@ C:\Windows\system32>
 ```
 
 Ya somos el usuario **Administrator** y podemos visualizar la flag (root.txt). 
-

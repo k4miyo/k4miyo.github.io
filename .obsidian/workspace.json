@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_posts/2021-09-05-htb-lame.md",
+                "file": "_posts/2023-07-30-htb-meow.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "_posts/2021-09-05-htb-lame.md",
+                "file": "_posts/2023-07-30-htb-meow.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "_posts/2021-09-05-htb-lame.md",
+                "file": "_posts/2023-07-30-htb-meow.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "_posts/2021-09-05-htb-lame.md"
+                "file": "_posts/2023-07-30-htb-meow.md"
               }
             }
           }
@@ -148,6 +148,12 @@
   },
   "active": "156a2f0f508bf6eb",
   "lastOpenFiles": [
+    "_posts/2023-07-30-htb-late.md",
+    "_posts/2023-07-10-vh-devguru.md",
+    "_posts/2023-07-09-vh-lupinone.md",
+    "_posts/2022-03-15-htb-jerry.md",
+    "_posts/2021-11-26-htb-chatterbox.md",
+    "_posts/2021-09-05-htb-lame.md",
     "_posts/2021-09-06-extractPorts.md",
     "_posts/2021-09-06-htb-legacy.md",
     "_posts/2021-09-06-htb-love.md",
@@ -168,12 +174,6 @@
     "_posts/2021-09-27-procmon.md",
     "_posts/2021-10-05-htb-bart.md",
     "_posts/2021-10-05-htb-devoops.md",
-    "_posts/2021-10-09-htb-bastard.md",
-    "_posts/2021-10-11-htb-jeeves.md",
-    "_posts/2021-10-11-htb-tartarsauce.md",
-    "_posts/2021-10-11-htb-teacher.md",
-    "_posts/2021-10-12-htb-stratosphere.md",
-    "_posts/2021-10-18-htb-haircut.md",
     "assets/images/htb-late/late12.png",
     "assets/images/htb-late/late11.png",
     "assets/images/htb-late/late10.png",
